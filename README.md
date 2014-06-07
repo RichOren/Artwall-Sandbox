@@ -7,6 +7,6 @@ This is the sandbox for deving out the Design Tool for the website code named "A
 
 We will be using
 
-Bootstrap 3
-AngularJS
+Bootstrap 3,
+AngularJS,
 Custom Fonts from IcoMoon
