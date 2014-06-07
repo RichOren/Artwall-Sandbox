@@ -1,4 +1,0 @@
-Artwall-Sandbox
-===============
-
-Artwall Sandbox
