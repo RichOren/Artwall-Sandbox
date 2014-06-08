@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 17.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="room" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 778.1 502.9" enable-background="new 0 0 778.1 502.9" xml:space="preserve">
+<polygon id="floor" onclick="alert(&quot;This is the Floor&quot;);" fill="#FFFFFF" stroke="#000000" stroke-miterlimit="10" points="
+	2,502 776,502 597.9,412.3 169,412 "/>
+<rect id="middleWall" x="170" y="135" onclick="alert(&quot;This is the Middle Wall&quot;);" fill="#FFFFFF" stroke="#000000" stroke-miterlimit="10" width="428" height="277"/>
+<polygon id="left_x5F_wall" onclick="alert(&quot;This is the Left Wall&quot;);" fill="#FFFFFF" stroke="#000000" stroke-miterlimit="10" points="
+	2,1 169.8,135.5 169.8,412.3 1.9,502 "/>
+<polygon id="rightWall" onclick="alert(&quot;This is the Right Wall&quot;);" fill="#FFFFFF" stroke="#000000" stroke-miterlimit="10" points="
+	597.9,135.5 775.5,1 776,502 598.5,413 "/>
+<polygon id="bottomRghtTrim" onclick="alert(&quot;This is the Bottom Right Trim&quot;);" fill="#FFFFFF" stroke="#000000" stroke-miterlimit="10" points="
+	776,466.7 598.5,388 598.5,412.8 775.6,502 "/>
+<rect id="bottomMiddleTrim" x="169" y="388" onclick="alert(&quot;This is the Bottom Middle Trim&quot;);" fill="#FFFFFF" stroke="#000000" stroke-miterlimit="10" width="429.5" height="25"/>
+<polygon id="bottomLeftTrim" onclick="alert(&quot;This is the Bottom Left Trim&quot;);" fill="#FFFFFF" stroke="#000000" stroke-miterlimit="10" points="
+	2,502 170,412.3 170.1,387 2,468 "/>
+<polygon id="topRightTrim" onclick="alert(&quot;This is the Top Right Trim&quot;);" fill="#FFFFFF" stroke="#000000" stroke-miterlimit="10" points="
+	776,1 597.4,135 597.4,160 775.6,35 "/>
+<rect id="topMiddleTrim" x="170" y="134.4" onclick="alert(&quot;This is the Top Middle Trim&quot;);" fill="#FFFFFF" stroke="#000000" stroke-miterlimit="10" width="428.1" height="25"/>
+<polygon id="topLeftTrim" onclick="alert(&quot;This is the Top Left Trim&quot;);" fill="#FFFFFF" stroke="#000000" stroke-miterlimit="10" points="
+	2,1 170,135 169,160 2,35 "/>
+<polygon id="ceiiling" onclick="alert(&quot;This is the ceiling&quot;);" fill="#FFFFFF" stroke="#000000" stroke-miterlimit="10" points="
+	1.9,1.2 776,1 597.9,135.5 169.8,135.5 "/>
+</svg>
