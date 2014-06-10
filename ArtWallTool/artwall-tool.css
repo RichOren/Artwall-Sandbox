@@ -1,0 +1,38 @@
+
+.dropTarget {
+    display: inline-block;
+    width:46px;
+    height:38px;
+    padding:0;
+    border:1px solid #aaa;
+}
+
+.over {
+    border: 2px solid #0f0;
+}
+
+.itemC {
+    display: inline-block;
+    width: 44px;
+    height: 36px;
+    background-color: yellowgreen;
+}
+.itemT {
+    display: inline-block;
+    width: 44px;
+    height: 36px;
+    background-color: lightpink;
+}
+.itemW {
+    display: inline-block;
+    width: 44px;
+    height: 36px;
+    background-color: darkorange;
+}
+.itemB {
+    display: inline-block;
+    width: 44px;
+    height: 36px;
+    background-color: chocolate;
+}
+

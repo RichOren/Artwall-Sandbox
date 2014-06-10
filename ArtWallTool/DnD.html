@@ -1,0 +1,113 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <style>
+        #div1, #div2 {
+            width:350px;
+            height:64px;
+            padding:10px;
+            border:1px solid #aaaaaa;
+        }
+        div .over {
+            border: 2px dashed #000;
+        }
+    </style>
+
+    <script>
+        function onDragStart(e, type) {
+//            e.effectAllowed = "move";
+            console.log("setData");
+            //e.dataTransfer.effectAllowed = 'all';
+            e.dataTransfer.setData("Text", e.target.id);
+        }
+
+        function onDragEnter1(e) {
+//            e.dataTransfer.dropEffect = 'move';
+            //this.classList.add('over');
+//            return false;
+
+        }
+
+        function onDragEnter2(e) {
+//            e.dataTransfer.dropEffect = 'link';
+            //this.classList.add('over');
+//            e.preventDefault();
+//            e.dataTransfer.dropEffect = 'link';
+//            return false;
+        }
+
+        function onDragLeave(e) {
+            //this.classList.remove('over');
+        }
+
+        function onDragOver1(e) {
+            e.preventDefault();
+//            e.dataTransfer.dropEffect = 'copy';
+            return false;
+        }
+
+        function onDragOver2(e) {
+            e.preventDefault();
+            e.dataTransfer.dropEffect = 'link';
+            return false;
+        }
+
+        function onDrop1(e) {
+            console.log(e.dataTransfer.getData("Text"));
+            console.log(e);
+            var data = e.dataTransfer.getData("Text");
+//            e.target.appendChild(document.getElementById(data));
+            e.target.appendChild(createButton());
+        }
+
+        function onDrop2(e) {
+            console.log(e.dataTransfer.getData("Text"));
+            e.preventDefault();
+            var data = e.dataTransfer.getData("Text");
+//            e.target.appendChild(document.getElementById(data));
+            e.target.appendChild(createButton());
+        }
+
+        function createButton() {
+            var btn = document.createElement("button");
+            var att = document.createAttribute("draggable");
+            att.value="true";
+            btn.setAttributeNode(att);
+
+            var t = document.createTextNode("CLICK ME");
+            btn.appendChild(t);
+
+
+            return btn;
+        }
+
+    </script>
+</head>
+<body>
+
+
+<div id="div1"
+     ondragenter="onDragEnter1(event)"
+     ondragover="onDragOver1(event)"
+     ondragleave="onDragLeave(event)"
+     ondrop="onDrop1(event)">
+</div>
+<br>
+<div id="div2"
+     ondragenter="onDragEnter2(event)"
+     ondragover="onDragOver2(event)"
+     ondragleave="onDragLeave(event)"
+     ondrop="onDrop2(event)">
+
+</div>
+<br>
+    <div id="red" draggable="true"
+         ondragstart="onDragStart(event, 'red')"
+         style="width: 44px; height:44px; background-color: red"></div>
+
+    <div id="green" draggable="true"
+         ondragstart="onDragStart(event, 'green')"
+         style="width: 44px; height:44px; background-color: green"></div>
+
+</body>
+</html>

@@ -1,0 +1,59 @@
+<div
+    ng-controller="PreviewCtrl"
+>
+
+    <div>
+        <div>Ceeling</div>
+        <div class="dropTarget" dnd-target="C">
+            <div class="itemC" dnd-source="getItem('C')">{{getItem('C').productId}}</div>
+        </div>
+    </div>
+    <div>
+        <div>Top Trim</div>
+        <div>
+            <div class="dropTarget" dnd-target="T1">
+                <div class="itemT" dnd-source="getItem('T1')">{{getItem('T1').productId}}</div>
+            </div>
+            <div class="dropTarget" dnd-target="T2">
+                <div class="itemT" dnd-source="getItem('T2')">{{getItem('T2').productId}}</div>
+            </div>
+            <div class="dropTarget" dnd-target="T3">
+                <div class="itemT" dnd-source="getItem('T3')">{{getItem('T3').productId}}</div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <div>Wall</div>
+        <div>
+            <div class="dropTarget" dnd-target="W1">
+                <div class="itemW" dnd-source="getItem('W1')">{{getItem('W1').productId}}</div>
+            </div>
+            <div class="dropTarget" dnd-target="W2">
+                <div class="itemW" dnd-source="getItem('W2')">{{getItem('W2').productId}}</div>
+            </div>
+            <div class="dropTarget" dnd-target="W3">
+                <div class="itemW" dnd-source="getItem('W3')">{{getItem('W3').productId}}</div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <div>Bottom Trim</div>
+        <div>
+            <div class="dropTarget" dnd-target="B1">
+                <div class="itemB" dnd-source="getItem('B1')">{{getItem('B1').productId}}</div>
+            </div>
+            <div class="dropTarget" dnd-target="B2">
+                <div class="itemB" dnd-source="getItem('B2')">{{getItem('B2').productId}}</div>
+            </div>
+            <div class="dropTarget" dnd-target="B3">
+                <div class="itemB" dnd-source="getItem('B3')">{{getItem('B3').productId}}</div>
+            </div>
+        </div>
+
+        <div>Trash</div>
+        <div>
+            <div class="dropTarget" dnd-target="">
+            </div>
+        </div>
+    </div>
+</div>

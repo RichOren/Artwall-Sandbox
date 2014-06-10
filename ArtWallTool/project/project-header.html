@@ -1,0 +1,11 @@
+<div ng-controller="ProjectCtrl">
+
+    <label>Project:
+        <input type="text" ng-model="model.projectName"/>
+    </label>
+    <span ng-show="model.projectItems.length">
+        (
+        <span ng-bind="model.projectItems.length"></span>
+        )
+    </span>
+</div>

@@ -1,0 +1,38 @@
+<div
+    ng-controller="ToolboxCtrl"
+>
+    <select ng-model="collSelected"
+            ng-options="coll.name for coll in myColls">
+    </select>
+
+    <div dnd-target="">
+        <div>
+            <div ng-click="selectType('C')">Ceelings ({{collSelected.ceelings.length}})</div>
+            <div ng-show="typeSelected == 'C'"
+                 ng-repeat="product in collSelected.ceelings">
+                <div class="itemC" dnd-source="product">{{product.productId}}</div>
+            </div>
+        </div>
+        <div>
+            <div ng-click="selectType('T')">Top Trims ({{collSelected.topTrims.length}})</div>
+            <div ng-show="typeSelected == 'T'"
+                 ng-repeat="product in collSelected.topTrims">
+                <div class="itemT" dnd-source="product">{{product.productId}}</div>
+            </div>
+        </div>
+        <div>
+            <div ng-click="selectType('W')">Walls ({{collSelected.walls.length}})</div>
+            <div ng-show="typeSelected == 'W'"
+                 ng-repeat="product in collSelected.walls">
+                <div class="itemW" dnd-source="product">{{product.productId}}</div>
+            </div>
+        </div>
+        <div>
+            <div ng-click="selectType('B')">Bottom Trims ({{collSelected.bottomTrims.length}})</div>
+            <div ng-show="typeSelected == 'B'"
+                 ng-repeat="product in collSelected.bottomTrims">
+                <div class="itemB" dnd-source="product">{{product.productId}}</div>
+            </div>
+        </div>
+    </div>
+</div>
