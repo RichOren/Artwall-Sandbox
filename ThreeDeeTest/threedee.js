@@ -55,6 +55,10 @@ function Camera( world, x, y, z, rx, ry, rz) {
 Camera.prototype = {
 	update: function() {
 		if (this.world) {
+			// this.world.node.style.cssText=
+			// 	CssUtils.origin( 237.5, -9, -150) +
+			// 	CssUtils.translate( -237, 9, 700, 278.5, 0, 270)
+			// }
 			this.world.node.style.cssText=
 				CssUtils.origin( -this.position.x, -this.position.y, -this.position.z) +
 				CssUtils.translate( this.position.x, this.position.y, this.fov, this.rotation.x, this.rotation.y, this.rotation.z)
