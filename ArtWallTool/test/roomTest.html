@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>Phoria - Dev test page 0</title>
+      <script src="../scripts/phoria/gl-matrix.js"></script>
+      <script src="../scripts/phoria/phoria-util.js"></script>
+      <script src="../scripts/phoria/phoria-entity.js"></script>
+      <script src="../scripts/phoria/phoria-scene.js"></script>
+      <script src="../scripts/phoria/phoria-renderer.js"></script>
+      <script src="../scripts/phoria/phoria-view.js"></script>
+      <script src='../scripts/phoria/dat.gui.min.js'></script>
+      <script>
+var requestAnimFrame = window.requestAnimationFrame || window.webkitRequestAnimationFrame ||
+                       window.mozRequestAnimationFrame || window.msRequestAnimationFrame ||
+                       function(c) {
+                           window.setTimeout(c, 15)
+                       };
+
+
+// bind to window onload event
+window.addEventListener('load', onloadHandler, false);
+var bitmaps = [];
+function onloadHandler()
+{
+    // get the images loading
+    var loader = new Phoria.Preloader();
+//    for (var i=0; i<6; i++)
+//    {
+        bitmaps.push(new Image());
+        loader.addImage(bitmaps[0], '../images/texture'+5+'.png');
+//    }
+    loader.onLoadCallback(init);
+}
+function init()
+{
+
+   var model = {};
+    model.frontWall = {w:14, h:8};
+    model.leftWall = {w:12, h:8};
+    model.rightWall = {w:12, h:8};
+
+   var eyeHeight = 3;
+
+
+   // get the canvas DOM element and the 2D drawing context
+   var canvas = document.getElementById('canvas');
+   
+   // create the scene and setup camera, perspective and viewport
+   var scene = new Phoria.Scene();
+   scene.camera.up = {x:0.0, y:1.0, z:0.0};
+   scene.camera.lookat = {x:model.frontWall.w/2, y:model.frontWall.h/2, z:0};
+   scene.camera.position = {x:model.frontWall.w/2, y:eyeHeight, z:-30};
+
+//   scene.perspective.fov = 35;
+   scene.perspective.fov = 28;
+   scene.perspective.aspect = canvas.width / canvas.height;
+   scene.viewport.width = canvas.width;
+   scene.viewport.height = canvas.height;
+   
+   // create a canvas renderer
+   var renderer = new Phoria.CanvasRenderer(canvas);
+   
+//   // add a grid to help visualise camera position etc.
+//   var plane = Phoria.Util.generateTesselatedPlane(8,8,0,20);
+//   scene.graph.push(Phoria.Entity.create({
+//      points: plane.points,
+//      edges: plane.edges,
+//      polygons: plane.polygons,
+//      style: {
+//         drawmode: "wireframe",
+//         shademode: "plain",
+//         linewidth: 0.5,
+//         objectsortmode: "back"
+//      }
+//   }));
+
+
+    function createVerticalSurface(w, h) {
+        var vs = Phoria.Entity.create({
+            points: [{x:0,y:0,z:0}, {x:0,y:h,z:0}, {x:w,y:h,z:0}, {x:w,y:0,z:0}],
+            edges: [{a:0,b:1}, {a:1,b:2}, {a:2,b:3}, {a:3,b:0}],
+            polygons: [{vertices:[0,1,2,3]}]
+        });
+//        wall.textures.push(bitmaps[0]);
+//        wall.polygons[0].texture = 0;
+//        var style = vs.style;
+//        style.color = [0,0,256];
+//        style.diffuse = 1.0;
+//        style.specular = 0;
+//        style.drawmode = "solid";
+//        style.shademode = "lightsource";
+//        style.fillmode = "inflate";
+//        style.objectsortmode = "sorted";
+//        style.geometrysortmode = "automatic";
+//        style.linewidth = 0.0;
+//        style.linescale = 0.0;
+//        style.opacity = 1;
+//        style.doublesided = false;
+        return vs;
+    }
+
+    function createWall(id, w, h, topH, bottomH) {
+        var wall = createVerticalSurface(w, h);
+        wall.id = id;
+
+        var topTrim = createVerticalSurface(w, topH);
+        topTrim.id = id + "-topTrim";
+        topTrim.translateY(h - topH);
+        topTrim.style.color = [88,0,88];
+        topTrim.style.objectsortmode = "front";
+        wall.children.push(topTrim);
+
+        var bottomTrim = createVerticalSurface(w, bottomH);
+        bottomTrim.id = id + "-bottomTrim";
+        bottomTrim.style.color = [88,0,88];
+        bottomTrim.style.objectsortmode = "front";
+        wall.children.push(bottomTrim);
+
+        return wall;
+    }
+
+    function createFloor(id, w, d) {
+        var floor = Phoria.Entity.create({
+            points: [{x:0,y:0,z:0}, {x:w,y:0,z:0}, {x:w,y:0,z:-d}, {x:0,y:0,z:-d}],
+            edges: [{a:0,b:1}, {a:1,b:2}, {a:2,b:3}, {a:3,b:0}],
+            polygons: [{vertices:[0,1,2,3]}]
+        });
+        floor.id = id;
+        floor.style.color = [0,128,128];
+        return floor;
+    }
+
+    function createCeiling(id, w, d, h) {
+        var ceil = Phoria.Entity.create({
+            points: [{x:0,y:h,z:0}, {x:0,y:h,z:-d}, {x:w,y:h,z:-d}, {x:w,y:h,z:0}],
+            edges: [{a:0,b:1}, {a:1,b:2}, {a:2,b:3}, {a:3,b:0}],
+            polygons: [{vertices:[0,1,2,3]}]
+        });
+        ceil.id = id;
+        ceil.style.color = [0,128,128];
+        return ceil;
+    }
+
+    var floor = createFloor("floor", model.frontWall.w, model.leftWall.w);
+    scene.graph.push(floor);
+
+    var ceiling = createCeiling("ceiling", model.frontWall.w, model.leftWall.w, model.frontWall.h);
+    ceiling.textures.push(bitmaps[0]);
+    ceiling.polygons[0].texture = 0;
+    scene.graph.push(ceiling);
+
+    var frontWall = createWall("frontWall", model.frontWall.w, model.frontWall.h, 0.4, 0.6);
+    frontWall.style.color = [0,0,256];
+    scene.graph.push(frontWall);
+
+
+    var leftWall = createWall("leftWall", model.leftWall.w, model.leftWall.h, 0.4, 0.6);
+    leftWall.style.color = [0,256,0];
+    leftWall.rotateY(-Phoria.PIO2);
+    leftWall.translateX(-model.leftWall.w);
+    scene.graph.push(leftWall);
+
+    var rightWall = createWall("rightWall", model.rightWall.w, model.rightWall.h, 0.4, 0.6);
+    rightWall.style.color = [128,0, 0];
+    rightWall.translateX(model.frontWall.w);
+    rightWall.rotateY(Phoria.PIO2);
+    scene.graph.push(rightWall);
+
+
+
+    var light1 = new Phoria.DistantLight();
+    light1.direction = {x:-2, y:+5, z:+3};
+    scene.graph.push(light1);
+
+    var light2 = new Phoria.DistantLight();
+    light2.direction = {x:+2, y:-5, z:-3};
+    scene.graph.push(light2);
+
+
+    var mouse = Phoria.View.addMouseEvents(canvas,
+//            function() {
+//        console.log( mouse.clickPositionX, mouse.clickPositionY);
+
+                // pick object detection on mouse click
+//        var cpv = Phoria.View.calculateClickPointAndVector(scene, mouse.clickPositionX, mouse.clickPositionY);
+//        var intersects = Phoria.View.getIntersectedObjects(scene, cpv.clickPoint, cpv.clickVector);
+//        console.log( cpv, intersects);
+
+//        console.log( "Clicked: " + (intersects.length !== 0 ? intersects[0].entity.id : "[none]")) ;
+//            },
+        null,
+        onMouseDown,
+        onMouseUp
+    );
+
+    var selectedEntity;
+    var originalColor;
+
+    function onMouseDown() {
+        // pick object detection on mouse click
+        var cpv = Phoria.View.calculateClickPointAndVector(scene, mouse.clickPositionX, mouse.clickPositionY);
+        var intersects = Phoria.View.getIntersectedObjects(scene, cpv.clickPoint, cpv.clickVector);
+//        console.log( cpv, intersects);
+
+        console.log( "Pressed: " + (intersects.length !== 0 ? intersects[0].entity.id : "[none]")) ;
+        if( intersects.length) {
+            selectedEntity = intersects[0].entity;
+            originalColor = selectedEntity.style.color;
+            selectedEntity.style.color = [128, 128, 0];
+        }
+    }
+
+    function onMouseUp() {
+        if(selectedEntity) {
+            selectedEntity.style.color = originalColor;
+            selectedEntity = null;
+        }
+    }
+
+
+
+   var pause = false;
+   var fnAnimate = function() {
+      if (!pause)
+      {
+
+          scene.perspective.aspect = canvas.width / canvas.height;
+          scene.viewport.width = canvas.width;
+          scene.viewport.height = canvas.height;
+
+          //frontWall.rotateZ(0.5*Phoria.RADIANS);
+
+         // execute the model view 3D pipeline and render the scene
+         scene.modelView();
+         renderer.render(scene);
+      }
+      requestAnimFrame(fnAnimate);
+   };
+    fnAnimate();
+
+   // key binding
+   document.addEventListener('keydown', function(e) {
+      console.log(e.keyCode, e.altKey);
+
+      switch (e.keyCode)
+      {
+         case 27: // ESC
+            pause = !pause;
+            break;
+
+         case 38: // Up Arrow
+             if(e.altKey) {
+                 if( scene.camera.position.z < -1) {
+                     scene.camera.position.z++;
+                 }
+             }
+             else {
+                 if( scene.camera.position.y > 1) {
+                     scene.camera.position.y--;
+                 }
+             }
+            break;
+         case 40: // Down Arrow
+             if(e.altKey) {
+                 scene.camera.position.z--;
+             }
+             else {
+                 if( scene.camera.position.y < (model.frontWall.h - 1)) {
+                     scene.camera.position.y++;
+                 }
+             }
+            break;
+
+         case 37: // Left Arrow
+             if(e.altKey) {
+                 scene.camera.lookat.x++;
+             }
+             else {
+                 if( scene.camera.position.x < (model.frontWall.w - 1)) {
+                    scene.camera.position.x++;
+                 }
+             }
+            break;
+         case 39: // Right Arrow
+             if(e.altKey) {
+                 scene.camera.lookat.x--;
+             }
+             else {
+                 if( scene.camera.position.x > 1) {
+                    scene.camera.position.x--;
+                 }
+             }
+            break;
+
+          default:
+            console.log(e.keyCode);
+            break;
+      }
+   }, false);
+
+   function sizeCanvas(){
+       canvas.width = window.innerWidth -20; canvas.height = window.innerHeight - 20;
+   }
+   window.addEventListener('resize', function(e) {
+       sizeCanvas();
+   });
+   sizeCanvas();
+
+
+
+
+   // add GUI controls
+//   var gui = new dat.GUI();
+//   var f = gui.addFolder('Perspective');
+//   f.add(scene.perspective, "fov").min(5).max(175);
+//   f.add(scene.perspective, "near").min(1).max(100);
+//   f.add(scene.perspective, "far").min(1).max(1000);
+//   //f.open();
+//   f = gui.addFolder('Camera LookAt');
+//   f.add(scene.camera.lookat, "x").min(-100).max(100);
+//   f.add(scene.camera.lookat, "y").min(-100).max(100);
+//   f.add(scene.camera.lookat, "z").min(-100).max(100);
+//   f.open();
+//   f = gui.addFolder('Camera Position');
+//   f.add(scene.camera.position, "x").min(-100).max(100);
+//   f.add(scene.camera.position, "y").min(-100).max(100);
+//   f.add(scene.camera.position, "z").min(-100).max(100);
+//   f.open();
+//   f = gui.addFolder('Camera Up');
+//   f.add(scene.camera.up, "x").min(-10).max(10).step(0.1);
+//   f.add(scene.camera.up, "y").min(-10).max(10).step(0.1);
+//   f.add(scene.camera.up, "z").min(-10).max(10).step(0.1);
+//   f = gui.addFolder('Rendering');
+//   f.add(floor.style, "drawmode", ["point", "wireframe", "solid"]);
+//   f.add(floor.style, "shademode", ["plain", "lightsource"]);
+//   f.add(floor.style, "fillmode", ["fill", "filltwice", "inflate", "fillstroke", "hiddenline"]);
+//   f.add(cube.style, "drawmode", ["point", "wireframe", "solid"]);
+//   f.add(cube.style, "shademode", ["plain", "lightsource"]);
+//   f.add(cube.style, "fillmode", ["fill", "filltwice", "inflate", "fillstroke", "hiddenline"]);
+   //f.open();
+   
+   // start animation
+   requestAnimFrame(fnAnimate);
+}
+      </script>
+   </head>
+   
+   <body style="background-color: #ffffff">
+      <canvas id="canvas" width="768" height="512" style="background-color: #000000"></canvas>
+   </body>
+</html>
