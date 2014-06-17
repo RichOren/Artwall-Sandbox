@@ -57,7 +57,7 @@ Camera.prototype = {
 		if (this.world) {
 			this.world.node.style.cssText=
 				CssUtils.origin( 237.5, -9, -150) +
-				CssUtils.translate( -237, 9, 700, 278.5, 0, 270)
+				CssUtils.translate( -237, 9, 370, 278.5, 0, 270)
 			}
 			// this.world.node.style.cssText=
 			// 	CssUtils.origin( -this.position.x, -this.position.y, -this.position.z) +
