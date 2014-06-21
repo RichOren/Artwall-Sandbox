@@ -69,10 +69,10 @@ Camera.prototype = {
 /* Plane
 -------------------------------------------------- */
 
-function Plane( colour, w,h,x,y,z,rx,ry,rz) {
-	this.node = document.createElement("div")
-	this.node.className="plane"
-	this.colour = colour
+function Plane( colour, w,h,  x,y,z,  rx,ry,rz) {
+	this.node = document.createElement("div");
+	this.node.className = "plane";
+	this.colour = colour;
 	this.width = w;
 	this.height = h;
 	this.position = new Triplet(x, y, z);
@@ -94,15 +94,15 @@ Plane.prototype = {
 -------------------------------------------------- */
 
 function World( viewport ) {
-	this.node = document.createElement("div")
-	this.node.className = "world"
-	viewport.node.appendChild(this.node)
+	this.node = document.createElement("div");
+	this.node.className = "world";
+	viewport.node.appendChild(this.node);
 	viewport.camera.world = this;
 }
 
 World.prototype = {
 	addPlane: function( plane ) {
-		this.node.appendChild(plane.node)
+		this.node.appendChild(plane.node);
 	}
 }
 
@@ -110,8 +110,8 @@ World.prototype = {
 -------------------------------------------------- */
 
 function Viewport( node ) {
-	this.node = document.createElement("div")
-	this.node.className = "viewport"
-	this.camera = new Camera()
-	node.appendChild(this.node)
+	this.node = document.createElement("div");
+	this.node.className = "viewport";
+	this.camera = new Camera();
+	node.appendChild(this.node);
 }
