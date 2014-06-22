@@ -52,8 +52,8 @@ angular.module("artwalltool", [])
         };
 
         $scope.onDrop = function(data, targetUid) {
-            console.log('onDrop', targetUid, data);
-            if (!targetUid && isProjectItem(data)) {
+            console.log('onDrop |' + targetUid + "|", data);
+            if (targetUid == '' && isProjectItem(data)) {
                 $scope.removeProjectItem(data);
             }
             else {
@@ -94,6 +94,7 @@ angular.module("artwalltool", [])
         };
 
         $scope.removeProjectItemAtLocation = function(previewLocation){
+            console.log('removeCartItemAt', previewLocation);
             var result = null;
             var items = $scope.model.projectItems;
             for(var i=0; i<items.length; i++) {
@@ -128,6 +129,7 @@ angular.module("artwalltool", [])
 
                 productId: product.productId,
                 productType: product.productType,
+                productImage: product.productImage,
 
                 color: 'tan',
                 height: 4,
@@ -137,6 +139,20 @@ angular.module("artwalltool", [])
                 unitPrice: product.productId * 100
             };
             $scope.model.projectItems.push(item);
+        };
+
+        $scope.getImageFor = function(previewLocation){
+            var result = "";
+            var pi = $scope.getProjectItemAtLocation(previewLocation);
+            if( pi && pi.productImage) {
+                result = "./images/" + pi.productImage + ".jpg";
+            }
+//            console.log("getImageFor", previewLocation, result);
+            return result;
+        };
+
+        $scope.getCartItemAt = function(previewLocation){
+            return $scope.getProjectItemAtLocation(previewLocation);
         };
 
     }]);

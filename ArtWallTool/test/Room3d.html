@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+
+    <!-- disable zooming -->
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=0" />
+
+
+    <style>
+
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            /*-webkit-text-size-adjust: none;*/
+            color: #333;
+        }
+
+        figure {
+            margin: 0;
+        }
+
+
+        .container {
+            width: 400px;
+            height: 200px;
+            position: relative;
+            margin: 0 auto 40px;
+            border: 1px solid #CCC;
+            -webkit-perspective: 300px;
+            -moz-perspective: 300px;
+            -o-perspective: 300px;
+            perspective: 300px;
+
+            -webkit-perspective-origin: 50% 70%;
+            -moz-perspective-origin: 50% 70%;
+            -o-perspective-origin: 50% 70%;
+            perspectiveorigin: 50% 70%;
+        }
+
+        #box {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            -webkit-transform-style: preserve-3d;
+            -moz-transform-style: preserve-3d;
+            -o-transform-style: preserve-3d;
+            transform-style: preserve-3d;
+            -webkit-transition: -webkit-transform 1s;
+            -moz-transition: -moz-transform 1s;
+            -o-transition: -o-transform 1s;
+            transition: transform 1s;
+        }
+
+        #box figure {
+            display: block;
+            position: absolute;
+            /*border: 2px solid black;*/
+            /*line-height: 196px;*/
+            font-size: 60px;
+            text-align: center;
+            font-weight: bold;
+            color: white;
+            -webkit-backface-visibility: hidden;
+            -moz-backface-visibility: hidden;
+            -o-backface-visibility: hidden;
+            backface-visibility: hidden;
+        }
+
+
+        #box .front,
+        #box .back {
+            width: 400px;
+            height: 200px;
+        }
+
+        #box .right,
+        #box .left {
+            width: 100px;
+            height: 200px;
+            left: 150px;
+        }
+
+        #box .top,
+        #box .bottom {
+            width: 400px;
+            height: 100px;
+            top: 50px;
+            /*line-height: 96px;*/
+        }
+
+
+        #box .front  { background: hsla( 000, 100%, 50%, 0.7 ); }
+        #box .back   { background: hsla( 160, 100%, 50%, 0.7 ); }
+        #box .right  { background: hsla( 120, 100%, 50%, 0.7 ); }
+        #box .left   { background: hsla( 180, 100%, 50%, 0.7 ); }
+        #box .top    { background: hsla( 240, 100%, 50%, 0.7 ); }
+        #box .bottom { background: hsla( 300, 100%, 50%, 0.7 ); }
+
+        #box .front  {
+            -webkit-transform: translateZ( -50px );
+            -moz-transform: translateZ( -50px );
+            -o-transform: translateZ( -50px );
+            transform: translateZ( -50px );
+        }
+        #box .back   {
+            -webkit-transform: rotateY( -180deg ) translateZ(  -50px );
+            -moz-transform: rotateY( -180deg ) translateZ(  -50px );
+            -o-transform: rotateY( -180deg ) translateZ(  -50px );
+            transform: rotateY( -180deg ) translateZ(  -50px );
+        }
+
+        #box .left {
+            -webkit-transform: rotateY(  90deg ) translateZ( -200px );
+            -moz-transform: rotateY(  90deg ) translateZ( -200px );
+            -o-transform: rotateY(  90deg ) translateZ( -200px );
+            transform: rotateY(  90deg ) translateZ( -200px );
+        }
+        #box .right {
+            -webkit-transform: rotateY(   -90deg ) translateZ( -200px );
+            -moz-transform: rotateY(   -90deg ) translateZ( -200px );
+            -o-transform: rotateY(   -90deg ) translateZ( -200px );
+            transform: rotateY(   -90deg ) translateZ( -200px );
+        }
+        #box .top {
+            -webkit-transform: rotateX(   -90deg ) translateZ( -100px );
+            -moz-transform: rotateX(   -90deg ) translateZ( -100px );
+            -o-transform: rotateX(   -90deg ) translateZ( -100px );
+            transform: rotateX(   -90deg ) translateZ( -100px );
+        }
+        #box .bottom {
+            -webkit-transform: rotateX(  90deg ) translateZ( -100px );
+            -moz-transform: rotateX(  90deg ) translateZ( -100px );
+            -o-transform: rotateX(  90deg ) translateZ( -100px );
+            transform: rotateX(  90deg ) translateZ( -100px );
+        }
+
+
+        #box.show-front {
+            -webkit-transform: translateZ(  -50px );
+            -moz-transform: translateZ(  -50px );
+            -o-transform: translateZ(  -50px );
+            transform: translateZ(  -50px );
+        }
+        #box.show-back {
+            -webkit-transform: translateZ( -50px ) rotateY( -180deg );
+            -moz-transform: translateZ( -50px ) rotateY( -180deg );
+            -o-transform: translateZ( -50px ) rotateY( -180deg );
+            transform: translateZ( -50px ) rotateY( -180deg );
+        }
+
+        #box.show-left {
+            -webkit-transform: translateZ( -200px ) rotateY(   -90deg );
+            -moz-transform: translateZ( -200px ) rotateY(   -90deg );
+            -o-transform: translateZ( -200px ) rotateY(   -90deg );
+            transform: translateZ( -200px ) rotateY(   -90deg );
+        }
+        #box.show-right {
+            -webkit-transform: translateZ( -200px ) rotateY(  90deg );
+            -moz-transform: translateZ( -200px ) rotateY(  90deg );
+            -o-transform: translateZ( -200px ) rotateY(  90deg );
+            transform: translateZ( -200px ) rotateY(  90deg );
+        }
+
+        #box.show-top {
+            -webkit-transform: translateZ( -100px ) rotateX(  90deg );
+            -moz-transform: translateZ( -100px ) rotateX(  90deg );
+            -o-transform: translateZ( -100px ) rotateX(  90deg );
+            transform: translateZ( -100px ) rotateX(  90deg );
+        }
+        #box.show-bottom {
+            -webkit-transform: translateZ( -100px ) rotateX(   -90deg );
+            -moz-transform: translateZ( -100px ) rotateX(   -90deg );
+            -o-transform: translateZ( -100px ) rotateX(   -90deg );
+            transform: translateZ( -100px ) rotateX(   -90deg );
+        }
+
+
+
+    </style>
+
+</head>
+<body>
+
+<section class="container">
+
+    <div id="box" class="show-front">
+        <figure class="front">front</figure>
+        <figure class="back">back</figure>
+        <figure class="left">L</figure>
+        <figure class="right">R</figure>
+        <figure class="top">ceeling</figure>
+        <figure class="bottom">floor</figure>
+    </div>
+
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+<section id="options">
+
+    <p id="show-buttons">
+        <button class="show-front">Front</button>
+        <button class="show-back">Back</button>
+        <button class="show-left">Left</button>
+        <button class="show-right">Right</button>
+        <button class="show-top">Ceeling</button>
+        <button class="show-bottom">Floor</button>
+    </p>
+
+</section>
+
+<script src="js/utils.js"></script>
+<script src="js/rotate-box.js"></script>
+
+
+</body>
+</html>

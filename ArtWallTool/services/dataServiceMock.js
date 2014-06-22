@@ -23,7 +23,7 @@ angular.module("artwalltool")
             var coll = getMyCollections()[1];
 
             var projectItemId = projectId * 100;
-            result.push(createMockProjectItem(++projectItemId, coll.ceelings[3], 'C'));
+            //result.push(createMockProjectItem(++projectItemId, coll.ceelings[3], 'C'));
 
             result.push(createMockProjectItem(++projectItemId, coll.topTrims[2], 'T1'));
             result.push(createMockProjectItem(++projectItemId, coll.walls[5], 'W1'));
@@ -46,6 +46,7 @@ angular.module("artwalltool")
 
                 productId: product.productId,
                 productType: product.productType,
+                productImage: product.productImage,
 
                 color: 'tan',
                 height: 4,
@@ -100,7 +101,22 @@ angular.module("artwalltool")
                 code: productCode,
                 name: productName,
                 productType: productType
+                //productImage: "A023-copy"
             };
+            switch (productType){
+                case "C":
+                    result.productImage = "A023-copy";
+                    break;
+                case "T":
+                    result.productImage = "wood";
+                    break;
+                case "W":
+                    result.productImage = "A023-copy";
+                    break;
+                case "B":
+                    result.productImage = "1";
+                    break;
+            }
             return result;
         }
 

@@ -6,33 +6,42 @@
     </select>
 
     <div dnd-target="">
-        <div>
-            <div ng-click="selectType('C')">Ceelings ({{collSelected.ceelings.length}})</div>
-            <div ng-show="typeSelected == 'C'"
-                 ng-repeat="product in collSelected.ceelings">
-                <div class="itemC" dnd-source="product">{{product.productId}}</div>
-            </div>
+
+        <div ng-click="selectType('C')">Ceelings ({{collSelected.ceelings.length}})</div>
+        <div ng-show="typeSelected == 'C'"
+             style="border: 1px solid #aaaaaa;">
+            <span ng-repeat="product in collSelected.ceelings">
+                <img class="prod" dnd-source="product"
+                     ng-src="{{getImageUrl(product.productImage)}}">
+            </span>
         </div>
-        <div>
-            <div ng-click="selectType('T')">Top Trims ({{collSelected.topTrims.length}})</div>
-            <div ng-show="typeSelected == 'T'"
-                 ng-repeat="product in collSelected.topTrims">
-                <div class="itemT" dnd-source="product">{{product.productId}}</div>
-            </div>
+
+        <div ng-click="selectType('T')">Top Trims ({{collSelected.topTrims.length}})</div>
+        <div ng-show="typeSelected == 'T'"
+            style="border: 1px solid #aaaaaa;">
+            <span ng-repeat="product in collSelected.topTrims">
+                <img class="prod" dnd-source="product"
+                     ng-src="{{getImageUrl(product.productImage)}}">
+            </span>
         </div>
-        <div>
-            <div ng-click="selectType('W')">Walls ({{collSelected.walls.length}})</div>
-            <div ng-show="typeSelected == 'W'"
-                 ng-repeat="product in collSelected.walls">
-                <div class="itemW" dnd-source="product">{{product.productId}}</div>
-            </div>
+
+        <div ng-click="selectType('W')">Walls ({{collSelected.walls.length}})</div>
+        <div ng-show="typeSelected == 'W'"
+             style="border: 1px solid #aaaaaa;">
+            <span ng-repeat="product in collSelected.walls">
+                <img class="prod" dnd-source="product"
+                     ng-src="{{getImageUrl(product.productImage)}}">
+            </span>
         </div>
-        <div>
-            <div ng-click="selectType('B')">Bottom Trims ({{collSelected.bottomTrims.length}})</div>
-            <div ng-show="typeSelected == 'B'"
-                 ng-repeat="product in collSelected.bottomTrims">
-                <div class="itemB" dnd-source="product">{{product.productId}}</div>
-            </div>
+
+        <div ng-click="selectType('B')">Bottom Trims ({{collSelected.bottomTrims.length}})</div>
+        <div ng-show="typeSelected == 'B'"
+             style="border: 1px solid #aaaaaa;">
+            <span ng-repeat="product in collSelected.bottomTrims">
+                <img class="prod" dnd-source="product"
+                     ng-src="{{getImageUrl(product.productImage)}}">
+            </span>
         </div>
+
     </div>
 </div>

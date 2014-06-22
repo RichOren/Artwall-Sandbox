@@ -1,0 +1,99 @@
+<div class="viewport" ng-controller="RoomCtrl as room">
+
+    <div class="room"
+        style="-webkit-transform: translate3d(-{{room.frontWall.w/2}}px, -20px, 150px);"
+    >
+
+        <div class="plane"
+             style="width:{{room.ceeling.w}}px; height:{{room.ceeling.h}}px;
+                -webkit-transform: translate3d(0px, 0px, {{room.ceeling.h}}px) rotateX( -90deg );"
+            >
+            <div class="artHolder" dnd-target="C"
+                 style="top: 30px; bottom: 30px; left: 30px; right: 30px">
+                <img width="100%" height="100%"
+                     ng-src="{{getImageFor('C')}}"
+                     ng-show="getImageFor('C')"
+                     dnd-source="getCartItemAt('C')">
+            </div>
+        </div>
+
+        <div class="plane"
+             style="width:{{room.leftWall.w}}px; height:{{room.leftWall.h}}px;
+                -webkit-transform: translate3d(0px, 0px, {{room.leftWall.w}}px) rotateY( 90deg );"
+            >
+            <div class="artHolder" dnd-target="W1"
+                 style="top: 10px; bottom: 10px;">
+                <img width="100%" height="100%"
+                     ng-src="{{getImageFor('W1')}}"
+                     ng-show="getImageFor('W1')"
+                     dnd-source="getCartItemAt('W1')">
+            </div>
+            <div class="topTrimHolder" dnd-target="T1">
+                <div class="topTrim" dnd-source="getCartItemAt('T1')"
+                     style="height: 10px;
+                    background-image: url('{{getImageFor('T1')}}')"></div>
+            </div>
+            <div class="bottomTrimHolder" dnd-target="B1">
+                <div class="bottomTrim" dnd-source="getCartItemAt('B1')"
+                     style="height: 10px;
+                    background-image: url('{{getImageFor('B1')}}')"></div>
+            </div>
+        </div>
+
+        <div class="plane"
+             style="width:{{room.frontWall.w}}px; height:{{room.frontWall.h}}px;"
+            >
+            <div class="artHolder" dnd-target="W2"
+                 style="top: 10px; bottom: 10px;">
+                <img width="100%" height="100%"
+                     ng-src="{{getImageFor('W2')}}"
+                     ng-show="getImageFor('W2')"
+                     dnd-source="getCartItemAt('W2')">
+            </div>
+            <div class="topTrimHolder" dnd-target="T2">
+                <div class="topTrim" dnd-source="getCartItemAt('T2')"
+                     style="height: 10px;
+                    background-image: url('{{getImageFor('T2')}}')"></div>
+            </div>
+            <div class="bottomTrimHolder" dnd-target="B2">
+                <div class="bottomTrim" dnd-source="getCartItemAt('B2')"
+                     style="height: 10px;
+                    background-image: url('{{getImageFor('B2')}}')"></div>
+            </div>
+        </div>
+
+        <div class="plane"
+             style="width:{{room.rightWall.w}}px; height:{{room.rightWall.h}}px;
+                -webkit-transform: translate3d({{room.frontWall.w}}px, 0px, 0px) rotateY( -90deg );"
+            >
+            <div class="artHolder" dnd-target="W3"
+                 style="top: 10px; bottom: 10px;">
+                <img width="100%" height="100%"
+                     ng-src="{{getImageFor('W3')}}"
+                     ng-show="getImageFor('W3')"
+                     dnd-source="getCartItemAt('W3')">
+            </div>
+            <div class="topTrimHolder" dnd-target="T3">
+                <div class="topTrim" dnd-source="getCartItemAt('T3')"
+                     style="height: 10px;
+                    background-image: url('{{getImageFor('T3')}}')"></div>
+            </div>
+            <div class="bottomTrimHolder" dnd-target="B3">
+                <div class="bottomTrim" dnd-source="getCartItemAt('B3')"
+                     style="height: 10px;
+                    background-image: url('{{getImageFor('B3')}}')"></div>
+            </div>
+        </div>
+
+
+        <div class="plane" dnd-target=""
+             style="width:{{room.floor.w}}px; height:{{room.floor.h}}px;
+                -webkit-transform: translate3d(0px, {{room.frontWall.h}}px, 0px) rotateX( 90deg );
+                 background-image: url('./images/wood.jpg');
+                 background-repeat: repeat">
+        </div>
+
+    </div>
+
+
+</div>

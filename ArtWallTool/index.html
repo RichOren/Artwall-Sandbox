@@ -4,28 +4,6 @@
 
     <link rel="stylesheet" href="artwall-tool.css" />
 
-
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular.min.js"></script>
-    <script src="//code.createjs.com/easeljs-0.7.0.min.js"></script>
-
-    <script src="ArtWallTool.js"></script>
-    <script src="mainCtrl.js"></script>
-    <script src="canvasCtrl.js"></script>
-
-    <script src="dnd/dnd-source.js"></script>
-    <script src="dnd/dnd-target.js"></script>
-
-    <script src="preview/preview.js"></script>
-    <script src="preview/previewCtrl.js"></script>
-
-    <script src="project/project-header.js"></script>
-    <script src="project/projectCtrl.js"></script>
-
-    <script src="toolbox/toolbox.js"></script>
-    <script src="toolbox/toolboxCtrl.js"></script>
-
-    <script src="services/dataServiceMock.js"></script>
-
 </head>
 <body ng-controller="MainCtrl"
       style="padding: 0; margin: 0; padding-left:10px; padding-top: 10px"
@@ -41,7 +19,9 @@
         <div style="position: absolute; top:50px; left:0; background-color: #e0e0e0"
             ng-style="{width: (win.width-300)+'px', height: (win.height-60)+'px'}"
         >
-            <preview/>
+
+            <room/>
+
         </div>
 
         <div style="width: 300px; height: 200px; position: absolute; top:0; right:0; background-color: #e0e0e0"
@@ -49,16 +29,30 @@
             >
             <toolbox/>
         </div>
-<!--
-        <canvas id="canvas" ng-controller="CanvasCtrl"
-            width="640" height="480"
-            style="border: solid 1px #ff0000; position: absolute; top:0; left:0"
-            ng-style="{width: (win.width-20)+'px', height: (win.height-20)+'px'}"
-        ></canvas>
--->
-            <!--
-            -->
+
     </div>
+
+
+
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular.min.js"></script>
+
+    <script src="ArtWallTool.js"></script>
+    <script src="mainCtrl.js"></script>
+
+    <script src="dnd/dnd-source.js"></script>
+    <script src="dnd/dnd-target.js"></script>
+
+    <script src="project/project-header.js"></script>
+    <script src="project/projectCtrl.js"></script>
+
+    <script src="room/room.js"></script>
+    <script src="room/roomCtrl.js"></script>
+
+    <script src="toolbox/toolbox.js"></script>
+    <script src="toolbox/toolboxCtrl.js"></script>
+
+    <script src="services/dataServiceMock.js"></script>
+
 
 </body>
 </html>

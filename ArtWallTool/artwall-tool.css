@@ -11,28 +11,101 @@
     border: 2px solid #0f0;
 }
 
-.itemC {
-    display: inline-block;
-    width: 44px;
-    height: 36px;
-    background-color: yellowgreen;
+.prod {
+    width: 66px;
+    height: auto;
+    margin-left: 5px;
+    margin-top: 5px;
 }
-.itemT {
-    display: inline-block;
-    width: 44px;
-    height: 36px;
-    background-color: lightpink;
+
+
+.viewport {
+    position:relative;
+    float:left;
+    overflow: hidden;
+    width:100%;
+    height:400px;
+    background: #444;
+    -webkit-perspective: 500px;
+    -moz-perspective: 500px;
+    -ms-perspective: 500px;
+    perspective: 500px;
+    -webkit-perspective-origin: 50% 270px;
+    -moz-perspective-origin: 50% 270px;
+    -ms-perspective-origin: 50% 270px;
+    perspective-origin: 50% 270px;
 }
-.itemW {
-    display: inline-block;
-    width: 44px;
-    height: 36px;
-    background-color: darkorange;
+
+.room {
+    position: absolute;
+    left:50%;
+    top:50%;
+    width: 100%;
+    height: 100%;
+    -webkit-transform-style: preserve-3d;
+    -moz-transform-style: preserve-3d;
+    -ms-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+
+    /*-webkit-transform-origin: 0 0 500;*/
+    /*-moz-transform-origin: 0 0 0;*/
+    /*-ms-transform-origin: 0 0 0;*/
+    /*-webkit-transform: translate3d(-100px, -0px, 100px)*/
+    /*rotateX(0deg)*/
+    /*rotateX(-2deg) rotateY(2deg);*/
 }
-.itemB {
-    display: inline-block;
-    width: 44px;
-    height: 36px;
-    background-color: chocolate;
+
+.plane {
+    background-color: #ffffff;
+    position: absolute;
+    -webkit-transform-origin: 0 0 0;
+    -moz-transform-origin: 0 0 0;
+    -ms-transform-origin: 0 0 0;
+    transform-origin: 0 0 0;
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    -ms-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+
+
+.artHolder {
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    position: absolute;
+}
+
+.topTrimHolder {
+    top: 0;
+    width: 100%;
+    height: 20px;
+    /*background-color: #ffffff;*/
+    position: absolute;
+}
+
+.topTrim {
+    top: 0;
+    width: 100%;
+    position: absolute;
+    /*background-color: #ffffff;*/
+    background-repeat: repeat-x;
+}
+
+.bottomTrimHolder {
+    bottom: 0;
+    width: 100%;
+    height: 20px;
+    /*background-color: #ffffff;*/
+    position: absolute;
+}
+
+.bottomTrim {
+    bottom: 0;
+    width: 100%;
+    position: absolute;
+    /*background-color: #ffffff;*/
+    background-repeat: repeat-x;
 }
 

@@ -5,7 +5,7 @@ angular.module("artwalltool")
     .controller("ToolboxCtrl", ['$scope', 'dataService', function($scope, dataService) {
 
         $scope.myColls = [];
-        $scope.typeSelected = 'W';
+        $scope.typeSelected = 'C';
         $scope.collSelected = {
             ceelings: [],
             topTrims: [],
@@ -14,9 +14,9 @@ angular.module("artwalltool")
         };
 
         $scope.selectType = function(type){
-            $scope.typeSelected = ($scope.typeSelected == type)
-                ? null
-                : $scope.typeSelected = type;
+            if( $scope.typeSelected != type) {
+                $scope.typeSelected = type;
+            }
         };
 
         function activate(){
@@ -24,5 +24,9 @@ angular.module("artwalltool")
             $scope.collSelected = $scope.myColls[0];
         }
         activate();
+
+        $scope.getImageUrl = function(productImage){
+            return "./images/" + productImage + ".jpg";
+        }
 
     }]);
