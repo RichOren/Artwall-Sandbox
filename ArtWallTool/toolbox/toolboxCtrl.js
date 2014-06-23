@@ -5,7 +5,7 @@ angular.module("artwalltool")
     .controller("ToolboxCtrl", ['$scope', 'dataService', function($scope, dataService) {
 
         $scope.myColls = [];
-        $scope.typeSelected = 'C';
+        $scope.typeSelected = 'W';
         $scope.collSelected = {
             ceelings: [],
             topTrims: [],

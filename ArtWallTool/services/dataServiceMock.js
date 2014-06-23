@@ -23,18 +23,19 @@ angular.module("artwalltool")
             var coll = getMyCollections()[1];
 
             var projectItemId = projectId * 100;
-            //result.push(createMockProjectItem(++projectItemId, coll.ceelings[3], 'C'));
+            result.push(createMockProjectItem(++projectItemId, coll.ceelings[3], 'C'));
 
             result.push(createMockProjectItem(++projectItemId, coll.topTrims[2], 'T1'));
-            result.push(createMockProjectItem(++projectItemId, coll.walls[5], 'W1'));
+//            result.push(createMockProjectItem(++projectItemId, coll.walls[5], 'W1'));
             result.push(createMockProjectItem(++projectItemId, coll.bottomTrims[6], 'B1'));
 
             result.push(createMockProjectItem(++projectItemId, coll.topTrims[2], 'T2'));
             result.push(createMockProjectItem(++projectItemId, coll.walls[4], 'W2'));
             result.push(createMockProjectItem(++projectItemId, coll.bottomTrims[6], 'B2'));
 
-            result.push(createMockProjectItem(++projectItemId, coll.topTrims[2], ''));
-            result.push(createMockProjectItem(++projectItemId, coll.bottomTrims[6], ''));
+            result.push(createMockProjectItem(++projectItemId, coll.topTrims[2], 'T3'));
+//            result.push(createMockProjectItem(++projectItemId, coll.walls[4], 'W3'));
+            result.push(createMockProjectItem(++projectItemId, coll.bottomTrims[6], 'B3'));
 
             return result;
         }
@@ -97,6 +98,7 @@ angular.module("artwalltool")
 
         function createMockProduct(productId, productCode, productName, productType) {
             var result = {
+                className: 'product',
                 productId: productId,
                 code: productCode,
                 name: productName,

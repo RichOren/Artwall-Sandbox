@@ -4,6 +4,35 @@
 angular.module("artwalltool", [])
     .controller("MainCtrl", ['$scope', '$window', 'dataService', function($scope, $window, dataService) {
 
+        $scope.inch = 8;
+        $scope.foot = 12 * $scope.inch;
+
+        $scope.distance = 20;
+
+        $scope.room = {
+            widthFt: 14,
+            width: 14 * $scope.foot,
+            heightFt: 8,
+            height: 8 * $scope.foot,
+            depthFt: 12,
+            depth: 12 * $scope.foot
+        };
+        $scope.setWidth = function(val) {
+           if (val) {
+               $scope.room.width = val * $scope.foot;
+           }
+        };
+        $scope.setHeight = function(val) {
+           if (val) {
+               $scope.room.height = val * $scope.foot;
+           }
+        };
+        $scope.setDepth = function(val) {
+           if (val) {
+               $scope.room.depth = val * $scope.foot;
+           }
+        };
+
         $scope.model = {};
 
         $scope.win = {
@@ -28,16 +57,21 @@ angular.module("artwalltool", [])
         activate();
 
         function isProjectItem(obj) {
-            return obj.hasOwnProperty('projectItemId');
+            return obj && obj.hasOwnProperty('projectItemId');
+        }
+
+        function isProduct(obj) {
+            return obj && obj.hasOwnProperty('className') && obj.className == 'product';
         }
 
         $scope.canDrop = function(data, targetUid) {
             var result = false;
+            var productType;
             if (!targetUid && isProjectItem(data)) {
                 result = true;
             }
-            else {
-                var productType = targetUid.substr(0, 1);
+            else if(data) {
+                productType = targetUid.substr(0, 1);
                 result = (productType == data.productType);
                 if( result ) {
                     var item = $scope.getProjectItemAtLocation(targetUid);
@@ -55,6 +89,7 @@ angular.module("artwalltool", [])
             console.log('onDrop |' + targetUid + "|", data);
             if (targetUid == '' && isProjectItem(data)) {
                 $scope.removeProjectItem(data);
+                $scope.$apply();
             }
             else {
                 if (isProjectItem(data)) {
@@ -69,13 +104,14 @@ angular.module("artwalltool", [])
                         item.previewLocation = data.previewLocation;
                     }
                     data.previewLocation = targetUid;
+                    $scope.$apply();
                 }
-                else {
+                else if( isProduct(data) ) {
                     $scope.removeProjectItemAtLocation(targetUid);
                     $scope.addProductAtLocation(data, targetUid);
+                    $scope.$apply();
                 }
             }
-            $scope.$apply();
         };
 
 

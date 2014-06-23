@@ -1,11 +1,34 @@
-<div ng-controller="ProjectCtrl">
+<div ng-controller="ProjectCtrl as ctrl">
+    <div>
+        <label>Project:
+            <input type="text" ng-model="model.projectName"/>
+        </label>
+        <span ng-show="model.projectItems.length">
+            (
+            <span ng-bind="model.projectItems.length"></span>
+            )
+        </span>
+    </div>
+    <div>
+        <label>Room W:
+            <input type="text" ng-model="room.widthFt"
+                   ng-blur="setWidth(room.widthFt)"
+                    style="width: 30px"/>
+        </label>
+        <label>H:
+            <input type="text" ng-model="room.heightFt"
+                   ng-blur="setHeight(room.heightFt)"
+                    style="width: 30px"/>
+        </label>
+        <label>D:
+            <input type="text" ng-model="room.depthFt"
+                   ng-blur="setDepth(room.depthFt)"
+                    style="width: 30px"/>
+        </label>
 
-    <label>Project:
-        <input type="text" ng-model="model.projectName"/>
-    </label>
-    <span ng-show="model.projectItems.length">
-        (
-        <span ng-bind="model.projectItems.length"></span>
-        )
-    </span>
+        <label> Distance:
+            <input type="text" ng-model="distance"
+                    style="width: 30px"/>
+        </label>
+    </div>
 </div>
