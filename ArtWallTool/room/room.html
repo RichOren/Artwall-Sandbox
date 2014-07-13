@@ -1,101 +1,70 @@
 <div class="viewport">
 
-    <div class="room"
-        style="width:{{room.width}}px; height:{{room.height}}px;
+    <div class="room" style="width:{{room.width}}px; height:{{room.height}}px;
             -webkit-transform:
-            translate3d(-{{room.width/2}}px, -{{room.height/2 + 6*inch}}px, {{-distance * foot}}px)"
-    >
+            translate3d(-{{room.width/2}}px, -{{room.height/2 + 6*inch}}px, {{-distance * foot}}px)">
 
-        <div class="plane"
-             style="width:{{room.width}}px; height:{{room.depth}}px;
+        <div class="plane" style="width:{{room.width}}px; height:{{room.depth}}px;
                 -webkit-transform: translateZ({{room.depth}}px) rotateX( -90deg )">
-                       <div class="artHolder" dnd-target="C"
-                 style="top: {{2*foot}}px; bottom: {{2*foot}}px; left: {{2*foot}}px; right: {{2*foot}}px">
-                <img width="100%" height="100%"
-                     ng-src="{{getImageFor('C')}}"
-                     ng-show="getImageFor('C')"
-                     dnd-source="getCartItemAt('C')">
+            <div class="artHolder" dnd-target="C" style="top: {{2*foot}}px; bottom: {{2*foot}}px; left: {{2*foot}}px; right: {{2*foot}}px">
+                <img width="100%" height="100%" ng-src="{{getImageFor('C')}}" ng-show="getImageFor('C')" dnd-source="getCartItemAt('C')">
             </div>
+             <img width="100%" height="100%" src="./images/shdw.png" class="fade-ceiling">
         </div>
 
-        <div class="plane"
-             style="top:1px; width:{{room.depth}}px; height:{{room.height-2}}px;
-                -webkit-transform: translateZ({{room.depth}}px) rotateY( 90deg );"
-            >
-            <div class="artHolder" dnd-target="W1"
-                 style="top: {{6*inch}}px; bottom: {{6*inch}}px;">
-                <img width="100%" height="100%"
-                     ng-src="{{getImageFor('W1')}}"
-                     ng-show="getImageFor('W1')"
-                     dnd-source="getCartItemAt('W1')">
+        <div class="plane" style="top:1px; width:{{room.depth}}px; height:{{room.height-2}}px;
+                -webkit-transform: translateZ({{room.depth}}px) rotateY( 90deg );">
+            <div class="artHolder" dnd-target="W1" style="top: {{6*inch}}px; bottom: {{6*inch}}px;">
+                <img width="100%" height="100%" ng-src="{{getImageFor('W1')}}" ng-show="getImageFor('W1')" dnd-source="getCartItemAt('W1')">
             </div>
-            <div class="topTrimHolder" dnd-target="T1"
-                 style="height: {{foot}}px;">
-                <div class="topTrim" dnd-source="getCartItemAt('T1')"
-                     style="height: {{6*inch}}px;
+            <div class="topTrimHolder" dnd-target="T1" style="height: {{foot}}px;">
+                <div class="topTrim" dnd-source="getCartItemAt('T1')" style="height: {{6*inch}}px;
                     background-image: url('{{getImageFor('T1')}}')"></div>
             </div>
-            <div class="bottomTrimHolder" dnd-target="B1"
-                 style="height: {{foot}}px;">
-                <div class="bottomTrim" dnd-source="getCartItemAt('B1')"
-                     style="height: {{6*inch}}px;
+            <div class="bottomTrimHolder" dnd-target="B1" style="height: {{foot}}px;">
+                <div class="bottomTrim" dnd-source="getCartItemAt('B1')" style="height: {{6*inch}}px;
                     background-image: url('{{getImageFor('B1')}}')"></div>
             </div>
+             <img width="100%" height="100%" src="./images/shdw.png" class="fade-w1">
         </div>
 
-        <div class="plane"
-             style="left:1px; top:1px; width:{{room.width-2}}px; height:{{room.height-2}}px;"
-            >
-            <div class="artHolder" dnd-target="W2"
-                 style="top: {{6*inch}}px; bottom: {{6*inch}}px;">
-                <img width="100%" height="100%"
-                     ng-src="{{getImageFor('W2')}}"
-                     ng-show="getImageFor('W2')"
-                     dnd-source="getCartItemAt('W2')">
+        <div class="plane" style="left:1px; top:1px; width:{{room.width-2}}px; height:{{room.height-2}}px;">
+            <div class="artHolder" dnd-target="W2" style="top: {{6*inch}}px; bottom: {{6*inch}}px;">
+                <img width="100%" height="100%" ng-src="{{getImageFor('W2')}}" ng-show="getImageFor('W2')" dnd-source="getCartItemAt('W2')">
+                
             </div>
-            <div class="topTrimHolder" dnd-target="T2"
-                 style="height: {{foot}}px;">
-                <div class="topTrim" dnd-source="getCartItemAt('T2')"
-                     style="height: {{6*inch}}px;
+            <div class="topTrimHolder" dnd-target="T2" style="height: {{foot}}px;">
+                <div class="topTrim" dnd-source="getCartItemAt('T2')" style="height: {{6*inch}}px;
                     background-image: url('{{getImageFor('T2')}}')"></div>
             </div>
-            <div class="bottomTrimHolder" dnd-target="B2"
-                 style="height: {{foot}}px;">
-                <div class="bottomTrim" dnd-source="getCartItemAt('B2')"
-                     style="height: {{6*inch}}px;
+            <div class="bottomTrimHolder" dnd-target="B2" style="height: {{foot}}px;">
+                <div class="bottomTrim" dnd-source="getCartItemAt('B2')" style="height: {{6*inch}}px;
                     background-image: url('{{getImageFor('B2')}}')"></div>
             </div>
+            <img width="100%" height="100%" src="./images/shdw.png" class="fade-w2">
         </div>
 
-        <div class="plane"
-             style="top:1px; width:{{room.depth}}px; height:{{room.height-2}}px;
-                -webkit-transform: translateX({{room.width}}px) rotateY( -90deg );"
-        >
-            <div class="artHolder" dnd-target="W3"
-                 style="top: {{6*inch}}px; bottom: {{6*inch}}px;">
-                <img width="100%" height="100%"
-                     ng-src="{{getImageFor('W3')}}"
-                     ng-show="getImageFor('W3')"
-                     dnd-source="getCartItemAt('W3')"></div>
-            <div class="topTrimHolder" dnd-target="T3"
-                 style="height: {{foot}}px;">
-                <div class="topTrim" dnd-source="getCartItemAt('T3')"
-                     style="height: {{6*inch}}px;
+        <div class="plane" style="top:1px; width:{{room.depth}}px; height:{{room.height-2}}px;
+                -webkit-transform: translateX({{room.width}}px) rotateY( -90deg );">
+            <div class="artHolder" dnd-target="W3" style="top: {{6*inch}}px; bottom: {{6*inch}}px;">
+                <img width="100%" height="100%" ng-src="{{getImageFor('W3')}}" ng-show="getImageFor('W3')" dnd-source="getCartItemAt('W3')">
+            </div>
+            <div class="topTrimHolder" dnd-target="T3" style="height: {{foot}}px;">
+                <div class="topTrim" dnd-source="getCartItemAt('T3')" style="height: {{6*inch}}px;
                     background-image: url('{{getImageFor('T3')}}')"></div>
             </div>
-            <div class="bottomTrimHolder" dnd-target="B3"
-                 style="height: {{foot}}px;">
-                <div class="bottomTrim" dnd-source="getCartItemAt('B3')"
-                     style="height: {{6*inch}}px;
+            <div class="bottomTrimHolder" dnd-target="B3" style="height: {{foot}}px;">
+                <div class="bottomTrim" dnd-source="getCartItemAt('B3')" style="height: {{6*inch}}px;
                     background-image: url('{{getImageFor('B3')}}')"></div>
             </div>
+             <img width="100%" height="100%" src="./images/shdw.png" class="fade-w3">
         </div>
 
-        <div class="plane" dnd-target=""
-             style="width:{{room.width}}px; height:{{room.depth}}px;
+        <div class="plane" dnd-target="" style="width:{{room.width}}px; height:{{room.depth}}px;
                 -webkit-transform: translateY({{room.height}}px) rotateX( 90deg );
                  background-image: url('./images/wood.jpg');
-                 background-repeat: repeat">
+                 background-repeat: repeat;
+                 background-size: 71%">
         </div>
 
     </div>

@@ -110,13 +110,13 @@ angular.module("artwalltool")
                     result.productImage = "A023-copy";
                     break;
                 case "T":
-                    result.productImage = "wood";
+                    result.productImage = "C009";
                     break;
                 case "W":
                     result.productImage = "A023-copy";
                     break;
                 case "B":
-                    result.productImage = "1";
+                    result.productImage = "C010_sm";
                     break;
             }
             return result;

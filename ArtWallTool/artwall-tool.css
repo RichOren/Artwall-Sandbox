@@ -1,11 +1,26 @@
-
+body { padding-top: 70px; }
 .over {
     border: 2px solid #0f0;
 }
-
+.navbar .divider-vertical {
+    margin: 0 9px;
+    padding: 0 9px;
+    border-right: 1px solid #E7E7E7;
+    border-left: 1px solid #E7E7E7;
+}
+div.bottomTrim:hover {
+    content: "Drag an image here!";
+    color: #000;
+    background-color: rgba(0, 255, 0, .3);
+}
+div.topTrim:hover {
+    content: "Drag an image here!";
+    color: #000;
+    background-color: rgba(0, 255, 0, .3);
+}
 .prod {
     width: 66px;
-    height: auto;
+    height: auto;   
     margin-left: 5px;
     margin-top: 5px;
 }
@@ -21,10 +36,10 @@
     -moz-perspective: 1000px;
     -ms-perspective: 1000px;
     perspective: 1000px;
-    -webkit-perspective-origin: 45% 65%;
-    -moz-perspective-origin: 50% 65%;
-    -ms-perspective-origin: 50% 65%;
-    perspective-origin: 50% 65%;
+    -webkit-perspective-origin: 49% 65%;
+    -moz-perspective-origin: 49% 65%;
+    -ms-perspective-origin: 49% 65%;
+    perspective-origin: 49% 65%;
 }
 
 .room {
@@ -57,6 +72,20 @@
     backface-visibility: hidden;
 }
 
+img.fade-ceiling, img.fade-w1, img.fade-w2, img.fade-w3{
+    top: 0; 
+    left: 0; 
+    position: absolute;
+    pointer-events: none;
+    opacity: .5;
+}
+img.fade-w1, img.fade-w2, img.fade-w3{
+    top: 0; 
+    left: 0; 
+    position: absolute;
+    pointer-events: none;
+    opacity: .3;
+}
 
 .artHolder {
     left: 0;
