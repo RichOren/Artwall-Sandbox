@@ -1,0 +1,26 @@
+<div ng-cloak
+     ds-base-url="tool"
+     ds-require="./toolApp ./toolMainCtrl
+     ./services/dataServiceMock
+     ./room/artDirective
+     ../core/dnd/dndSourceDirective
+     ../core/dnd/dndTargetDirective
+     "
+     ng-controller="toolMainCtrl as mc"
+        class="container">
+    <div class="row">
+        <ng-include src="'tool/projectHeader/projectHeaderPartial.html'" />
+    </div>
+    <div class="row">
+        <div  class="col-xs-9">
+            <ng-include src="'tool/room/roomPartial.html'" />
+        </div>
+
+        <div class="col-xs-3" ng-show="model.artSelected">
+            <ng-include src="'tool/artParam/artParamPartial.html'" />
+        </div>
+        <div class="col-xs-3" ng-hide="model.artSelected">
+            <ng-include src="'tool/toolbox/toolboxPartial.html'" />
+        </div>
+    </div>
+</div>

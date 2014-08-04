@@ -1,0 +1,101 @@
+<div ng-cloak
+     class="panel-group" id="accordion"
+     ds-base-url="tool/toolbox"
+     ds-require="./toolboxCtrl"
+     ng-controller="toolboxCtrl as ctrl"
+     >
+
+    <select class="selectpicker"
+            ng-model="ctrl.collSelected"
+            ng-options="coll.name for coll in ctrl.myColls"
+            ng-change="ctrl.onCollChange(ctrl.collSelected)"
+            >
+    </select>
+
+
+    <div class="panel panel-default" dnd-target="">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <a class="accordion-toggle"
+                   ng-click="ctrl.selectType('C')"
+                   data-toggle="collapse"
+                   data-parent="#accordion" href="#collapseOne">
+          Ceilings ({{ctrl.collSelected.ceilings.length}})
+        </a><i class="indicator glyphicon glyphicon-chevron-up pull-right"></i>
+            </h4>
+        </div>
+        <div id="collapseOne" class="panel-collapse collapse in">
+            <div class="panel-body">
+                <span ng-repeat="product in ctrl.collSelected.ceilings">
+                    <img class="prod" dnd-source="product"
+                         ng-src="{{ctrl.getImageUrl(product.productImage)}}">
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <a class="accordion-toggle"
+                   ng-click="ctrl.selectType('T')"
+                   data-toggle="collapse"
+                   data-parent="#accordion"
+                   href="#collapseTwo">
+           Top Trims ({{ctrl.collSelected.topTrims.length}})
+        </a><i class="indicator glyphicon glyphicon-chevron-down pull-right"></i>
+            </h4>
+        </div>
+        <div id="collapseTwo" class="panel-collapse collapse">
+            <div class="panel-body">
+                <span ng-repeat="product in ctrl.collSelected.topTrims">
+                    <img class="prod" dnd-source="product"
+                         ng-src="{{ctrl.getImageUrl(product.productImage)}}">
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <a class="accordion-toggle"
+                   ng-click="ctrl.selectType('W')"
+                   data-toggle="collapse"
+                   data-parent="#accordion"
+                   href="#collapseThree">
+          Walls ({{ctrl.collSelected.walls.length}})
+        </a><i class="indicator glyphicon glyphicon-chevron-down pull-right"></i>
+            </h4>
+        </div>
+        <div id="collapseThree" class="panel-collapse collapse">
+            <div class="panel-body">
+                 <span ng-repeat="product in ctrl.collSelected.walls">
+                    <img class="prod" dnd-source="product"
+                         ng-src="{{ctrl.getImageUrl(product.productImage)}}">
+                </span>
+            </div>
+        </div>
+
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <a class="accordion-toggle"
+                   ng-click="ctrl.selectType('B')"
+                   data-toggle="collapse"
+                   data-parent="#accordion"
+                   href="#collapseFour">
+          Bottom Trims ({{ctrl.collSelected.bottomTrims.length}})
+        </a><i class="indicator glyphicon glyphicon-chevron-down pull-right"></i>
+            </h4>
+        </div>
+        <div id="collapseFour" class="panel-collapse collapse">
+            <div class="panel-body">
+                <span ng-repeat="product in ctrl.collSelected.bottomTrims">
+                    <img class="prod" dnd-source="product"
+                         ng-src="{{ctrl.getImageUrl(product.productImage)}}">
+                </span>
+            </div>
+        </div>
+    </div>
+
+</div>
