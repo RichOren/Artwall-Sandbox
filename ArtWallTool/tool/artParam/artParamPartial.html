@@ -1,62 +1,104 @@
 <div class="panel-group">
     <div>
         <form>
-            Position
-            <div class="form-group">
-                <label>Left:
-                    <input type="text" style="width: 40px"
-                           ng-model="model.artSelected.art.position.left"
-                           />
-                </label>
+            <div class="panel panel-default panel-card">
+                <div class="panel-heading">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#position">
+                    Position
+                  </a>
+                </div>
+                <div id="position" class="panel-collapse collapse in">
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="form-group stepper-group">
+                                    <h5>Left:</h5>
+                                    <div numeric-stepper ng-model="model.artSelected.art.position.left" min="0" max="model.projectItems[0].art.original.width - model.projectItems[0].art.size.width" step-by="1">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="form-group stepper-group">
+                                    <h5>Top:</h5>
+                                    <div numeric-stepper ng-model="model.artSelected.art.position.top" min="10" max="model.projectItems[0].art.original.height - model.projectItems[0].art.size.height" step-by="1">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="form-group">
-                <label>Top:
-                    <input type="text" style="width: 40px"
-                           ng-model="model.artSelected.art.position.top"
-                           />
-                </label>
+            <div class="panel panel-default panel-card">
+                <div class="panel-heading">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#size">
+                    Size
+                  </a>
+                </div>
+                <div id="size" class="panel-collapse collapse in">
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="form-group stepper-group">
+                                    <h5 class="stepper-lbl">Width:</h5>
+                                    <div numeric-stepper ng-model="model.artSelected.art.size.width" min="10" max="model.projectItems[0].art.original.width" step-by="1">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="form-group stepper-group">
+                                    <h5 class="stepper-lbl">Height:</h5>
+                                    <div numeric-stepper ng-model="model.artSelected.art.size.height" min="10" max="model.projectItems[0].art.original.height" step-by="1">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            Size
-            <div class="form-group">
-                <label>Width:
-                    <input type="text" style="width: 40px"
-                           ng-model="model.artSelected.art.size.width"
-                           />
-                </label>
-            </div>
-            <div class="form-group">
-                <label>Height:
-                    <input type="text" style="width: 40px"
-                           ng-model="model.artSelected.art.size.height"
-                           />
-                </label>
-            </div>
-            Clip
-            <div class="form-group">
-                <label>Left:
-                    <input type="text" style="width: 40px"
-                           ng-model="model.artSelected.art.clip.left"
-                           />
-                </label>
-            </div>
-            <div class="form-group">
-                <label>Top:
-                    <input type="text" style="width: 40px"
-                           ng-model="model.artSelected.art.clip.top"
-                           />
-                </label>
-            </div>
-            <div class="form-group">
-                <label>Zoom:
-                    <input type="text" style="width: 40px"
-                           ng-model="model.artSelected.art.zoom"
-                           />
-                </label>
+            <div class="panel panel-default panel-card">
+                <div class="panel-heading">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#clip">
+                    Clip
+                  </a>
+                </div>
+                <div id="clip" class="panel-collapse collapse in">
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                <div class="form-group stepper-group">
+                                    <h5 class="stepper-lbl">Left:
+
+                                    </h5>
+                                    <div numeric-stepper ng-model="model.artSelected.art.clip.left" min="0" max="1" step-by=".001">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                <div class="form-group stepper-group">
+                                    <h5 class="stepper-lbl">Top:</h5>
+                                    <div numeric-stepper ng-model="model.artSelected.art.clip.top" min="0" max="1" step-by=".001">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                <div class="form-group stepper-group">
+                                    <h5 class="stepper-lbl">Zoom:</h5>
+                                    <div numeric-stepper ng-model="model.artSelected.art.zoom" min="0" max="1" step-by=".001">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </form>
     </div>
-
-
 </div>
-
-

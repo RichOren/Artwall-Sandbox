@@ -1,56 +1,113 @@
-body { padding-top: 70px; }
-.over {
+body
+{
+    padding-top: 70px;
+}
+.over
+{
     border: 2px solid #0f0;
 }
-.navbar .divider-vertical {
+.navbar .divider-vertical
+{
     margin: 0 9px;
     padding: 0 9px;
-    border-right: 1px solid #E7E7E7;
-    border-left: 1px solid #E7E7E7;
+
+    border-right: 1px solid #e7e7e7;
+    border-left: 1px solid #e7e7e7;
 }
-div.bottomTrim:hover {
-    content: "Drag an image here!";
+div.bottomTrim:hover
+{
+    content: 'Drag an image here!';
+
     color: #000;
     background-color: rgba(0, 255, 0, .3);
 }
-div.topTrim:hover {
-    content: "Drag an image here!";
+div.topTrim:hover
+{
+    content: 'Drag an image here!';
+
     color: #000;
     background-color: rgba(0, 255, 0, .3);
 }
-.prod {
+
+.tool-settings-header
+{
+    margin: 0 0 16px 0;
+    padding: 1px 15px;
+
+    border: 1px solid rgba(0, 0, 0, .1);
+    border-radius: 2px;
+    background: rgba(0, 0, 0, .05);
+}
+
+.panel-card {
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.2);
+}
+
+.panel-group .panel-card + .panel-card {
+    margin-top: 10px;
+}
+.panel-group .panel-card {
+    margin-bottom: 0;
+    border-radius: 0;
+}
+
+.tool-settings-header h6 {
+    margin: 2px 0;
+}
+.tool-settings-input
+{
+    width: 100%;
+}
+
+.stepper-group {
+    margin-bottom: 0;
+}
+
+div[numeric-stepper].ng-invalid-out-of-bounds input.form-control
+{
+    color: red !important;
+}
+
+.prod
+{
     width: 66px;
-    height: auto;   
-    margin-left: 5px;
+    height: auto;
     margin-top: 5px;
+    margin-left: 5px;
 }
 
-.viewport {
-    position:relative;
-    float:left;
+.viewport
+{
+    position: relative;
+
+    float: left;
     overflow: hidden;
-    width:100%;
-    height:400px;
+
+    width: 100%;
+    height: 400px;
+
     background: #444;
+
     -webkit-perspective: 1000px;
-    -moz-perspective: 1000px;
-    -ms-perspective: 1000px;
-    perspective: 1000px;
+       -moz-perspective: 1000px;
+        -ms-perspective: 1000px;
+            perspective: 1000px;
     -webkit-perspective-origin: 49% 65%;
-    -moz-perspective-origin: 49% 65%;
-    -ms-perspective-origin: 49% 65%;
-    perspective-origin: 49% 65%;
+       -moz-perspective-origin: 49% 65%;
+        -ms-perspective-origin: 49% 65%;
+            perspective-origin: 49% 65%;
 }
 
-.room {
+.room
+{
     position: absolute;
-    left:50%;
-    top:50%;
-    -webkit-transform-style: preserve-3d;
-    -moz-transform-style: preserve-3d;
-    -ms-transform-style: preserve-3d;
-    transform-style: preserve-3d;
+    top: 50%;
+    left: 50%;
 
+    -webkit-transform-style: preserve-3d;
+       -moz-transform-style: preserve-3d;
+        -ms-transform-style: preserve-3d;
+            transform-style: preserve-3d;
     /*-webkit-transform-origin: 0 0 500;*/
     /*-moz-transform-origin: 0 0 0;*/
     /*-ms-transform-origin: 0 0 0;*/
@@ -59,65 +116,85 @@ div.topTrim:hover {
     /*rotateX(-2deg) rotateY(2deg);*/
 }
 
-.plane {
-    background-color: #FFFFFF;
+.plane
+{
     position: absolute;
+
     -webkit-transform-origin: 0 0 0;
-    -moz-transform-origin: 0 0 0;
-    -ms-transform-origin: 0 0 0;
-    transform-origin: 0 0 0;
+       -moz-transform-origin: 0 0 0;
+        -ms-transform-origin: 0 0 0;
+            transform-origin: 0 0 0;
+
+    background-color: #fff;
+
     -webkit-backface-visibility: hidden;
-    -moz-backface-visibility: hidden;
-    -ms-backface-visibility: hidden;
-    backface-visibility: hidden;
+       -moz-backface-visibility: hidden;
+        -ms-backface-visibility: hidden;
+            backface-visibility: hidden;
 }
 
-img.fade-ceiling, img.fade-w1, img.fade-w2, img.fade-w3{
-    top: 0; 
-    left: 0; 
+img.fade-ceiling, img.fade-w1, img.fade-w2, img.fade-w3
+{
     position: absolute;
+    top: 0;
+    left: 0;
+
     pointer-events: none;
+
     opacity: .5;
 }
-img.fade-w1, img.fade-w2, img.fade-w3{
-    top: 0; 
-    left: 0; 
+img.fade-w1, img.fade-w2, img.fade-w3
+{
     position: absolute;
+    top: 0;
+    left: 0;
+
     pointer-events: none;
+
     opacity: .3;
 }
 
-.artHolder {
-    left: 0;
+.artHolder
+{
+    position: absolute;
+    top: 0;
     right: 0;
-    top: 0;
     bottom: 0;
-    position: absolute;
+    left: 0;
 }
 
-.topTrimHolder {
-    top: 0;
-    width: 100%;
+.topTrimHolder
+{
     position: absolute;
+    top: 0;
+
+    width: 100%;
 }
 
-.topTrim {
-    top: 0;
-    width: 100%;
+.topTrim
+{
     position: absolute;
+    top: 0;
+
+    width: 100%;
+
     background-repeat: repeat-x;
 }
 
-.bottomTrimHolder {
-    bottom: 0;
-    width: 100%;
+.bottomTrimHolder
+{
     position: absolute;
+    bottom: 0;
+
+    width: 100%;
 }
 
-.bottomTrim {
-    bottom: 0;
-    width: 100%;
+.bottomTrim
+{
     position: absolute;
+    bottom: 0;
+
+    width: 100%;
+
     background-repeat: repeat-x;
 }
-
