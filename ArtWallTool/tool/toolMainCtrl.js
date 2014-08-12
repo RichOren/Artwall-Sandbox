@@ -25,8 +25,8 @@ function (angular, app, $) {
             height: 8 * unit.feet,
             depthFt: 12,
             depth: 12 * unit.feet,
-            distanceFt: 22,
-            distance: 22 * unit.feet
+            distanceFt: 14.7,
+            distance: 14.7 * unit.feet
         };
 
         $scope.model = {
