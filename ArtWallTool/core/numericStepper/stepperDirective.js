@@ -96,7 +96,7 @@ define([
                     updateModel(+Number($scope.stepBy));
                 }
             };
-
+            
             /**
              * @name decrement
              * @description UWhen the user clicks the increment button, decrements the value by the step coefficient

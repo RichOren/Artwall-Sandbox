@@ -2,10 +2,12 @@ body
 {
     padding-top: 70px;
 }
+
 .over
 {
     border: 2px solid #0f0;
 }
+
 .navbar .divider-vertical
 {
     margin: 0 9px;
@@ -14,6 +16,7 @@ body
     border-right: 1px solid #e7e7e7;
     border-left: 1px solid #e7e7e7;
 }
+
 div.bottomTrim:hover
 {
     content: 'Drag an image here!';
@@ -21,6 +24,7 @@ div.bottomTrim:hover
     color: #000;
     background-color: rgba(0, 255, 0, .3);
 }
+
 div.topTrim:hover
 {
     content: 'Drag an image here!';
@@ -46,25 +50,35 @@ div.topTrim:hover
 .panel-group .panel-card + .panel-card {
     margin-top: 10px;
 }
+
 .panel-group .panel-card {
     margin-bottom: 0;
     border-radius: 0;
 }
 
-.panel-group .panel-card .panel-body {
+.panel-group .panel-card .panel-body 
+{
     padding: 0 15px 15px;
 }
 
-.tool-settings-header h6 {
+.tool-settings-header h6 
+{
     margin: 2px 0;
 }
+
 .tool-settings-input
 {
     width: 100%;
 }
 
-.stepper-group {
+.stepper-group 
+{
     margin-bottom: 0;
+}
+
+.wall-isSelected
+{
+    background-color: rgba(0, 0, 0, 0.83);
 }
 
 div[numeric-stepper].ng-invalid-out-of-bounds input.form-control
@@ -72,6 +86,10 @@ div[numeric-stepper].ng-invalid-out-of-bounds input.form-control
     color: red !important;
 }
 
+.header-input
+{
+    width: 50px;
+}
 .prod
 {
     width: 66px;
@@ -147,6 +165,7 @@ img.fade-ceiling, img.fade-w1, img.fade-w2, img.fade-w3
 
     opacity: .5;
 }
+
 img.fade-w1, img.fade-w2, img.fade-w3
 {
     position: absolute;
