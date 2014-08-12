@@ -78,7 +78,7 @@ div.topTrim:hover
 
 .wall-isSelected
 {
-    background-color: rgba(0, 0, 0, 0.83);
+    background-color: rgba(0, 0, 0, 0.55);
 }
 
 div[numeric-stepper].ng-invalid-out-of-bounds input.form-control
@@ -147,7 +147,7 @@ div[numeric-stepper].ng-invalid-out-of-bounds input.form-control
         -ms-transform-origin: 0 0 0;
             transform-origin: 0 0 0;
 
-    background-color: #fff;
+    background-color: #746F48;
 
     -webkit-backface-visibility: hidden;
        -moz-backface-visibility: hidden;

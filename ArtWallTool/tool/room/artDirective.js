@@ -42,7 +42,7 @@ define([
                 var imageWidth = art.original.width * art.zoom;
 
                 $element.css({
-                    'background-color': 'grey',
+                    'background-color': '#000',
                     left: art.position.left + 'px',
                     top: art.position.top + 'px',
                     right: undefined,
@@ -57,7 +57,7 @@ define([
             }
             else {
                 $element.css({
-                    'background-color': 'grey',
+                    'background-color': 'transparent',
                     left: 0,
                     top: 0,
                     right: 0,

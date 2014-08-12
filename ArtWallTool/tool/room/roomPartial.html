@@ -7,7 +7,7 @@
         <div class="plane" style="width:{{room.width}}px; height:{{room.depth}}px;
                 -webkit-transform: translateZ({{room.depth}}px) rotateX( -90deg )">
             <div class="artHolder" dnd-target="C" dnd-source="model.artC" ng-click="mc.selectArt(model.artC)" ng-class="mc.isArtSelected(model.artC)? 'wall-isSelected':''">
-                <art pi="model.artC"></art>
+                <art pi="model.artC" ng-style="{'box-shadow': (mc.isArtSelected(model.artC) ? 'black 0px 0px 50px' : undefined)}"></art>
                 <!--
                 <img width="100%" height="100%"-->
                 <!--ng-src="{{getImageFor('C')}}"-->
@@ -20,7 +20,7 @@
         <div class="plane" style="top:1px; width:{{room.depth}}px; height:{{room.height-2}}px;
                 -webkit-transform: translateZ({{room.depth}}px) rotateY( 90deg );">
             <div class="artHolder" dnd-target="W1" style="top: {{6*inch}}px; bottom: {{6*inch}}px;" ng-click="mc.selectArt(model.artW1)" ng-class="mc.isArtSelected(model.artW1)? 'wall-isSelected':''">
-                <art dnd-source="model.artW1" pi="model.artW1"></art>
+                <art dnd-source="model.artW1" pi="model.artW1" ng-style="{'box-shadow': (mc.isArtSelected(model.artW1) ? 'black 0px 0px 50px' : undefined)}"></art>
                 <!--<img width="100%" height="100%"-->
                 <!--ng-src="{{mc.getImageFor('W1')}}"-->
                 <!--ng-show="mc.getImageFor('W1')"-->
@@ -43,7 +43,7 @@
 
         <div class="plane" style="left:1px; top:1px; width:{{room.width-2}}px; height:{{room.height-2}}px;">
             <div class="artHolder" dnd-target="W2" ng-click="mc.selectArt(model.artW2)" ng-class="mc.isArtSelected(model.artW2) ? 'wall-isSelected':''">
-                <art dnd-source="model.artW2" pi="model.artW2"></art>
+                <art dnd-source="model.artW2" pi="model.artW2" ng-style="{'box-shadow': (mc.isArtSelected(model.artW2) ? 'black 0px 0px 50px' : undefined)}"></art>
                 <!--
                 <div
                      dnd-source="getCartItemAt('W2')"
@@ -80,7 +80,7 @@
             <div class="plane" style="top:1px; width:{{room.depth}}px; height:{{room.height-2}}px;
                 -webkit-transform: translateX({{room.width}}px) rotateY( -90deg );">
                 <div class="artHolder" dnd-target="W3" style="top: {{6*inch}}px; bottom: {{6*inch}}px;" ng-click="mc.selectArt(model.artW3)" ng-class="mc.isArtSelected(model.artW3) ? 'wall-isSelected':''">
-                    <art dnd-source="model.artW3" pi="model.artW3"></art>
+                    <art dnd-source="model.artW3" pi="model.artW3" ng-style="{'box-shadow': (mc.isArtSelected(model.artW3) ? 'black 0px 0px 50px' : undefined)}"></art>
                     <!--<img width="100%" height="100%"-->
                     <!--ng-src="{{mc.getImageFor('W3')}}"-->
                     <!--ng-show="mc.getImageFor('W3')"-->
