@@ -4,6 +4,7 @@
 define([
     'angular',
     'app',
+    'freeTransform',
     'jquery'
 ],
 function (angular, app, $) {

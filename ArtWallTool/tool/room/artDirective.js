@@ -30,8 +30,19 @@ define([
                 updateImage($scope.pi, $element);
             });
             updateImage($scope.pi, $element);
+            
         }
+        function setTransform(art, $element) {
+           $element.freetrans({
+                    x: art.position.left,
+                    y: art.position.top,
+                    maintainAspectRatio: true,
+                    'rot-origin': '50% 50%'
+                }).css({
+                    border: "1px solid pink"
+                });
 
+        }
         function updateImage(pi, $element) {
 //            console.log('updateImage', pi);
             var art = pi ? pi.art : null;
@@ -43,8 +54,8 @@ define([
 
                 $element.css({
                     'background-color': '#000',
-                    left: art.position.left + 'px',
-                    top: art.position.top + 'px',
+                    //left: art.position.left + 'px',
+                    //top: art.position.top + 'px',
                     right: undefined,
                     bottom: undefined,
                     width: art.size.width + 'px',
@@ -54,6 +65,19 @@ define([
                     'background-size': imageWidth + 'px'
 
                 });
+
+                setTransform(art, $element);
+
+                // $element.freetrans({
+                //     x: art.position.left,
+                //     y: art.position.top,
+                //     maintainAspectRatio: true,
+                //     'rot-origin': '50% 50%'
+                // }).css({
+                //     border: "1px solid pink"
+                // });
+
+
             }
             else {
                 $element.css({

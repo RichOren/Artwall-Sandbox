@@ -120,6 +120,22 @@
                 'moment': '//cdnjs.cloudflare.com/ajax/libs/moment.js/2.7.0/moment.min',
             }
         },
+        // Matrix
+        {
+            paths: {
+                'Matrix': 'core/Matrix',
+            }
+        },
+        // freeTransform
+        {
+            paths: {
+                'freeTransform': 'core/jquery.freetrans',
+            },
+            shim: {
+                'freeTransform': { deps: ["jquery", "Matrix"] },
+            }
+        },
+        
 
         // Polyfill
         {
