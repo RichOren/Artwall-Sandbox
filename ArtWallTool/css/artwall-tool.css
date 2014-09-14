@@ -134,6 +134,25 @@ div[numeric-stepper].ng-invalid-out-of-bounds input.form-control
     /*rotateX(0deg)*/
     /*rotateX(-2deg) rotateY(2deg);*/
 }
+
+
+.absolute
+{
+    position: absolute;
+}
+
+.origin0
+{
+    position: absolute;
+
+    -webkit-transform-origin: 0 0 0;
+    -moz-transform-origin: 0 0 0;
+    -ms-transform-origin: 0 0 0;
+    transform-origin: 0 0 0;
+}
+
+
+
 .plane
 {
     position: absolute;

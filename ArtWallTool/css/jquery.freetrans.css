@@ -51,5 +51,5 @@
     position: absolute;
     width: 16px;
     height: 16px;
-    background-image: url('./rotate_ccw.png');
+    background-image: url('../rotate_ccw.png');
 }

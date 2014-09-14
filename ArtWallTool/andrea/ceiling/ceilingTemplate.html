@@ -1,0 +1,50 @@
+<div
+    ds-base-url="andrea/ceiling"
+    ds-require="./ceilingController
+    ../directive/artDirective
+    ../directive/borderArtDirective
+    ../directive/borderCornerArtDirective
+    ../directive/borderCenterArtDirective
+    ../directive/borderMiddleArtDirective"
+    ng-controller="ceilingController as ctrl"
+>
+
+    <button ng-click="ctrl.test()">Ceiling</button>
+
+    <div class="plane"
+         ng-style="{
+            width: ctrl.width + 'px',
+            height: ctrl.height + 'px'
+         }"
+    >
+        <art art="ctrl.backgroundArt"
+            width="ctrl.width" height="ctrl.height"
+        ></art>
+
+        <border-art art="ctrl.borderArt"
+            width="ctrl.width" height="ctrl.height"
+        ></border-art>
+
+        <border-corner-art art="ctrl.borderCornerArt"
+            width="ctrl.width" height="ctrl.height"
+        ></border-corner-art>
+
+        <border-center-art art="ctrl.borderCenterArt"
+            width="ctrl.width" height="ctrl.height"
+        ></border-center-art>
+
+        <border-middle-art art="ctrl.borderMiddleArt"
+            width="ctrl.width" height="ctrl.height"
+        ></border-middle-art>
+
+        <art art="ctrl.mainArt"
+            width="ctrl.width" height="ctrl.height"
+        ></art>
+
+        <art art="art" ng-repeat="art in ctrl.floatingArts"
+            width="ctrl.width" height="ctrl.height"
+        ></art>
+
+    </div>
+
+</div>

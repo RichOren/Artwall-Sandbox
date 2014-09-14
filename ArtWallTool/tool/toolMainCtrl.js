@@ -20,19 +20,21 @@ function (angular, app, $) {
         };
 
         $scope.room = {
-            widthFt: 14,
             width: 14 * unit.feet,
-            heightFt: 8,
             height: 8 * unit.feet,
-            depthFt: 12,
             depth: 12 * unit.feet,
-            distanceFt: 14.7,
             distance: 14.7 * unit.feet
         };
 
         $scope.model = {
+            value: 192,
             projectName: "My Project",
             projectItems: [],
+
+            planeC: {
+                width: 0,
+                height: 0
+            },
 
             artC: null,
             artW1: null,
@@ -45,11 +47,6 @@ function (angular, app, $) {
         $scope.onDrop = onDrop;
 
         var ctrl = {
-            setWidth: setWidth,
-            setHeight: setHeight,
-            setDepth: setDepth,
-            setDistance: setDistance,
-
             getProjectItemAtLocation: getProjectItemAtLocation,
             removeProjectItemAtLocation: removeProjectItemAtLocation,
             removeProjectItem: removeProjectItem,
@@ -71,6 +68,9 @@ function (angular, app, $) {
                 $scope.$apply();
             });
 
+            $scope.$watch(function(){
+                sizePlanes();
+            });
 //            $scope.$watch('model.projectItems', function(){
 //                updateDisplayedArts();
 //            });
@@ -80,25 +80,9 @@ function (angular, app, $) {
             updateDisplayedArts();
         }
 
-        function setWidth(val) {
-            if (val) {
-                $scope.room.width = val * unit.feet;
-            }
-        }
-        function setHeight(val) {
-            if (val) {
-                $scope.room.height = val * unit.feet;
-            }
-        }
-        function setDepth(val) {
-            if (val) {
-                $scope.room.depth = val * unit.feet;
-            }
-        }
-        function setDistance(val) {
-            if (val) {
-                $scope.room.distance = val * unit.feet;
-            }
+        function sizePlanes(){
+            $scope.model.planeC.width = $scope.room.width;
+            $scope.model.planeC.height = $scope.room.depth;
         }
 
 

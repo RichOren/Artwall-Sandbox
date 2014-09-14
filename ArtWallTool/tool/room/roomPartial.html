@@ -4,15 +4,13 @@
             -webkit-transform:
             translate3d(-{{room.width/2}}px, -{{room.height/2 + 3.9*inch}}px, {{-room.distance}}px)">
 
+        <!--<plane model="model.planeC"-->
+               <!--style="-webkit-transform: translateZ({{room.depth}}px) rotateX( -90deg )">-->
+        <!--></plane>-->
         <div class="plane" style="width:{{room.width}}px; height:{{room.depth}}px;
                 -webkit-transform: translateZ({{room.depth}}px) rotateX( -90deg )">
             <div class="artHolder" dnd-target="C" dnd-source="model.artC" ng-click="mc.selectArt(model.artC)" ng-class="mc.isArtSelected(model.artC)? 'wall-isSelected':''">
                 <art pi="model.artC" ng-style="{'box-shadow': (mc.isArtSelected(model.artC) ? 'black 0px 0px 50px' : undefined)}"></art>
-                <!--
-                <img width="100%" height="100%"-->
-                <!--ng-src="{{getImageFor('C')}}"-->
-                <!--ng-show="getImageFor('C')"-->
-                <!--dnd-source="getCartItemAt('C')">-->
             </div>
             <img width="100%" height="100%" src="./images/shdw.png" class="fade-ceiling">
         </div>

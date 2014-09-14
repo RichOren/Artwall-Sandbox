@@ -16,7 +16,7 @@ define([
             scope: {
                 pi: '='
             },
-            templateUrl: "tool/room/artDirectiveTemplate.html",
+            template: '<div class="art-display"></div>',
             link: link
         };
 
@@ -54,8 +54,8 @@ define([
 
                 $element.css({
                     'background-color': '#000',
-                    //left: art.position.left + 'px',
-                    //top: art.position.top + 'px',
+                    left: art.position.left + 'px',
+                    top: art.position.top + 'px',
                     right: undefined,
                     bottom: undefined,
                     width: art.size.width + 'px',
@@ -66,7 +66,7 @@ define([
 
                 });
 
-                setTransform(art, $element);
+                //setTransform(art, $element);
 
                 // $element.freetrans({
                 //     x: art.position.left,

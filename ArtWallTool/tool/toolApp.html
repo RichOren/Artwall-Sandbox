@@ -2,13 +2,16 @@
      ds-base-url="tool"
      ds-require="./toolApp ./toolMainCtrl
      ./services/dataServiceMock
+     ./room/planeDirective
      ./room/artDirective
      ../core/dnd/dndSourceDirective
      ../core/dnd/dndTargetDirective
      ../core/numericStepper/stepperDirective
-     "
+     ../core/input/inputSizeDirective"
      ng-controller="toolMainCtrl as mc"
-        class="container">
+     class="container"
+     >
+
     <div class="row">
         <ng-include src="'tool/projectHeader/projectHeaderPartial.html'" />
     </div>
@@ -24,4 +27,5 @@
             <ng-include src="'tool/toolbox/toolboxPartial.html'" />
         </div>
     </div>
+
 </div>

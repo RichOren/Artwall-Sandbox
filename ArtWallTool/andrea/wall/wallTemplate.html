@@ -1,0 +1,44 @@
+<div
+    ds-base-url="andrea/wall"
+    ds-require="./wallController
+    ../directive/artDirective
+    ../directive/artTrimDirective
+    ../directive/artTrimCornerDirective
+    ../directive/artFrameDirective"
+    ng-controller="wallController as ctrl"
+>
+    <button ng-click="ctrl.test()">Wall</button>
+
+    <div class="plane"
+         ng-style="{
+            width: ctrl.width + 'px',
+            height: ctrl.height + 'px'
+         }"
+            >
+        <art art="ctrl.backgroundArt"
+             width="ctrl.width" height="ctrl.height"
+        ></art>
+
+        <art-frame frame="ctrl.mainArtFrame" art="ctrl.mainArt"
+             left="0" right="0"
+             top="ctrl.topTrimArt.height"
+             bottom="ctrl.bottomTrimArt.height"
+
+             width="ctrl.width" height="ctrl.height"
+        ></art-frame>
+
+
+        <art-trim art="ctrl.topTrimArt"
+             width="ctrl.width" height="ctrl.height"
+        ></art-trim>
+
+        <art-trim-corner art="ctrl.topTrimCornerArt"
+             width="ctrl.width" height="ctrl.height"
+        ></art-trim-corner>
+
+        <art-trim art="ctrl.bottomTrimArt" is-bottom="true"
+             width="ctrl.width" height="ctrl.height"
+        ></art-trim>
+
+    </div>
+</div>
