@@ -41,47 +41,47 @@ function (app) {
             };
 
             ctrl.borderArt = {
-                height: 40,
-                url: './images/C1/B/C1-B1-B.jpg'
+                height: 86,
+                url: './images/C1/B/C1-B1-B-01.jpg'
             };
 
             ctrl.borderCornerArt = {
-                width: 60,
-                height: 50,
-                url: './images/C1/T/C1-T1-T.jpg'
+                width: 179,
+                height: 179,
+                url: './images/C1/T/C1-T1-T-01.jpg'
             };
 
             ctrl.borderCenterArt = {
                 width: 100,
                 height: 40,
-                url: './images/C1/T/C1-T1-T.jpg'
+                url: '' //./images/C1/T/C1-T1-T.jpg
             };
 
             ctrl.borderMiddleArt = {
                 width: 80,
                 height: 40,
-                url: './images/C1/T/C1-T1-T.jpg'
+                url: ''//./images/C1/T/C1-T1-T.jpg
             };
 
             ctrl.mainArt = {
                 center: true,
                 width: 60,
                 height: 60,
-                url: './images/wood.jpg'
+                url: ''
             };
 
             ctrl.floatingArts = [
                 {
                     width: 20,
                     height: 50,
-                    url: './images/wood.jpg',
+                    url: '',
                     left: 70,
                     top: 50
                 },
                 {
                     width: 20,
                     height: 50,
-                    url: './images/wood.jpg',
+                    url: '',
                     left: 230,
                     top: 90
                 }
@@ -96,8 +96,8 @@ function (app) {
                 ctrl.height = 400;
             }
             else {
-                ctrl.width = 300;
-                ctrl.height = 200;
+                ctrl.width = 800;
+                ctrl.height = 500;
             }
         }
 
