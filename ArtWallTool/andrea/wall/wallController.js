@@ -41,8 +41,8 @@ function (app) {
             };
 
             ctrl.topTrimArt = {
-                height: 30,
-                url: './images/C1/T/C1-T1-T.jpg'
+                height: 43,
+                url: './images/C1/T/C1-T2-T-01.png'
             };
 
             ctrl.topTrimCornerArt = {

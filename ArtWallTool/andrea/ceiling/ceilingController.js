@@ -54,13 +54,13 @@ function (app) {
             ctrl.borderCenterArt = {
                 width: 124,
                 height: 68,
-                url: './images/C1/B/C1-B3-B-02.png'
+                url: ''//./images/C1/B/C1-B3-B-02.png
             };
 
             ctrl.borderMiddleArt = {
                 width: 124,
                 height: 68,
-                url: './images/C1/B/C1-B3-B-02.png'
+                url: ''
             };
 
             ctrl.mainArt = {
