@@ -41,26 +41,26 @@ function (app) {
             };
 
             ctrl.borderArt = {
-                height: 86,
-                url: './images/C1/B/C1-B1-B-01.jpg'
+                height: 43,
+                url: './images/C1/B/C1-B1-B-01.png'
             };
 
             ctrl.borderCornerArt = {
-                width: 179,
-                height: 179,
-                url: './images/C1/T/C1-T1-T-01.jpg'
+                width: 90,
+                height: 90,
+                url: './images/C1/T/C1-T1-T-01.png'
             };
 
             ctrl.borderCenterArt = {
-                width: 100,
-                height: 40,
-                url: '' //./images/C1/T/C1-T1-T.jpg
+                width: 124,
+                height: 68,
+                url: './images/C1/B/C1-B3-B-02.png'
             };
 
             ctrl.borderMiddleArt = {
-                width: 80,
-                height: 40,
-                url: ''//./images/C1/T/C1-T1-T.jpg
+                width: 124,
+                height: 68,
+                url: './images/C1/B/C1-B3-B-02.png'
             };
 
             ctrl.mainArt = {
