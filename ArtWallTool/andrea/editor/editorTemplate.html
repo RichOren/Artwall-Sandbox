@@ -1,0 +1,15 @@
+<div
+    ds-base-url="andrea/editor"
+    ds-require="./editorController
+    ./cropperDirective
+    ../../core/service/debounceService"
+    ng-controller="editorController as ctrl"
+>
+    <button ng-click="ctrl.test()">Editor</button>
+
+    <cropper style="display: block; position: relative;
+        width: 100%; height: 100%"
+        art="ctrl.art"
+    ></cropper>
+
+</div>

@@ -1,0 +1,67 @@
+<div style="overflow-x: hidden; overflow-y: hidden"
+    ng-style="{
+    width: '100%',
+    height: height + 'px'
+}">
+
+    <div ng-style="{
+        position: 'absolute',
+        top: 0,
+        width: '100%',
+        height: height + 'px',
+        'background-color': 'black',
+        'background-image': 'url(\'' + art.url + '\')',
+        'background-position': getImagePosition(),
+        'background-repeat': 'no-repeat',
+        'background-size': getImageSize(),
+    }"></div>
+
+    <div ng-style="{
+        position: 'absolute',
+        top: 0,
+        width: '100%',
+        height: margin + 'px',
+        'background-color': 'black',
+        opacity: .25
+    }"></div>
+
+    <div ng-style="{
+        position: 'absolute',
+        bottom: 0,
+        width: '100%',
+        height: margin + 'px',
+        'background-color': 'black',
+        opacity: .25
+    }"></div>
+
+    <div ng-style="{
+        position: 'absolute',
+        left: 0,
+        width: margin + 'px',
+        height: (height - 2*margin) + 'px',
+        top: margin + 'px',
+        'background-color': 'black',
+        opacity: .25
+    }"></div>
+
+    <div ng-style="{
+        position: 'absolute',
+        right: 0,
+        width: margin + 'px',
+        height: (height - 2*margin) + 'px',
+        top: margin + 'px',
+        'background-color': 'black',
+        opacity: .25
+    }"></div>
+
+    <div ng-style="{
+        position: 'absolute',
+        left: margin-2 + 'px',
+        right: margin-2 + 'px',
+        top: margin-2 + 'px',
+        bottom: margin-2 + 'px',
+        'border': '2px dashed white'
+    }"></div>
+
+
+</div>
