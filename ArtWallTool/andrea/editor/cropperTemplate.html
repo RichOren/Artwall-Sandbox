@@ -1,67 +1,83 @@
 <div style="overflow-x: hidden; overflow-y: hidden"
     ng-style="{
     width: '100%',
-    height: height + 'px'
+    height: ctrl.height + 'px'
 }">
-
+    <!-- Image -->
     <div ng-style="{
         position: 'absolute',
         top: 0,
         width: '100%',
-        height: height + 'px',
+        height: ctrl.height + 'px',
         'background-color': 'black',
         'background-image': 'url(\'' + art.url + '\')',
-        'background-position': getImagePosition(),
+        'background-position': ctrl.getImagePosition(),
         'background-repeat': 'no-repeat',
-        'background-size': getImageSize(),
+        'background-size': ctrl.getImageSize()
     }"></div>
 
+    <!-- Mask -->
     <div ng-style="{
         position: 'absolute',
         top: 0,
         width: '100%',
-        height: margin + 'px',
+        height: ctrl.margin + 'px',
         'background-color': 'black',
-        opacity: .25
+        opacity: .5
     }"></div>
 
     <div ng-style="{
         position: 'absolute',
         bottom: 0,
         width: '100%',
-        height: margin + 'px',
+        height: ctrl.margin + 'px',
         'background-color': 'black',
-        opacity: .25
+        opacity: .5
     }"></div>
 
     <div ng-style="{
         position: 'absolute',
         left: 0,
-        width: margin + 'px',
-        height: (height - 2*margin) + 'px',
-        top: margin + 'px',
+        width: ctrl.margin + 'px',
+        height: (ctrl.height - 2*ctrl.margin) + 'px',
+        top: ctrl.margin + 'px',
         'background-color': 'black',
-        opacity: .25
+        opacity: .5
     }"></div>
 
     <div ng-style="{
         position: 'absolute',
         right: 0,
-        width: margin + 'px',
-        height: (height - 2*margin) + 'px',
-        top: margin + 'px',
+        width: ctrl.margin + 'px',
+        height: (ctrl.height - 2*ctrl.margin) + 'px',
+        top: ctrl.margin + 'px',
         'background-color': 'black',
-        opacity: .25
+        opacity: .5
     }"></div>
 
+    <!-- Dotted Frame -->
+    <div style="cursor: hand" ng-style="{
+        position: 'absolute',
+        left: ctrl.margin-2 + 'px',
+        right: ctrl.margin-2 + 'px',
+        top: ctrl.margin-2 + 'px',
+        bottom: ctrl.margin-2 + 'px',
+        'border': '2px dashed white'
+    }"
+    ></div>
+
+    <!-- Mouse Tracking -->
     <div ng-style="{
         position: 'absolute',
-        left: margin-2 + 'px',
-        right: margin-2 + 'px',
-        top: margin-2 + 'px',
-        bottom: margin-2 + 'px',
-        'border': '2px dashed white'
-    }"></div>
+        top: 0,
+        width: '100%',
+        height: ctrl.height + 'px'
+    }"
+         ng-mousedown="ctrl.onMouseDown($event)"
+         ng-mousemove="ctrl.onMouseMove($event)"
+         ng-mouseup="ctrl.onMouseUp($event)"
+         ng-mouseleave="ctrl.onMouseLeave($event)"
+    ></div>
 
 
 </div>

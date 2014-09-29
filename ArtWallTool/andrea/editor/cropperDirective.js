@@ -8,87 +8,284 @@ define([
     'use strict';
 
     app.directive('cropper', [
-        '$window', 'debounce',
-        function($window, debounce) {
+    '$window', 'debounce',
+    function($window, debounce) {
 
         return {
             restrict: 'E',
             scope: {
+                frame: '=',
                 art: '='
             },
             templateUrl: "andrea/editor/cropperTemplate.html",
             link: link
         };
 
-        function link($scope, $element, attrs, ctrl, transcludeFn) {
-
-            $scope.width = 0;
-            $scope.height = 0;
-            $scope.margin = 40;
-            $scope.naturalWidth = 400;
-            $scope.naturalHeight = 250;
-
-            init($scope, $element);
-
-
-            $scope.getImagePosition = function(){
-                return '40px 10px';
-            };
-
-            $scope.getImageSize = function(){
-                var width = $scope.width - 2*$scope.margin;
-                width = Math.max(0, width);
-                return width + 'px';
-            };
-
-
-//            $element.addClass('absolute');
-//            var style = $element[0].style;
-//            style.display = width = '100%';
-//            style.width = '100%';
-//            style.height = '100px';
-//            style.backgroundColor = 'red';
+        function link($scope, $element, attrs, ctrls, transcludeFn) {
+            createController($scope, $element);
         }
 
-        function init($scope, $element) {
-            var trackElementSize = true;
-            $scope.$on("$destroy", function () {
-                trackElementSize = false;
-            });
+        function createController($scope, $element) {
 
-            function onResize() {
-                if(trackElementSize) {
-                    debounce(afterResize, 50);
-                }
-            }
-            function afterResize() {
-                if(trackElementSize) {
-                    $scope.width = $element.width();
-                    $scope.height = $scope.width / getAspectRatio();
-                    $scope.$apply();
-                }
-            }
-            angular.element($window).on('resize', onResize);
-            onResize();
+            var ctrl = {
+                margin: 40,
+                width: 0,
+                height: 0,
+                dottedWidth: 100,
+                naturalWidth: 400,
+                naturalHeight: 250,
+                getImagePosition: getImagePosition,
+                getImageSize: getImageSize,
+                onMouseDown: onMouseDown,
+                onMouseMove: onMouseMove,
+                onMouseUp: stopTracking,
+                onMouseLeave: stopTracking
+            };
+            $scope.ctrl = ctrl;
 
-            $scope.$watch('art.url', function(url){
-                if(url){
-                    var img = new Image();
-                    img.onload = function(){
-                        console.log(img.width + 'x' + img.height);
-                        $scope.naturalWidth = img.width ? img.width : 400;
-                        $scope.naturalHeight = img.height ? img.height : 250;
+            var downX = NaN;
+            var downY = NaN;
+            var adjZoom = false;
+
+            init();
+
+            return ctrl;
+
+            function init() {
+                var trackElementSize = true;
+                $scope.$on("$destroy", function () {
+                    trackElementSize = false;
+                });
+
+                function onResize() {
+                    if(trackElementSize) {
+                        debounce(afterResize, 50);
+                    }
+                }
+                function afterResize() {
+                    if(trackElementSize) {
+                        ctrl.width = $element.width();
+                        ctrl.dottedWidth = ctrl.width - 2*ctrl.margin;
+                        ctrl.dottedHeight = ctrl.dottedWidth / getAspectRatio();
+                        ctrl.height = ctrl.dottedHeight + 2*ctrl.margin;
                         $scope.$apply();
-                    };
-                    img.src = url;
+                    }
                 }
-            });
-        }
+                angular.element($window).on('resize', onResize);
+                onResize();
 
-        function getAspectRatio() {
-            return 16/9;
+                $scope.$watch('art.url', function(url){
+                    if(url){
+                        var img = new Image();
+                        img.onload = function(){
+                            console.log(img.width + 'x' + img.height);
+                            ctrl.naturalWidth = img.width ? img.width : 400;
+                            ctrl.naturalHeight = img.height ? img.height : 250;
+                            $scope.art.naturalWidth = ctrl.naturalWidth;
+                            $scope.art.naturalHeight = ctrl.naturalHeight;
+                            $scope.$apply();
+                        };
+                        img.src = url;
+                    }
+                });
+
+            }
+
+
+            function getAspectRatio() {
+                var w = $scope.frame ? $scope.frame.width : 0;
+                var h = $scope.frame ? $scope.frame.height : 0;
+                if( !w ) w = 100;
+                if( !h ) h = 100;
+                return w/h;
+            }
+
+            function getImageSize() {
+                return getCurrImageWidth() + 'px';
+            }
+
+            function getImagePosition(){
+                var w = getCurrImageWidth();
+                var h = w / ctrl.naturalWidth * ctrl.naturalHeight;
+
+                var clipX1 = $scope.art ? -$scope.art.clipX1 : 0;
+                var x = w * clipX1 / 100;
+
+                var clipY1 = $scope.art ? -$scope.art.clipY1 : 0;
+                var y = h * clipY1 / 100;
+
+                x += ctrl.margin;
+                y += ctrl.margin;
+                return x + 'px ' + y + 'px';
+            }
+
+            function getZoomFactor() {
+                var clipX1 = $scope.art ? $scope.art.clipX1 : 0;
+                var clipX2 = $scope.art ? $scope.art.clipX2 : 100;
+                var result = 100 / (clipX2 - clipX1);
+                return result;
+            }
+
+            function getCurrImageWidth() {
+                return ctrl.dottedWidth * getZoomFactor();
+            }
+
+//            function getCurrImageHeight() {
+//                var result = getCurrImageWidth() / ctrl.naturalWidth * ctrl.naturalHeight;
+//                return result;
+//            }
+
+
+
+            function moveImage(deltaX, deltaY){
+                var w = getCurrImageWidth();
+                var deltaP = deltaX * 100 / w;
+
+                var clipX1 = $scope.art.clipX1 - deltaP;
+                if( clipX1 < 0) {
+                    deltaP = $scope.art.clipX1;
+                }
+                var clipX2 = $scope.art.clipX2 - deltaP;
+                if( clipX2 > 100) {
+                    deltaP = $scope.art.clipX2 - 100;
+                }
+                $scope.art.clipX1 -= deltaP;
+                $scope.art.clipX2 -= deltaP;
+
+                w = getCurrImageWidth();
+                var h = w / ctrl.naturalWidth * ctrl.naturalHeight;
+                var deltaP = deltaY * 100 / h;
+
+                var clipY1 = $scope.art.clipY1 - deltaP;
+                if( clipY1 < 0) {
+                    clipY1 = 0;
+                }
+                var maxClipY1 = (h - ctrl.dottedHeight) * 100 / h;
+                if( clipY1 > maxClipY1) {
+                    clipY1 = maxClipY1;
+                }
+                $scope.art.clipY1 = clipY1;
+            }
+
+            function zoomImage(deltaX){
+                var w = getCurrImageWidth();
+                var deltaP = deltaX * 100 / w;
+
+                var clipX1 = $scope.art.clipX1 + deltaP;
+                if( clipX1 < 0) {
+                    clipX1 = 0;
+                }
+                var clipX2 = $scope.art.clipX2 - deltaP;
+                if( clipX2 > 100) {
+                    clipX2 = 100;
+                }
+
+                //clipX2 = 100 / factor + clipX1;
+
+                var factor = 100 / (clipX2 - clipX1);
+                console.log('factor', factor);
+                if( factor > 2) {
+                    return;
+                }
+
+                $scope.art.clipX1 = clipX1;
+                $scope.art.clipX2 = clipX2;
+
+                w = getCurrImageWidth();
+                var h = w / ctrl.naturalWidth * ctrl.naturalHeight;
+
+                var clipY1 = $scope.art.clipY1 + deltaP;
+                if( clipY1 < 0) {
+                    clipY1 = 0;
+                }
+                var maxClipY1 = (h - ctrl.dottedHeight) * 100 / h;
+                if( clipY1 > maxClipY1) {
+                    clipY1 = maxClipY1;
+                }
+                $scope.art.clipY1 = clipY1;
+            }
+
+
+
+
+            function trackMouse(event) {
+                downX = event.clientX;
+                downY = event.clientY;
+            }
+            function stopTracking() {
+                downX = NaN;
+                downY = NaN;
+            }
+
+            function onMouseDown(event){
+                var point = getCrossBrowserElementCoords(event);
+                trackMouse(event);
+                adjZoom = (point.y > (ctrl.height - ctrl.margin));
+            }
+            function onMouseMove(event){
+                if( !isNaN(downX)) {
+                    var deltaX = event.clientX - downX;
+                    var deltaY = event.clientY - downY;
+                    trackMouse(event);
+                    if( adjZoom) {
+                        zoomImage(deltaX);
+                    }
+                    else {
+                        moveImage(deltaX, deltaY);
+                    }
+                }
+            }
+
+
+            // Accepts a MouseEvent as input and returns the x and y
+            // coordinates relative to the target element.
+            function getCrossBrowserElementCoords(mouseEvent)
+            {
+                var result = {
+                    x: 0,
+                    y: 0
+                };
+
+                if (!mouseEvent) {
+                    mouseEvent = window.event;
+                }
+
+                if (mouseEvent.pageX || mouseEvent.pageY) {
+                    result.x = mouseEvent.pageX;
+                    result.y = mouseEvent.pageY;
+                }
+                else if (mouseEvent.clientX || mouseEvent.clientY) {
+                    result.x = mouseEvent.clientX + document.body.scrollLeft +
+                        document.documentElement.scrollLeft;
+                    result.y = mouseEvent.clientY + document.body.scrollTop +
+                        document.documentElement.scrollTop;
+                }
+
+                if (mouseEvent.target) {
+                    var offEl = mouseEvent.target;
+                    var offX = 0;
+                    var offY = 0;
+
+                    if (typeof(offEl.offsetParent) != "undefined") {
+                        while (offEl) {
+                            offX += offEl.offsetLeft;
+                            offY += offEl.offsetTop;
+
+                            offEl = offEl.offsetParent;
+                        }
+                    }
+                    else {
+                        offX = offEl.x;
+                        offY = offEl.y;
+                    }
+                    result.x -= offX;
+                    result.y -= offY;
+                }
+                return result;
+            }
+
+
         }
 
     }]);
-
 });
