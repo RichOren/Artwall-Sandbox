@@ -29,9 +29,8 @@ function (app) {
                 url: './images/A023-copy.jpg',
                 clipX1: 7,
                 clipY1: 7,
-                //zoom: 100,
+                zoom: undefined,
                 clipX2: 93,
-                clipY2: 93,
                 origWidth: 60000 //150ppi = 6ppmm
             };
         }

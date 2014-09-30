@@ -83,14 +83,39 @@ define([
                             ctrl.naturalHeight = img.height ? img.height : 250;
                             $scope.art.naturalWidth = ctrl.naturalWidth;
                             $scope.art.naturalHeight = ctrl.naturalHeight;
+                            calcAndUpdateZoom();
                             $scope.$apply();
                         };
                         img.src = url;
                     }
                 });
 
+                $scope.$watch('art.zoom', function(zoom){
+                    if(zoom){
+                        zoomImageTo(zoom);
+                    }
+                });
+
             }
 
+            function getZoomFactor(art) {
+                var result = 100;
+                if( art ) {
+                    var clipX1 = art.clipX1 ? art.clipX1 : 0;
+                    var clipX2 = art.clipX2 ? art.clipX2 : 100;
+                    result = 100 / (clipX2 - clipX1);
+                }
+                return result;
+            }
+
+            function calcAndUpdateZoom() {
+                var result = getZoomFactor($scope.art) * 100;
+                if( $scope.art) {
+                    //console.log('calcAndUpdateZoom', result);
+                    $scope.art.zoom = result;
+                }
+                return result;
+            }
 
             function getAspectRatio() {
                 var w = $scope.frame ? $scope.frame.width : 0;
@@ -102,6 +127,10 @@ define([
 
             function getImageSize() {
                 return getCurrImageWidth() + 'px';
+            }
+
+            function getCurrImageWidth() {
+                return ctrl.dottedWidth * getZoomFactor($scope.art);
             }
 
             function getImagePosition(){
@@ -118,23 +147,6 @@ define([
                 y += ctrl.margin;
                 return x + 'px ' + y + 'px';
             }
-
-            function getZoomFactor() {
-                var clipX1 = $scope.art ? $scope.art.clipX1 : 0;
-                var clipX2 = $scope.art ? $scope.art.clipX2 : 100;
-                var result = 100 / (clipX2 - clipX1);
-                return result;
-            }
-
-            function getCurrImageWidth() {
-                return ctrl.dottedWidth * getZoomFactor();
-            }
-
-//            function getCurrImageHeight() {
-//                var result = getCurrImageWidth() / ctrl.naturalWidth * ctrl.naturalHeight;
-//                return result;
-//            }
-
 
 
             function moveImage(deltaX, deltaY){
@@ -167,7 +179,9 @@ define([
                 $scope.art.clipY1 = clipY1;
             }
 
+            //TODO: refactor when implementing pinching
             function zoomImage(deltaX){
+                deltaX = deltaX / 2;
                 var w = getCurrImageWidth();
                 var deltaP = deltaX * 100 / w;
 
@@ -180,10 +194,8 @@ define([
                     clipX2 = 100;
                 }
 
-                //clipX2 = 100 / factor + clipX1;
-
                 var factor = 100 / (clipX2 - clipX1);
-                console.log('factor', factor);
+                //console.log('factor', factor);
                 if( factor > 2) {
                     return;
                 }
@@ -203,10 +215,50 @@ define([
                     clipY1 = maxClipY1;
                 }
                 $scope.art.clipY1 = clipY1;
+
+                calcAndUpdateZoom();
             }
 
+            function zoomImageTo(zoom) {
+                var currZoom = calcAndUpdateZoom();
+                var deltaZ = zoom - currZoom;
+                if( deltaZ == 0 ) {
+                    return;
+                }
+                var currClip = $scope.art.clipX2 - $scope.art.clipX1;
+                var newClip = 10000 / zoom;
+                var deltaClip = currClip - newClip;
+                //console.log('zoomImageTo', zoom, currZoom, deltaZ, deltaClip);
 
+                var deltaClip2 = deltaClip/2;
+                var clipX1 = $scope.art.clipX1 + deltaClip2;
+                var clipX2 = $scope.art.clipX2 - deltaClip2;
+                if( clipX2 > 100) {
+                    clipX2 = 100;
+                    clipX1 += (100 - ($scope.art.clipX2 - deltaClip2));
+                }
+                if( clipX1 < 0) {
+                    clipX1 = 0;
+                }
 
+                $scope.art.clipX1 = clipX1;
+                $scope.art.clipX2 = clipX2;
+
+                var w = getCurrImageWidth();
+                var h = w / ctrl.naturalWidth * ctrl.naturalHeight;
+
+                var clipY1 = $scope.art.clipY1 + deltaClip2;
+                if( clipY1 < 0) {
+                    clipY1 = 0;
+                }
+                var maxClipY1 = (h - ctrl.dottedHeight) * 100 / h;
+                if( clipY1 > maxClipY1) {
+                    clipY1 = maxClipY1;
+                }
+                $scope.art.clipY1 = clipY1;
+
+                calcAndUpdateZoom();
+            }
 
             function trackMouse(event) {
                 downX = event.clientX;
