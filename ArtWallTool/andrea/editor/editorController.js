@@ -21,17 +21,20 @@ function (app) {
         function init() {
 
             ctrl.frame = {
-                width: 6000, //mm
-                height: 3375 //mm
+                width: 9004, //mm
+                height: 3375, //mm
+                maxZoom: 150
             };
 
             ctrl.art = {
                 url: './images/A023-copy.jpg',
+                naturalWidth: 400,
+                naturalHeight: 300,
+                formFactor: 4/3,
+                zoom: undefined,
                 clipX1: 7,
                 clipY1: 7,
-                zoom: undefined,
-                clipX2: 93,
-                origWidth: 60000 //150ppi = 6ppmm
+                clipX2: 93
             };
         }
 
