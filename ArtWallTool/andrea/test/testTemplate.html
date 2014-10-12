@@ -1,0 +1,49 @@
+<div
+    ds-base-url="andrea/test"
+    ds-require="./testController
+        ../directive/popupMenu"
+    ng-controller="testController as ctrl"
+>
+    <h4>Test Menu</h4>
+
+    <div popup-menu="menu-aa"
+         style="width: 100%; height: 200px; background-color: #aaaaaa">
+        Test 1
+    </div>
+    <br>
+    <div popup-menu="menu-bb"
+         style="width: 100%; height: 200px; background-color: #aaaaaa">
+        Test 2
+    </div>
+
+
+    <div class="dropdown position-fixed" id="menu-aa">
+        <ul class="dropdown-menu" role="menu">
+            <li>
+                <a class="pointer" role="menuitem" tabindex="1"
+                   ng-click="ctrl.edit()">
+                    Edit
+                </a>
+            </li>
+            <li>
+                <a class="pointer" role="menuitem" tabindex="2"
+                   ng-click="ctrl.remove()">
+                    Remove
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="dropdown position-fixed" id="menu-bb">
+        <ul class="dropdown-menu" role="menu">
+            <li>
+                <a class="pointer" role="menuitem" tabindex="2"
+                   ng-click="ctrl.remove()">
+                    Remove
+                </a>
+            </li>
+        </ul>
+    </div>
+
+
+</div>

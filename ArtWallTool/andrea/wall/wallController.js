@@ -9,6 +9,7 @@ function (app) {
 
     app.controller('wallController', [
     function() {
+
         var ctrl = {
             test: test,
             width: 0,
@@ -57,10 +58,10 @@ function (app) {
             };
 
             ctrl.mainArtFrame = {
-//                fill:false,
-//                center: true,
-//                width: 160,
-//                height: 100
+                fill:false,
+                center: true,
+                width: 260,
+                height: 200
             };
 
             ctrl.mainArt = {
@@ -71,9 +72,6 @@ function (app) {
 
 
         }
-
-
-
 
         function test() {
             if( ctrl.mainArt.clipPosition === '0% 0%') {

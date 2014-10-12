@@ -13,10 +13,18 @@ function (app) {
 
         $rootScope.format = createFormat();
 
-        var mainCtrl = {};
+        var mainCtrl = {
+            selectedArt:null,
+            selectArt:selectArt
+        };
         return mainCtrl;
 
     }]);
+
+    function selectArt(art) {
+        console.log('selectArt', art);
+    }
+
 
 
     function createFormat() {

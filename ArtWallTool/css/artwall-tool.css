@@ -135,6 +135,9 @@ div[numeric-stepper].ng-invalid-out-of-bounds input.form-control
     /*rotateX(-2deg) rotateY(2deg);*/
 }
 
+.position-fixed {
+    position: fixed;
+}
 
 .absolute
 {
