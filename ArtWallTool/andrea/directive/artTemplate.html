@@ -1,7 +1,10 @@
 <div ng-style="{
-    position: 'absolute',
-    width: getWidth() + 'px',
-    height: getHeight() + 'px',
-    transform: 'translateX(' + getLeft() + 'px) translateY(' + getTop() + 'px)',
-    'background-image': 'url(\'' + art.url + '\')'
-}"></div>
+        position: 'absolute',
+        width: getWidth() + 'px',
+        height: getHeight() + 'px',
+        transform: 'translateX(' + getLeft() + 'px) translateY(' + getTop() + 'px)',
+        'background-image': 'url(\'' + art.url + '\')',
+        border: (getIsSelected() ? '2' : '0') + 'px solid #ff00ff'
+    }"
+    ng-mousedown="select()"
+></div>

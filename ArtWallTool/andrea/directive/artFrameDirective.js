@@ -8,7 +8,8 @@ define([
     'use strict';
 
     app.directive('artFrame', [
-        function() {
+        'selectService',
+        function(selectService) {
 
         return {
             restrict: 'E',
@@ -78,6 +79,15 @@ define([
                 }
                 return minTop;
             };
+
+            $scope.select = function () {
+                return selectService.select($scope.art);
+            };
+
+            $scope.getIsSelected = function () {
+                return selectService.isItemSelected($scope.art);
+            };
+
 
         }
 

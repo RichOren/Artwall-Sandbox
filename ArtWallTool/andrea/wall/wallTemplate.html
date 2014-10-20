@@ -1,69 +1,91 @@
 <div
     ds-base-url="andrea/wall"
     ds-require="./wallController
+    ../directive/popupMenu
     ../directive/artDirective
+    ../directive/art2Directive
     ../directive/artTrimDirective
-    ../directive/artTrimCornerDirective
+    ../directive/artTrimTopCornerDirective
     ../directive/artFrameDirective"
-    ng-controller="wallController as ctrl"
+    ng-controller="wallController"
 >
-    <button ng-click="ctrl.test()">Wall</button>
+    <!--<button ng-click="ctrl.test()">Wall</button>-->
 
-    <div class="plane"
+    {{root.scale}}
+    <br/>
+    <input type="range" ng-model="root.scale" min="15" max="100"/>
+    <br/>
+
+    <div>
+        Dimentions: {{format.size(wall.width)}} x {{format.size(wall.height)}}
+        <span class="pull-right">
+            <input type="checkbox" ng-model="format.useMetric"/>
+        </span>
+    </div>
+
+    <div class="origin0"
          ng-style="{
-            width: ctrl.width + 'px',
-            height: ctrl.height + 'px'
+            transform: 'scale3d(' + root.scale/100 + ',' + root.scale/100 + ',' + root.scale/100 + ')'
          }"
     >
-        <art art="ctrl.backgroundArt"
-             width="ctrl.width" height="ctrl.height"
-             ng-click="mainCtrl.selectArt(ctrl.backgroundArt)"
-             context-menu data-target="artMenu"
-        ></art>
-
-        <art-frame frame="ctrl.mainArtFrame" art="ctrl.mainArt"
-             left="0" right="0"
-             top="ctrl.topTrimArt.height"
-             bottom="ctrl.bottomTrimArt.height"
-             width="ctrl.width" height="ctrl.height"
-             ng-click="mainCtrl.selectArt(ctrl.mainArt)"
-        ></art-frame>
+        <div class="plane"
+             ng-style="{
+                width: px(wall.width) + 'px',
+                height: px(wall.height) + 'px',
+             }"
+        >
+            <art art="wall.backgroundArt"
+                 width="px(wall.width)" height="px(wall.height)"
+                 popup-menu="artMenu"
+            ></art>
 
 
-        <art-trim art="ctrl.topTrimArt"
-             width="ctrl.width" height="ctrl.height"
-             ng-click="mainCtrl.selectArt(ctrl.topTrimArt)"
-        ></art-trim>
+            <art2 wall="wall" item="wall.mainItem"
+                 popup-menu="artMenu"
+            ></art2>
 
-        <art-trim-corner art="ctrl.topTrimCornerArt"
-             width="ctrl.width" height="ctrl.height"
-             ng-click="mainCtrl.selectArt(ctrl.topTrimCornerArt)"
-        ></art-trim-corner>
 
-        <art-trim art="ctrl.bottomTrimArt" is-bottom="true"
-             width="ctrl.width" height="ctrl.height"
-             ng-click="mainCtrl.selectArt(ctrl.bottomTrimArt)"
-        ></art-trim>
+            <art-trim wall="wall" trim="wall.trimTop"
+                 popup-menu="artMenu"
+            ></art-trim>
 
+            <art-trim-top-corner wall="wall" trim="wall.trimTopCorner"
+                 popup-menu="artMenu"
+            ></art-trim-top-corner>
+
+            <art-trim wall="wall" trim="wall.trimBottom" is-bottom="true"
+                 popup-menu="artMenu"
+            ></art-trim>
+        </div>
     </div>
+
+            <!--<art-frame frame="wall.mainArtFrame" art="wall.mainArt"-->
+                 <!--left="0" right="0"-->
+                 <!--top="300"-->
+                 <!--bottom="300"-->
+                 <!--width="px(wall.width)" height="px(wall.height)"-->
+                 <!--popup-menu="artMenu"-->
+            <!--</art-frame>-->
+
+             <!--top="wall.topTrimArt.height"-->
+             <!--bottom="wall.bottomTrimArt.height"-->
 
 
     <div id="artMenu" class="dropdown position-fixed" >
         <ul class="dropdown-menu" role="menu">
             <li>
                 <a class="pointer" role="menuitem" tabindex="1"
-                   ng-click="">
+                   ng-click="ctrl.edit()">
                     Edit
                 </a>
             </li>
             <li>
                 <a class="pointer" role="menuitem" tabindex="2"
-                   ng-click="">
+                   ng-click="ctrl.remove()">
                     Remove
                 </a>
             </li>
         </ul>
     </div>
-
 
 </div>

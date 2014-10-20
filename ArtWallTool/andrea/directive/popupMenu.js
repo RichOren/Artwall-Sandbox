@@ -65,8 +65,8 @@ define([
                 menuElement.css('top', top + 'px');
                 menuElement.css('left', left + 'px');
 
-                menuRect.left = left;
-                menuRect.top = top;
+                menuRect.left = left + docLeft;
+                menuRect.top = top + docTop;
                 menuRect.width = elementWidth;
                 menuRect.height = elementHeight;
 
@@ -87,6 +87,7 @@ define([
                     event.pageY > menuRect.top &&
                     event.pageY <= (menuRect.top + menuRect.height)
                 );
+                console.log('isPointerOnMenu', hit, menuRect, event.pageX, event.pageY);
                 return hit;
             }
 
@@ -100,6 +101,7 @@ define([
             }
             function onBeforeMouseDown(event) {
                 if (menuElement && !isPointerOnMenu(event)) {
+                    console.log('onBeforeMouseDown');
                     event.preventDefault();
                     event.stopPropagation();
                     cancelUp = true;
@@ -110,6 +112,7 @@ define([
             }
             function onBeforeMouseUp(event) {
                 if (cancelUp) {
+                    console.log('onBeforeMouseUp');
                     cancelUp = false;
                     event.preventDefault();
                     event.stopPropagation();
@@ -162,14 +165,18 @@ define([
                     }
                 }
 
+//                $element.on('contextmenu', function(event) {
+//                    event.preventDefault();
+//                    event.stopPropagation();
+//                    clearDownId();
+//                    openMenu(event);
+//                });
                 $element.on('contextmenu', function(event) {
-                    event.preventDefault();
-                    event.stopPropagation();
                     clearDownId();
-                    openMenu(event);
                 });
 
                 $element.on('mousedown', function(event) {
+                    console.log('mousedown');
                     clearDownId();
                     downId = window.setTimeout(onHoldDown, 500);
                     downEvent = event;

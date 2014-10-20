@@ -6,7 +6,7 @@
     ng-controller="editorController as ctrl"
 >
     <div>
-        Dimentions: {{format.size(ctrl.frame.width)}} x {{format.size(ctrl.frame.height)}}
+        Dimentions: {{format.size(ctrl.item.width)}} x {{format.size(ctrl.item.height)}}
         <span class="pull-right">
             <input type="checkbox" ng-model="format.useMetric"/>
         </span>
@@ -14,12 +14,11 @@
 
     <cropper style="display: block; position: relative;
         width: 100%; height: 100%"
-        frame="ctrl.frame"
-        art="ctrl.art"
+        item="ctrl.item"
     ></cropper>
 
     <br/>
-    <input type="range" ng-model="ctrl.art.zoom" min="100" max="200"/>
+    <input type="range" ng-model="ctrl.item.art.zoom" min="100" max="200"/>
     <br/>
 
 </div>

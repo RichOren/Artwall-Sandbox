@@ -8,69 +8,36 @@ function (app) {
     'use strict';
 
     app.controller('wallController', [
-    function() {
+    '$rootScope', '$scope', '$location', 'wallModel', 'selectService',
+    function($rootScope, $scope, $location, wallModel, selectService) {
+
+        $scope.root = $rootScope;
+        $scope.wall = wallModel;
 
         var ctrl = {
             test: test,
-            width: 0,
-            height: 0,
 
-            backgroundArt: null,
-
-            topTrimArt: null,
-
-            topTrimCornerArt: null,
-
-            mainArtFrame: null,
-
-            mainArt: null,
-
-            bottomTrimArt: null
+            edit: edit,
+            remove: remove
         };
+        $scope.ctrl = ctrl;
 
-        init();
-
-        return ctrl;
-
-        function init() {
-            ctrl.width = 600;
-            ctrl.height = 400;
-
-            ctrl.backgroundArt = {
-                fill: true,
-                url: './images/wood.jpg'
-            };
-
-            ctrl.topTrimArt = {
-                height: 43,
-                url: './images/C1/T/C1-T2-T-01.png'
-            };
-
-            ctrl.topTrimCornerArt = {
-                width: 50,
-                height: 40,
-                url: './images/C1/T/C1-T1-T.jpg'
-            };
-
-            ctrl.bottomTrimArt = {
-                height: 40,
-                url: './images/C1/B/C1-B1-B.jpg'
-            };
-
-            ctrl.mainArtFrame = {
-                fill:false,
-                center: true,
-                width: 260,
-                height: 200
-            };
-
-            ctrl.mainArt = {
-                clipPosition: '0% 0%',
-                zoomFactor: 1,
-                url: './images/A023-copy.jpg'
-            };
+//        return ctrl;
 
 
+        function edit() {
+            var item = selectService.getSelectedItem();
+            if( item && item.art ) {
+                $location.url("/editor");
+            }
+        }
+        function remove() {
+            var item = selectService.getSelectedItem();
+            if( item && item.art ) {
+                item.art.url = '';
+                item.width = 0;
+                item.height = 0;
+            }
         }
 
         function test() {

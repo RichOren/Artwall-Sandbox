@@ -8,7 +8,8 @@ define([
     'use strict';
 
     app.directive('art', [
-        function() {
+        'selectService',
+        function(selectService) {
 
         return {
             restrict: 'E',
@@ -55,6 +56,15 @@ define([
                 }
                 return $scope.art.top;
             };
+
+            $scope.select = function () {
+                return selectService.select($scope.art);
+            };
+
+            $scope.getIsSelected = function () {
+                return selectService.isItemSelected($scope.art);
+            };
+
 
         }
 

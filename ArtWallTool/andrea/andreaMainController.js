@@ -13,18 +13,21 @@ function (app) {
 
         $rootScope.format = createFormat();
 
+//        $rootScope.scale = 50;
+        $rootScope.scale = 24;
+
+        $rootScope.px = function(mm) {
+            //console.log(mm, $rootScope.scale);
+            return mm / 2;
+        };
+
         var mainCtrl = {
-            selectedArt:null,
-            selectArt:selectArt
+
         };
         return mainCtrl;
 
+
     }]);
-
-    function selectArt(art) {
-        console.log('selectArt', art);
-    }
-
 
 
     function createFormat() {

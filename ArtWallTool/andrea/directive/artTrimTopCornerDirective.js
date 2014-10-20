@@ -1,5 +1,5 @@
 /**
- * Created by awyss on 7/23/14.
+ * Created by awyss on 10/19/14.
  */
 define([
     'app'
@@ -7,7 +7,7 @@ define([
 ], function (app) {
     'use strict';
 
-    app.directive('artTrim', [
+    app.directive('artTrimTopCorner', [
         '$rootScope', 'selectService',
         function($rootScope, selectService) {
 
@@ -15,10 +15,9 @@ define([
             restrict: 'E',
             scope: {
                 wall: '=',
-                trim: '=',
-                isBottom: '='
+                trim: '='
             },
-            templateUrl: "andrea/directive/artTrimTemplate.html",
+            templateUrl: "andrea/directive/artTrimTopCornerTemplate.html",
             link: link
         };
 
@@ -27,22 +26,15 @@ define([
             $scope.px = $rootScope.px;
 
             $element.addClass('absolute');
-            if ($scope.isBottom) {
-                $element[0].style.bottom = '0px';
-            }
 
             $scope.$watch('trim.art.url', function(url){
                 if (url){
                     var img = new Image();
                     img.onload = function(){
-                        if ($scope.isBottom) {
-                            console.log('trim Bottom size:', img.width + 'x' + img.height, img.naturalWidth + 'x' + img.naturalHeight);
-                        }
-                        else {
-                            console.log('trim Top size:', img.width + 'x' + img.height, img.naturalWidth + 'x' + img.naturalHeight);
-                        }
+                        console.log('artTrimTopCorner size:', img.width + 'x' + img.height, img.naturalWidth + 'x' + img.naturalHeight);
                         $scope.trim.art.naturalWidth = img.width;
                         $scope.trim.art.naturalHeight = img.height;
+                        $scope.trim.width = img.width;
                         $scope.trim.height = img.height;
                         $scope.trim.art.formFactor = $scope.trim.art.naturalWidth / $scope.trim.art.naturalHeight;
                         $scope.$apply();
@@ -51,30 +43,14 @@ define([
                 }
             });
 
-            $scope.getLeft = function() {
-                return $scope.isBottom ? 0 : $scope.wall.trimTopCorner.width;
-            };
-
-            $scope.getWidth = function() {
-                var result = $rootScope.px($scope.wall.width);
-                if (!$scope.isBottom) {
-                    result -= 2*$scope.wall.trimTopCorner.width;
-                    if( result < 0 ) result = 0;
-                }
-                return result;
+            $scope.getHitWidth = function() {
+                return ($scope.trim.width < hitSize) ? hitSize : $scope.trim.width;
             };
 
             $scope.getHitHeight = function() {
                 return ($scope.trim.height < hitSize) ? hitSize : $scope.trim.height;
             };
 
-            $scope.getBgPosition = function() {
-                var y = 0;
-                if ($scope.isBottom) {
-                    y = $scope.getHitHeight() - $scope.trim.height;
-                }
-                return '0px ' + y + 'px';
-            };
 
             $scope.select = function () {
                 return selectService.select($scope.trim);
@@ -83,7 +59,6 @@ define([
             $scope.getIsSelected = function () {
                 return selectService.isItemSelected($scope.trim);
             };
-
         }
 
     }]);
