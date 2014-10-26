@@ -100,7 +100,8 @@ define([
                     }
                     result = 100 / diff;
                 }
-                console.log('getArtZoomFactor', result);
+                //TODO: optimize # calls
+                //console.log('getArtZoomFactor', result);
                 return result;
             }
 

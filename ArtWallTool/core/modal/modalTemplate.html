@@ -1,0 +1,31 @@
+<div class="modal fade" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true"
+>
+    <div class="modal-dialog modal-{{options.size}}">
+        <div class="modal-content">
+            <div class="modal-header" ng-show="title">
+                <button type="button" class="close" aria-hidden="true"
+                        ng-show="escape"
+                        ng-click="dismiss()">
+                    &times;
+                </button>
+                <h3 class="modal-title">{{title}}</h3>
+            </div>
+
+            <div class="modal-body" ng-transclude></div>
+
+            <div class="modal-footer" ng-hide="bare">
+                <button class="btn btn-default"
+                        ng-disabled="ending"
+                        ng-click="dismiss()">
+                    Cancel
+                </button>
+                <button class="btn btn-primary"
+                        ng-disabled="ending"
+                        ng-click="close()">
+                    OK
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

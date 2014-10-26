@@ -41,7 +41,7 @@ function (app) {
             wall.trimTop = {
                 height: 0,
                 art: {
-                    url: './images/C1/T/C1-T2-T-01.png'
+                    url: './images/C1/T/12_inch_trim.png'
                 }
             };
 
@@ -49,7 +49,7 @@ function (app) {
                 width: 0,
                 height: 0,
                 art: {
-                    url: './images/C1/T/C1-T1-T.jpg'
+                    url: './images/C1/TC/12_inch_corner_b.png'
                 }
             };
 

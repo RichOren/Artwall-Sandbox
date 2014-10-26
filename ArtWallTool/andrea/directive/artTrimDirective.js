@@ -61,6 +61,7 @@ define([
                     result -= 2*$scope.wall.trimTopCorner.width;
                     if( result < 0 ) result = 0;
                 }
+                $scope.trim.width = result;
                 return result;
             };
 

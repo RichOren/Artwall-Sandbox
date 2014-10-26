@@ -15,15 +15,23 @@ function (app) {
         $scope.wall = wallModel;
 
         var ctrl = {
-            test: test,
-
+            showSpec: showSpec,
             edit: edit,
-            remove: remove
+            remove: remove,
+
+            item: null //for spec dialog
         };
         $scope.ctrl = ctrl;
 
 //        return ctrl;
 
+
+        function showSpec() {
+            ctrl.item = selectService.getSelectedItem();
+            if( ctrl.item) {
+                $scope.specModal.open();
+            }
+        }
 
         function edit() {
             var item = selectService.getSelectedItem();
@@ -31,6 +39,7 @@ function (app) {
                 $location.url("/editor");
             }
         }
+
         function remove() {
             var item = selectService.getSelectedItem();
             if( item && item.art ) {
@@ -38,23 +47,6 @@ function (app) {
                 item.width = 0;
                 item.height = 0;
             }
-        }
-
-        function test() {
-            if( ctrl.mainArt.clipPosition === '0% 0%') {
-                ctrl.mainArt.clipPosition = '50% 50%';
-            }
-            else {
-                ctrl.mainArt.clipPosition = '0% 0%';
-            }
-//            if( ctrl.width === 300) {
-//                ctrl.width = 600;
-//                ctrl.height = 400;
-//            }
-//            else {
-//                ctrl.width = 300;
-//                ctrl.height = 200;
-//            }
         }
 
     }]);

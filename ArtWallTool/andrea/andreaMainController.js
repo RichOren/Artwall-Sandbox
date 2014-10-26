@@ -17,8 +17,11 @@ function (app) {
         $rootScope.scale = 24;
 
         $rootScope.px = function(mm) {
-            //console.log(mm, $rootScope.scale);
             return mm / 2;
+        };
+
+        $rootScope.mm = function(px) {
+            return px * 2;
         };
 
         var mainCtrl = {
