@@ -1,21 +1,24 @@
 <div class="origin0"
-    ng-style="{
+     ng-style="{
         width: getHitWidth() + 'px',
         height: getHitHeight() + 'px',
+        transform: 'translate3d(0, ' + (plane.heightPx + item.width)/2 + 'px, 0) rotateZ(-90deg)',
         'background-image': 'url(\'' + item.art.url + '\')',
         'background-repeat': 'no-repeat',
         border: (getIsSelected() ? '2' : '0') + 'px solid #ff00ff'
     }"
-    ng-mousedown="select()"
-></div>
+     ng-mousedown="select()"
+        ></div>
+
 <div class="origin0"
-    ng-style="{
+     ng-style="{
         width: getHitWidth() + 'px',
         height: getHitHeight() + 'px',
-        transform: 'translate3d(' + plane.widthPx + 'px, 0, 0) rotateY(180deg)',
+        transform: 'translate3d(' + plane.widthPx + 'px, ' + (plane.heightPx + item.width)/2 + 'px, 0)
+        rotateX(180deg) rotateZ(90deg)',
         'background-image': 'url(\'' + item.art.url + '\')',
         'background-repeat': 'no-repeat',
         border: (getIsSelected() ? '2' : '0') + 'px solid #ff00ff'
     }"
-    ng-mousedown="select()"
-></div>
+     ng-mousedown="select()"
+        ></div>

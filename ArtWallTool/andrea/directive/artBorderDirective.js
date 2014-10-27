@@ -7,7 +7,7 @@ define([
 ], function (app) {
     'use strict';
 
-    app.directive('artTrim', [
+    app.directive('artBorder', [
         '$rootScope', 'selectService',
         function($rootScope, selectService) {
 
@@ -15,10 +15,9 @@ define([
             restrict: 'E',
             scope: {
                 plane: '=',
-                item: '=',
-                isBottom: '='
+                item: '='
             },
-            templateUrl: "andrea/directive/artTrimTemplate.html",
+            templateUrl: "andrea/directive/artBorderTemplate.html",
             link: link
         };
 
@@ -27,20 +26,12 @@ define([
             $scope.px = $rootScope.px;
 
             $element.addClass('absolute');
-            if ($scope.isBottom) {
-                $element[0].style.bottom = '0px';
-            }
 
             $scope.$watch('item.art.url', function(url){
                 if (url){
                     var img = new Image();
                     img.onload = function(){
-                        if ($scope.isBottom) {
-                            console.log('trim Bottom size:', img.width + 'x' + img.height, img.naturalWidth + 'x' + img.naturalHeight);
-                        }
-                        else {
-                            console.log('trim Top size:', img.width + 'x' + img.height, img.naturalWidth + 'x' + img.naturalHeight);
-                        }
+                        console.log('border size:', img.width + 'x' + img.height, img.naturalWidth + 'x' + img.naturalHeight);
                         $scope.item.art.naturalWidth = img.width;
                         $scope.item.art.naturalHeight = img.height;
                         $scope.item.height = img.height;
@@ -52,28 +43,39 @@ define([
             });
 
             $scope.getLeft = function() {
-                return $scope.isBottom ? 0 : $scope.plane.trimTopCorner.width;
+                return 0;
+//                return $scope.wall.trimTopCorner.width;
             };
 
-            $scope.getWidth = function() {
-                var result = $scope.plane.widthPx;
-                if (!$scope.isBottom) {
-                    result -= 2*$scope.plane.trimTopCorner.width;
-                    if( result < 0 ) result = 0;
-                }
-                $scope.item.width = result;
-                return result;
-            };
+//            $scope.getWidth = function() {
+//                var result = $rootScope.px($scope.plane.width);
+//                if (!$scope.isBottom) {
+//                    result -= 2*$scope.wall.trimTopCorner.width;
+//                    if( result < 0 ) result = 0;
+//                }
+//                $scope.item.width = result;
+//                return result;
+//            };
+
+//            $scope.getHeight = function() {
+//                var result = $rootScope.px($scope.plane.height);
+//                if (!$scope.isBottom) {
+//                    result -= 2*$scope.wall.trimTopCorner.width;
+//                    if( result < 0 ) result = 0;
+//                }
+//                $scope.item.height = result;
+//                return result;
+//            };
 
             $scope.getHitHeight = function() {
-                return ($scope.item.height < hitSize) ? hitSize : $scope.item.height;
+                return ($scope.item && $scope.item.height > hitSize) ? $scope.item.height : hitSize;
             };
 
             $scope.getBgPosition = function() {
                 var y = 0;
-                if ($scope.isBottom) {
-                    y = $scope.getHitHeight() - $scope.item.height;
-                }
+//                if ($scope.isBottom) {
+//                    y = $scope.getHitHeight() - $scope.item.height;
+//                }
                 return '0px ' + y + 'px';
             };
 

@@ -1,5 +1,5 @@
 /**
- * Created by awyss on 10/19/14.
+ * Created by awyss on 10/26/14.
  */
 define([
     'app'
@@ -7,7 +7,7 @@ define([
 ], function (app) {
     'use strict';
 
-    app.directive('artTrimTopCorner', [
+    app.directive('artBorderCenter', [
         '$rootScope', 'selectService',
         function($rootScope, selectService) {
 
@@ -17,7 +17,7 @@ define([
                 plane: '=',
                 item: '='
             },
-            templateUrl: "andrea/directive/artTrimTopCornerTemplate.html",
+            templateUrl: "andrea/directive/artBorderCenterTemplate.html",
             link: link
         };
 
@@ -31,7 +31,7 @@ define([
                 if (url){
                     var img = new Image();
                     img.onload = function(){
-                        console.log('artTrimTopCorner size:', img.width + 'x' + img.height, img.naturalWidth + 'x' + img.naturalHeight);
+                        console.log('artBorderCenter size:', img.width + 'x' + img.height, img.naturalWidth + 'x' + img.naturalHeight);
                         $scope.item.art.naturalWidth = img.width;
                         $scope.item.art.naturalHeight = img.height;
                         $scope.item.width = img.width;
@@ -43,12 +43,13 @@ define([
                 }
             });
 
+
             $scope.getHitWidth = function() {
-                return ($scope.item.width < hitSize) ? hitSize : $scope.item.width;
+                return ($scope.item && $scope.item.width > hitSize) ? $scope.item.width : hitSize;
             };
 
             $scope.getHitHeight = function() {
-                return ($scope.item.height < hitSize) ? hitSize : $scope.item.height;
+                return ($scope.item && $scope.item.height > hitSize) ? $scope.item.height : hitSize;
             };
 
 

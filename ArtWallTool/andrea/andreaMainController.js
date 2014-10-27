@@ -8,8 +8,8 @@ function (app) {
     'use strict';
 
     app.controller('andreaMainController', [
-    '$rootScope',
-    function($rootScope) {
+    '$rootScope', '$scope', '$location', 'selectService',
+    function($rootScope, $scope, $location, selectService) {
 
         $rootScope.format = createFormat();
 
@@ -25,10 +25,37 @@ function (app) {
         };
 
         var mainCtrl = {
+            showSpec: showSpec,
+            edit: edit,
+            remove: remove,
 
+            item: null //for spec dialog
         };
         return mainCtrl;
 
+        function showSpec() {
+            mainCtrl.item = selectService.getSelectedItem();
+            console.log('showSpec', mainCtrl.item);
+            if( mainCtrl.item) {
+                $scope.specModal.open();
+            }
+        }
+
+        function edit() {
+            var item = selectService.getSelectedItem();
+            if( item && item.art ) {
+                $location.url("/editor");
+            }
+        }
+
+        function remove() {
+            var item = selectService.getSelectedItem();
+            if( item && item.art ) {
+                item.art.url = '';
+                item.width = 0;
+                item.height = 0;
+            }
+        }
 
     }]);
 

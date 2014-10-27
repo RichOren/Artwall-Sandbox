@@ -9,15 +9,13 @@
     ../directive/artFrameDirective"
     ng-controller="wallController"
 >
-    <!--<button ng-click="ctrl.test()">Wall</button>-->
-
     {{root.scale}}
     <br/>
     <input type="range" ng-model="root.scale" min="15" max="100"/>
     <br/>
 
     <div>
-        Dimentions: {{format.size(wall.width)}} x {{format.size(wall.height)}}
+        Wall - Width: {{format.size(wall.width)}} Height: {{format.size(wall.height)}}
         <span class="pull-right">
             <input type="checkbox" ng-model="format.useMetric"/>
         </span>
@@ -30,83 +28,34 @@
     >
         <div class="plane"
              ng-style="{
-                width: px(wall.width) + 'px',
-                height: px(wall.height) + 'px',
+                width: plane.widthPx + 'px',
+                height: plane.heightPx + 'px',
              }"
         >
-            <art art="wall.backgroundArt"
-                 width="px(wall.width)" height="px(wall.height)"
+            <art art="plane.backgroundArt"
+                 width="plane.widthPx" height="plane.heightPx"
                  popup-menu="artMenu"
             ></art>
 
 
-            <art2 wall="wall" item="wall.mainItem"
+            <art2 plane="plane" item="plane.mainItem"
                  popup-menu="artMenu"
             ></art2>
 
 
-            <art-trim wall="wall" trim="wall.trimTop"
-                 popup-menu="artMenu"
+            <art-trim plane="plane" item="plane.trimTop"
+                popup-menu="artMenu"
             ></art-trim>
 
-            <art-trim-top-corner wall="wall" trim="wall.trimTopCorner"
+            <art-trim-top-corner plane="plane" item="plane.trimTopCorner"
                  popup-menu="artMenu"
             ></art-trim-top-corner>
 
-            <art-trim wall="wall" trim="wall.trimBottom" is-bottom="true"
+            <art-trim plane="plane" item="plane.trimBottom" is-bottom="true"
                  popup-menu="artMenu"
             ></art-trim>
         </div>
     </div>
-
-            <!--<art-frame frame="wall.mainArtFrame" art="wall.mainArt"-->
-                 <!--left="0" right="0"-->
-                 <!--top="300"-->
-                 <!--bottom="300"-->
-                 <!--width="px(wall.width)" height="px(wall.height)"-->
-                 <!--popup-menu="artMenu"-->
-            <!--</art-frame>-->
-
-             <!--top="wall.topTrimArt.height"-->
-             <!--bottom="wall.bottomTrimArt.height"-->
-
-
-    <div id="artMenu" class="dropdown position-fixed" >
-        <ul class="dropdown-menu" role="menu">
-            <li>
-                <a class="pointer" role="menuitem" tabindex="1"
-                   ng-click="ctrl.showSpec()">
-                    Specifications
-                </a>
-            </li>
-            <li>
-                <a class="pointer" role="menuitem" tabindex="1"
-                   ng-click="ctrl.edit()">
-                    Edit
-                </a>
-            </li>
-            <li>
-                <a class="pointer" role="menuitem" tabindex="2"
-                   ng-click="ctrl.remove()">
-                    Remove
-                </a>
-            </li>
-        </ul>
-    </div>
-
-
-    <ds:modal name="specModal" escape size="md"
-              title="Specifications"
-    >
-        <div>
-            <span>width:</span>
-            <span>{{format.size(root.mm(ctrl.item.width))}}</span>
-        </div>
-        <div>
-            <span>height:</span>
-            <span>{{format.size(root.mm(ctrl.item.height))}}</span>
-        </div>
-    </ds:modal>
 
 
 </div>

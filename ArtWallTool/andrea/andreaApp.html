@@ -2,6 +2,7 @@
      ds-base-url="andrea"
      ds-require="./andreaApp
      ./service/wallModel
+     ./service/ceilingModel
      ./service/selectService
      ../core/modal/modalDirective
      ./andreaMainController"
@@ -15,4 +16,43 @@
     <a ng-href="#/test" class="btn btn-default">Test</a>
 
     <ng-view></ng-view>
+
+    <div id="artMenu" class="dropdown position-fixed" >
+        <ul class="dropdown-menu" role="menu">
+            <li>
+                <a class="pointer" role="menuitem" tabindex="1"
+                   ng-click="mainCtrl.showSpec()">
+                    Specifications
+                </a>
+            </li>
+            <li>
+                <a class="pointer" role="menuitem" tabindex="1"
+                   ng-click="mainCtrl.edit()">
+                    Edit
+                </a>
+            </li>
+            <li>
+                <a class="pointer" role="menuitem" tabindex="2"
+                   ng-click="mainCtrl.remove()">
+                    Remove
+                </a>
+            </li>
+        </ul>
+    </div>
+
+
+    <ds:modal name="specModal" escape size="md"
+              title="Specifications"
+            >
+        <div>
+            <span>width:</span>
+            <span>{{format.size(mm(mainCtrl.item.width))}}</span>
+        </div>
+        <div>
+            <span>height:</span>
+            <span>{{format.size(mm(mainCtrl.item.height))}}</span>
+        </div>
+    </ds:modal>
+
+
 </div>

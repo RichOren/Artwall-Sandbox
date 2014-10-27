@@ -1,10 +1,10 @@
 <div class="origin0"
      ng-style="{
         bottom: (isBottom ? '0px' : ''),
-        left: getLeft() + 'px',
+        transform: 'translate3d(' + getLeft() + 'px, 0, 0)',
         width: getWidth() + 'px',
         height: getHitHeight() + 'px',
-        'background-image': 'url(\'' + trim.art.url + '\')',
+        'background-image': 'url(\'' + item.art.url + '\')',
         'background-repeat': 'repeat-x',
         'background-position': getBgPosition(),
         border: (getIsSelected() ? '2' : '0') + 'px solid #ff00ff'

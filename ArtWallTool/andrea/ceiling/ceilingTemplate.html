@@ -1,50 +1,72 @@
-<div
+<div ng-cloak
     ds-base-url="andrea/ceiling"
     ds-require="./ceilingController
-    ../directive/artDirective
-    ../directive/borderArtDirective
-    ../directive/borderCornerArtDirective
-    ../directive/borderCenterArtDirective
-    ../directive/borderMiddleArtDirective"
-    ng-controller="ceilingController as ctrl"
+    ../directive/artBackgroundDirective
+    ../directive/artBorderDirective
+    ../directive/artBorderCornerDirective
+    ../directive/artBorderCenterDirective
+    ../directive/artBorderMiddleDirective"
+
+    ng-controller="ceilingController"
 >
 
-    <button ng-click="ctrl.test()">Ceiling</button>
+    {{root.scale}}
+    <br/>
+    <input type="range" ng-model="root.scale" min="15" max="100"/>
+    <br/>
 
-    <div class="plane"
-         ng-style="{
-            width: ctrl.width + 'px',
-            height: ctrl.height + 'px'
-         }"
-    >
-        <art art="ctrl.backgroundArt"
-            width="ctrl.width" height="ctrl.height"
-        ></art>
-
-        <border-art art="ctrl.borderArt"
-            width="ctrl.width" height="ctrl.height"
-        ></border-art>
-
-        <border-corner-art art="ctrl.borderCornerArt"
-            width="ctrl.width" height="ctrl.height"
-        ></border-corner-art>
-
-        <border-center-art art="ctrl.borderCenterArt"
-            width="ctrl.width" height="ctrl.height"
-        ></border-center-art>
-
-        <border-middle-art art="ctrl.borderMiddleArt"
-            width="ctrl.width" height="ctrl.height"
-        ></border-middle-art>
-
-        <art art="ctrl.mainArt"
-            width="ctrl.width" height="ctrl.height"
-        ></art>
-
-        <art art="art" ng-repeat="art in ctrl.floatingArts"
-            width="ctrl.width" height="ctrl.height"
-        ></art>
-
+    <div>
+        Ceiling - Width: {{format.size(root.mm(plane.widthPx))}} Height: {{format.size(root.mm(plane.heightPx))}}
+        <span class="pull-right">
+            <input type="checkbox" ng-model="format.useMetric"/>
+        </span>
     </div>
 
+    <div class="origin0"
+         ng-style="{
+            transform: 'scale3d(' + root.scale/100 + ',' + root.scale/100 + ',' + root.scale/100 + ')'
+         }"
+    >
+
+        <div class="plane"
+             ng-style="{
+                width: plane.widthPx + 'px',
+                height: plane.heightPx + 'px',
+             }"
+        >
+
+            <art-background plane="plane" item="plane.background"
+                 popup-menu="artMenu"
+            ></art-background>
+
+            <art-border plane="plane" item="plane.border"
+                popup-menu="artMenu"
+            ></art-border>
+
+            <art-border-corner plane="plane" item="plane.borderCorner"
+                popup-menu="artMenu"
+            ></art-border-corner>
+
+            <art-border-center plane="plane" item="plane.borderCenter"
+                popup-menu="artMenu"
+            ></art-border-center>
+
+            <art-border-middle plane="plane" item="plane.borderMiddle"
+                popup-menu="artMenu"
+            ></art-border-middle>
+
+<!--
+
+            <art art="ctrl.mainArt"
+                width="ctrl.width" height="ctrl.height"
+            ></art>
+
+            <art art="art" ng-repeat="art in ctrl.floatingArts"
+                width="ctrl.width" height="ctrl.height"
+            ></art>
+-->
+
+        </div>
+
+    </div>
 </div>

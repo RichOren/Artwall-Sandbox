@@ -11,8 +11,8 @@ function (app) {
     function() {
 
         var wall = {
-            width: 0,
-            height: 0,
+            widthPx: 0,
+            heightPx: 0,
 
             backgroundArt: null,
 
@@ -30,8 +30,8 @@ function (app) {
 
         function init() {
             console.log('init wallModel');
-            wall.width = 6000; //mm
-            wall.height = 2500; //mm
+            wall.widthPx = 6000/2; //mm
+            wall.heightPx = 2500/2; //mm
 
             wall.backgroundArt = {
                 fill: true,

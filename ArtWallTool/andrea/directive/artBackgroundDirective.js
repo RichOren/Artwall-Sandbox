@@ -1,5 +1,5 @@
 /**
- * Created by awyss on 10/19/14.
+ * Created by awyss on 10/26/14.
  */
 define([
     'app'
@@ -7,7 +7,7 @@ define([
 ], function (app) {
     'use strict';
 
-    app.directive('art2', [
+    app.directive('artBackground', [
         '$rootScope', 'selectService',
         function($rootScope, selectService) {
 
@@ -17,12 +17,11 @@ define([
                 plane: '=',
                 item: '='
             },
-            templateUrl: "andrea/directive/art2Template.html",
+            templateUrl: "andrea/directive/artBackgroundTemplate.html",
             link: link
         };
 
         function link($scope, $element, attrs, ctrl, transcludeFn) {
-            var hitSize = 100;
             $scope.px = $rootScope.px;
 
             $element.addClass('absolute');
@@ -41,21 +40,21 @@ define([
                 }
             });
 
-            $scope.getLeft = function() {
-                return $scope.item.left;
-            };
-
-            $scope.getTop = function() {
-                return $scope.item.top;
-            };
-
-            $scope.getWidth = function() {
-                return $scope.item.width;
-            };
-
-            $scope.getHeight = function() {
-                return $scope.item.height;
-            };
+//            $scope.getLeft = function() {
+//                return $scope.item.left;
+//            };
+//
+//            $scope.getTop = function() {
+//                return $scope.item.top;
+//            };
+//
+//            $scope.getWidth = function() {
+//                return $scope.item.width;
+//            };
+//
+//            $scope.getHeight = function() {
+//                return $scope.item.height;
+//            };
 
             $scope.getImagePosition = function() {
                 var w = getCurrImageWidth();

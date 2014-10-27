@@ -2,7 +2,7 @@
         position: 'absolute',
         width: getWidth() + 'px',
         height: getHeight() + 'px',
-        transform: 'translateX(' + getLeft() + 'px) translateY(' + getTop() + 'px)',
+        transform: 'translate3d(' + getLeft() + 'px, ' + getTop() + 'px, 0)',
         'background-image': 'url(\'' + art.url + '\')',
         border: (getIsSelected() ? '2' : '0') + 'px solid #ff00ff'
     }"
