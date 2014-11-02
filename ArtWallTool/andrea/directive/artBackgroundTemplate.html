@@ -1,12 +1,27 @@
-<div class="origin0" style="background-color: gray"
+<div class="origin0"
      ng-style="{
         width: plane.widthPx + 'px',
         height: plane.heightPx + 'px',
+        'background-color': item.color,
         'background-image': 'url(\'' + item.art.url + '\')',
-        'background-repeat': 'no-repeat',
-        'background-position': '0, 0',
-        'background-size': plane.widthPx + 'px',
+        'background-position': getBgPositionStyle(),
+        'background-repeat': getBgRepeatStyle(),
+        'background-size': getBgSizeStyle(),
         border: (getIsSelected() ? '2' : '0') + 'px solid #ff00ff'
     }"
      ng-mousedown="select()"
-></div>
+>
+    <div
+        style="font-size: 80pt;
+        color: #ffffff;
+        text-align: center;
+        background-color: #ff0000;
+        padding: 40px;
+        padding-left: 80px;
+        padding-right: 80px;
+        opacity: 0.7"
+        ng-show="isPlaneTooLarge"
+    >
+        Space is too large for this Art!
+    </div>
+</div>

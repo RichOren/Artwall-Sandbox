@@ -16,6 +16,8 @@ function (app) {
 //        $rootScope.scale = 50;
         $rootScope.scale = 24;
 
+        $rootScope.minPrintDPI = 72;
+
         $rootScope.px = function(mm) {
             return mm / 2;
         };
@@ -23,6 +25,24 @@ function (app) {
         $rootScope.mm = function(px) {
             return px * 2;
         };
+
+        $rootScope.maxLenghtMM = function(lowResArtNaturalLength){
+            return lowResArtNaturalLength * 10 / $rootScope.minPrintDPI * 25.4;
+        };
+
+        $rootScope.maxArtSizePx = function(art){
+            var result;
+            if( art && art.naturalWidth) {
+                result = {
+                    width: $rootScope.px($rootScope.maxLenghtMM(art.naturalWidth)),
+                    height: $rootScope.px($rootScope.maxLenghtMM(art.naturalHeight))
+                }
+            }
+            console.log('maxArtSizePx', result);
+            return result;
+        };
+
+
 
         var mainCtrl = {
             showSpec: showSpec,
@@ -63,7 +83,7 @@ function (app) {
     function createFormat() {
 
         var format = {
-            useMetric: false,
+            useMetric: true,
             size: size
         };
         return format;

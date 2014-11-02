@@ -34,12 +34,16 @@ function (app) {
 
         function init() {
             console.log('init ceilingModel');
-            ceiling.widthPx = 6000/2;
-            ceiling.heightPx = 2500/2;
+//            ceiling.widthPx = 6000/2;
+//            ceiling.heightPx = 2500/2;
+            ceiling.widthPx = 3000/2;
+            ceiling.heightPx = 1760/2;
 
             ceiling.background = {
-                fill: true,
+//                color: '#aa0044',
                 art: {
+//                    repeat: true,
+//                    url: './images/wood.jpg'
                     url: './images/A023-copy.jpg'
                 }
             };

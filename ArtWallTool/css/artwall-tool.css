@@ -165,7 +165,8 @@ div[numeric-stepper].ng-invalid-out-of-bounds input.form-control
         -ms-transform-origin: 0 0 0;
             transform-origin: 0 0 0;
 
-    background-color: #746f48;
+    /*background-color: #746f48;*/
+    background-color: #EEEEEE;
 
     -webkit-backface-visibility: hidden;
        -moz-backface-visibility: hidden;
