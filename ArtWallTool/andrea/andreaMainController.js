@@ -49,7 +49,8 @@ function (app) {
             edit: edit,
             remove: remove,
 
-            item: null //for spec dialog
+            item: null, //for spec dialog
+            formatType: formatType
         };
         return mainCtrl;
 
@@ -75,6 +76,24 @@ function (app) {
                 item.width = 0;
                 item.height = 0;
             }
+        }
+
+        function formatType() {
+            var item = selectService.getSelectedItem();
+            if( item && item.type ) {
+                switch (item.type) {
+                    case 'bg': return 'Background';
+                    case 'b': return 'Border';
+                    case 'bc': return 'Border Corner';
+                    case 'br': return 'Border Center';
+                    case 'bm': return 'Border Middle';
+
+                    case 'tt': return 'Top Trim';
+                    case 'tc': return 'Corner Trim';
+                    case 'tb': return 'Botom Trim';
+                }
+            }
+            return 'Unknown';
         }
 
     }]);

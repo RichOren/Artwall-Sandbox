@@ -42,42 +42,43 @@ define([
                 }
             });
 
+            function updateTotalWidth() {
+                var result = 2*$scope.plane.widthPx + 2*$scope.plane.heightPx;
+                result -= 4*$scope.plane.borderCorner.width;
+                result -= 4*$scope.plane.borderCorner.height;
+                result -= 2*$scope.plane.borderCenter.width;
+                result -= 2*$scope.plane.borderMiddle.height;
+                if( result < 0 ) result = 0;
+                $scope.item.width = result;
+            }
+
             $scope.getLeft = function() {
-                return 0;
-//                return $scope.wall.trimTopCorner.width;
+                return $scope.plane.borderCorner.width;
             };
 
-//            $scope.getWidth = function() {
-//                var result = $rootScope.px($scope.plane.width);
-//                if (!$scope.isBottom) {
-//                    result -= 2*$scope.wall.trimTopCorner.width;
-//                    if( result < 0 ) result = 0;
-//                }
-//                $scope.item.width = result;
-//                return result;
-//            };
+            $scope.getWidth = function() {
+                updateTotalWidth();
+                var result = $scope.plane.widthPx;
+                result -= 2*$scope.plane.borderCorner.width;
+                if( result < 0 ) result = 0;
+                return result;
+            };
 
-//            $scope.getHeight = function() {
-//                var result = $rootScope.px($scope.plane.height);
-//                if (!$scope.isBottom) {
-//                    result -= 2*$scope.wall.trimTopCorner.width;
-//                    if( result < 0 ) result = 0;
-//                }
-//                $scope.item.height = result;
-//                return result;
-//            };
+            $scope.getTop = function() {
+                return $scope.plane.borderCorner.height;
+            };
+
+            $scope.getHeight = function() {
+                var result = $scope.plane.heightPx;
+                result -= 2*$scope.plane.borderCorner.height;
+                if( result < 0 ) result = 0;
+                return result;
+            };
 
             $scope.getHitHeight = function() {
                 return ($scope.item && $scope.item.height > hitSize) ? $scope.item.height : hitSize;
             };
 
-            $scope.getBgPosition = function() {
-                var y = 0;
-//                if ($scope.isBottom) {
-//                    y = $scope.getHitHeight() - $scope.item.height;
-//                }
-                return '0px ' + y + 'px';
-            };
 
             $scope.select = function () {
                 return selectService.select($scope.item);

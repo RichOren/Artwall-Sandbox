@@ -39,6 +39,7 @@ function (app) {
             };
 
             wall.trimTop = {
+                type: 'tt',
                 height: 0,
                 art: {
                     url: './images/C1/T/12_inch_trim.png'
@@ -46,6 +47,7 @@ function (app) {
             };
 
             wall.trimTopCorner = {
+                type: 'tc',
                 width: 0,
                 height: 0,
                 art: {
@@ -54,6 +56,7 @@ function (app) {
             };
 
             wall.trimBottom = {
+                type: 'tb',
                 height: 0,
                 art: {
                     url: './images/C1/B/C1-B1-B.jpg'

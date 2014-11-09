@@ -61,6 +61,9 @@ define([
 
                 //var result = getIsRepeat() ? 'auto' : ($scope.plane.widthPx + 'px');
 
+                //item size is the size of the plane
+                $scope.item.width = $scope.plane.widthPx;
+                $scope.item.height = $scope.plane.heightPx;
                 $scope.isPlaneTooLarge = false;
 
                 if( getIsRepeat() ) {
@@ -75,6 +78,8 @@ define([
                     if( $scope.plane.widthPx > maxArtSizePx.width || $scope.plane.heightPx > maxArtSizePx.height){
                         $scope.isPlaneTooLarge = true;
                         result = maxArtSizePx.width;
+                        $scope.item.width = maxArtSizePx.width;
+                        $scope.item.height = maxArtSizePx.height;
                     }
                 }
                 return result + 'px';

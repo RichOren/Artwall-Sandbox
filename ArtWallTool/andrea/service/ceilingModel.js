@@ -36,11 +36,12 @@ function (app) {
             console.log('init ceilingModel');
 //            ceiling.widthPx = 6000/2;
 //            ceiling.heightPx = 2500/2;
-            ceiling.widthPx = 3000/2;
+            ceiling.widthPx = 2800/2;
             ceiling.heightPx = 1760/2;
 
             ceiling.background = {
-//                color: '#aa0044',
+                type: 'bg',
+                color: '#aa0044',
                 art: {
 //                    repeat: true,
 //                    url: './images/wood.jpg'
@@ -49,6 +50,7 @@ function (app) {
             };
 
             ceiling.border = {
+                type: 'b',
                 height: 0,
                 art: {
                     url: './images/ceiling/6_inch_trim_green.jpg'
@@ -56,6 +58,7 @@ function (app) {
             };
 
             ceiling.borderCorner = {
+                type: 'bc',
                 width: 0,
                 height: 0,
                 art: {
@@ -64,6 +67,7 @@ function (app) {
             };
 
             ceiling.borderCenter = {
+                type: 'br',
                 height: 0,
                 art: {
                     url: './images/ceiling/6_inch_middle_green.png'
@@ -71,6 +75,7 @@ function (app) {
             };
 
             ceiling.borderMiddle = {
+                type: 'bm',
                 height: 0,
                 art: {
                     url: './images/ceiling/6_inch_middle_green.png'
