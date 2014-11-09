@@ -146,6 +146,7 @@ div[numeric-stepper].ng-invalid-out-of-bounds input.form-control
 
 .origin0
 {
+    box-sizing: border-box;
     position: absolute;
 
     -webkit-transform-origin: 0 0 0;

@@ -44,14 +44,14 @@ function (app) {
                 art: {
 //                    repeat: true,
 //                    url: './images/wood.jpg'
-                    url: './images/A023-copy.jpg'
+                    url: './images/C1/C/C2-C1-C.jpg'
                 }
             };
 
             ceiling.border = {
                 height: 0,
                 art: {
-                    url: './images/C1/B/C1-B1-B-01.png'
+                    url: './images/ceiling/6_inch_trim_green.jpg'
                 }
             };
 
@@ -59,21 +59,21 @@ function (app) {
                 width: 0,
                 height: 0,
                 art: {
-                    url: './images/C1/T/C1-T1-T-01.png'
+                    url: './images/ceiling/6_inch_corner_green.png'
                 }
             };
 
             ceiling.borderCenter = {
                 height: 0,
                 art: {
-                    url: './images/C1/B/C1-B3-B-02.png'
+                    url: './images/ceiling/6_inch_middle_green.png'
                 }
             };
 
             ceiling.borderMiddle = {
                 height: 0,
                 art: {
-                    url: './images/C1/B/C1-B3-B-02.png'
+                    url: './images/ceiling/6_inch_middle_green.png'
                 }
             };
 
