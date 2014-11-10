@@ -14,6 +14,8 @@ function (app) {
         $scope.root = $rootScope;
         $scope.plane = ceilingModel;
 
+        $rootScope.selectedPlane = $scope.plane;
+
         var ctrl = {
             mainArt: null, //medalion
 

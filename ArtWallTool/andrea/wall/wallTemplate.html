@@ -2,7 +2,7 @@
     ds-base-url="andrea/wall"
     ds-require="./wallController
     ../directive/popupMenu
-    ../directive/artDirective
+    ../directive/artBackgroundDirective
     ../directive/art2Directive
     ../directive/artTrimDirective
     ../directive/artTrimTopCornerDirective
@@ -32,10 +32,9 @@
                 height: plane.heightPx + 'px',
              }"
         >
-            <art art="plane.backgroundArt"
-                 width="plane.widthPx" height="plane.heightPx"
-                 popup-menu="artMenu"
-            ></art>
+            <art-background plane="plane" item="plane.background"
+                            popup-menu="artMenu"
+            ></art-background>
 
 
             <art2 plane="plane" item="plane.mainItem"

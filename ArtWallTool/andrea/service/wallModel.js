@@ -14,7 +14,7 @@ function (app) {
             widthPx: 0,
             heightPx: 0,
 
-            backgroundArt: null,
+            background: null,
 
             trimTop: null,
             trimTopCorner: null,
@@ -33,9 +33,12 @@ function (app) {
             wall.widthPx = 6000/2; //mm
             wall.heightPx = 2500/2; //mm
 
-            wall.backgroundArt = {
-                fill: true,
-                url: './images/wood.jpg'
+            wall.background = {
+                type: 'bg',
+                art: {
+                    repeat: true,
+                    url: './images/wood.jpg'
+                }
             };
 
             wall.trimTop = {

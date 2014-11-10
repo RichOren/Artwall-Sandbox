@@ -50,7 +50,8 @@ function (app) {
             remove: remove,
 
             item: null, //for spec dialog
-            formatType: formatType
+            formatType: formatType,
+            isItemResizable: isItemResizable
         };
         return mainCtrl;
 
@@ -87,6 +88,7 @@ function (app) {
                     case 'bc': return 'Border Corner';
                     case 'br': return 'Border Center';
                     case 'bm': return 'Border Middle';
+                    case 'm': return 'Medallion';
 
                     case 'tt': return 'Top Trim';
                     case 'tc': return 'Corner Trim';
@@ -94,6 +96,17 @@ function (app) {
                 }
             }
             return 'Unknown';
+        }
+
+        function isItemResizable() {
+            var item = selectService.getSelectedItem();
+            if( item && item.type ) {
+                switch (item.type) {
+                    case 'm':
+                        return 'Medallion';
+                }
+            }
+            return false;
         }
 
     }]);

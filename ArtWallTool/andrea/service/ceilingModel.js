@@ -14,16 +14,15 @@ function (app) {
             widthPx: 0,
             heightPx: 0,
 
-            backgroundArt: null,
+            background: null,
 
             border: null,
             borderCorner: null,
             borderCenter: null,
             borderMiddle: null,
 
-//            trimTopCorner: null,
-//            trimBottom: null,
-//
+            medallion: null
+
 //            mainArtFrame: null,
 //            mainArt: null
         };
@@ -34,9 +33,9 @@ function (app) {
 
         function init() {
             console.log('init ceilingModel');
-//            ceiling.widthPx = 6000/2;
-//            ceiling.heightPx = 2500/2;
-            ceiling.widthPx = 2800/2;
+//            ceiling.widthPx = 5000/2;
+//            ceiling.heightPx = 3500/2;
+            ceiling.widthPx = 3800/2;
             ceiling.heightPx = 1760/2;
 
             ceiling.background = {
@@ -45,6 +44,7 @@ function (app) {
                 art: {
 //                    repeat: true,
 //                    url: './images/wood.jpg'
+                    stretch: true,
                     url: './images/C1/C/C2-C1-C.jpg'
                 }
             };
@@ -61,9 +61,9 @@ function (app) {
                 type: 'bc',
                 width: 0,
                 height: 0,
-                art: {
-                    url: './images/ceiling/6_inch_corner_green.png'
-                }
+//                art: {
+//                    url: './images/ceiling/6_inch_corner_green.png'
+//                }
             };
 
             ceiling.borderCenter = {
@@ -77,6 +77,14 @@ function (app) {
             ceiling.borderMiddle = {
                 type: 'bm',
                 height: 0,
+                art: {
+                    url: './images/ceiling/6_inch_middle_green.png'
+                }
+            };
+
+            ceiling.medallion = {
+                type: 'm',
+                height: 500/2,
                 art: {
                     url: './images/ceiling/6_inch_middle_green.png'
                 }

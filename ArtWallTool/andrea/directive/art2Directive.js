@@ -8,8 +8,8 @@ define([
     'use strict';
 
     app.directive('art2', [
-        '$rootScope', 'selectService',
-        function($rootScope, selectService) {
+        'selectService',
+        function(selectService) {
 
         return {
             restrict: 'E',
@@ -23,7 +23,6 @@ define([
 
         function link($scope, $element, attrs, ctrl, transcludeFn) {
             var hitSize = 100;
-            $scope.px = $rootScope.px;
 
             $element.addClass('absolute');
 

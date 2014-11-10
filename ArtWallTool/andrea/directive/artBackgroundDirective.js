@@ -82,7 +82,12 @@ define([
                         $scope.item.height = maxArtSizePx.height;
                     }
                 }
-                return result + 'px';
+                if($scope.item.art && $scope.item.art.stretch) {
+                    return $scope.item.width + 'px ' + $scope.item.height + 'px';
+                }
+                else {
+                    return result + 'px';
+                }
             };
 
 

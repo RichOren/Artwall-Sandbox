@@ -23,6 +23,7 @@ function (app) {
 
         function select(item) {
             selectedItem = item;
+            $rootScope.selectedItem = item;
         }
 
         function isItemSelected(item) {

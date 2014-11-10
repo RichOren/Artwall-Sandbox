@@ -13,9 +13,33 @@
     <a ng-href="#/ceiling" class="btn btn-default">Ceiling</a>
     <a ng-href="#/wall" class="btn btn-default">Wall</a>
     <a ng-href="#/editor" class="btn btn-default">Editor</a>
-    <a ng-href="#/test" class="btn btn-default">Test</a>
+    <!--<a ng-href="#/test" class="btn btn-default">Test</a>-->
 
     <ng-view></ng-view>
+
+
+    <div class="position-fixed"
+            style="
+            background-color: #CCCCCC;
+            padding: 10px;
+            bottom: 0px;
+            left: 0px;
+            right: 0px"
+        ng-show="mainCtrl.isItemResizable(selectedItem)"
+    >
+        <div style="text-align: center">
+            {{mainCtrl.formatType()}} Size: {{format.size(mm(selectedItem.width))}} x {{format.size(mm(selectedItem.height))}}
+            <span class="pull-right">
+                <button>X</button>
+            </span>
+        </div>
+        <div ng-show="selectedItem">
+            <input
+                type="range"
+                ng-model="selectedItem.height"
+                min="100" max="{{selectedPlane.heightPx*2/3}}"/>
+        </div>
+    </div>
 
     <div id="artMenu" class="dropdown position-fixed" >
         <ul class="dropdown-menu" role="menu">

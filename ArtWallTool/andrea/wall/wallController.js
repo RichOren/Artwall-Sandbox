@@ -14,6 +14,8 @@ function (app) {
         $scope.root = $rootScope;
         $scope.plane = wallModel;
 
+        $rootScope.selectedPlane = $scope.plane;
+
         var ctrl = {
 
         };

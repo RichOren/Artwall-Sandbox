@@ -18,7 +18,7 @@ define([
                 width: '=',
                 height: '='
             },
-            templateUrl: "andrea/directive/artTemplate.html",
+            templateUrl: "andrea/directive/artOLDTemplate.html",
             link: link
         };
 
