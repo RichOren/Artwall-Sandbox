@@ -72,10 +72,17 @@ function (app) {
 
         function remove() {
             var item = selectService.getSelectedItem();
-            if( item && item.art ) {
-                item.art.url = '';
-                item.width = 0;
-                item.height = 0;
+            if( item ){
+                if( item.type == 'f') {
+                    var floatItems = $rootScope.selectedPlane.floatItems;
+                    var index = floatItems.indexOf(item);
+                    floatItems.splice(index, 1);
+                }
+                else if( item.art ) {
+                    item.art.url = '';
+                    item.width = 0;
+                    item.height = 0;
+                }
             }
         }
 
@@ -89,6 +96,7 @@ function (app) {
                     case 'br': return 'Border Center';
                     case 'bm': return 'Border Middle';
                     case 'm': return 'Medallion';
+                    case 'f': return 'Float';
 
                     case 'tt': return 'Top Trim';
                     case 'tc': return 'Corner Trim';
@@ -103,6 +111,7 @@ function (app) {
             if( item && item.type ) {
                 switch (item.type) {
                     case 'm':
+                    case 'f':
                         return 'Medallion';
                 }
             }

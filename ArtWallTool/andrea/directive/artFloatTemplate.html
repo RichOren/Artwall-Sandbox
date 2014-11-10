@@ -1,0 +1,14 @@
+<div class="origin0"
+     ng-style="{
+        width: getHitWidth() + 'px',
+        height: getHitHeight() + 'px',
+        transform: 'translate3d(' + getLeft() + 'px, ' + getTop() + 'px, 0)',
+        'background-image': 'url(\'' + item.art.url + '\')',
+        'background-repeat': 'no-repeat',
+        'background-size': getImageSize(),
+        border: (getIsSelected() ? '2' : '0') + 'px solid #ff00ff'
+    }"
+     ng-mousedown="select()"
+></div>
+
+

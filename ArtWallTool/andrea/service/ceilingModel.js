@@ -21,10 +21,9 @@ function (app) {
             borderCenter: null,
             borderMiddle: null,
 
-            medallion: null
+            medallion: null,
 
-//            mainArtFrame: null,
-//            mainArt: null
+            floatItems: []
         };
 
         init();

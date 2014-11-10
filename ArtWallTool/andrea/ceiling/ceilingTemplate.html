@@ -6,7 +6,8 @@
     ../directive/artBorderCornerDirective
     ../directive/artBorderCenterDirective
     ../directive/artBorderMiddleDirective
-    ../directive/artMedallionDirective"
+    ../directive/artMedallionDirective
+    ../directive/artFloatDirective"
 
     ng-controller="ceilingController"
 >
@@ -15,6 +16,7 @@
     <br/>
     <input type="range" ng-model="root.scale" min="15" max="100"/>
     <br/>
+    <button ng-click="addFloatItem()">Add Floating Art {{plane.floatItems.length}}</button>
 
     <div>
         Ceiling - Width: {{format.size(mm(plane.widthPx))}} Height: {{format.size(mm(plane.heightPx))}}
@@ -60,16 +62,9 @@
                 popup-menu="artMenu"
             ></art-medallion>
 
-<!--
-
-            <art art="ctrl.mainArt"
-                width="ctrl.width" height="ctrl.height"
-            ></art>
-
-            <art art="art" ng-repeat="art in ctrl.floatingArts"
-                width="ctrl.width" height="ctrl.height"
-            ></art>
--->
+            <art-float plane="plane" item="item" ng-repeat="item in plane.floatItems"
+                popup-menu="artMenu"
+            ></art-float>
 
         </div>
 

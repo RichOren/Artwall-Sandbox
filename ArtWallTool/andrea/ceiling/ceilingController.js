@@ -16,45 +16,52 @@ function (app) {
 
         $rootScope.selectedPlane = $scope.plane;
 
-        var ctrl = {
-            mainArt: null, //medalion
+//        var ctrl = {
+//            addFloatItem: addFloatItem
+//        };
+//        $scope.ctrl = ctrl;
 
-            floatingArts: []
 
+        $scope.addFloatItem = function(){
+            console.log('addFloatItem');
+            var item = {
+                type: 'f',
+                left: 200/2,
+                top: 200/2,
+                height: 500/2,
+                art: {
+                    url: './images/ceiling/6_inch_middle_green.png'
+                }
+            };
+
+            ceilingModel.floatItems.push(item);
         };
-        $scope.ctrl = ctrl;
 
-        init();
+//        init();
 
         //return ctrl;
 
-        function init() {
-
-            ctrl.mainArt = {
-                center: true,
-                width: 60,
-                height: 60,
-                url: ''
-            };
-
-            ctrl.floatingArts = [
-                {
-                    width: 20,
-                    height: 50,
-                    url: '',
-                    left: 70,
-                    top: 50
-                },
-                {
-                    width: 20,
-                    height: 50,
-                    url: '',
-                    left: 230,
-                    top: 90
-                }
-            ];
-
-        }
+//        function init() {
+//
+//
+//            ctrl.floatingArts = [
+//                {
+//                    width: 20,
+//                    height: 50,
+//                    url: '',
+//                    left: 70,
+//                    top: 50
+//                },
+//                {
+//                    width: 20,
+//                    height: 50,
+//                    url: '',
+//                    left: 230,
+//                    top: 90
+//                }
+//            ];
+//
+//        }
 
 
     }]);
