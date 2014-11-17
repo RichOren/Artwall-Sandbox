@@ -16,14 +16,8 @@ function (app) {
 
         $rootScope.selectedPlane = $scope.plane;
 
-//        var ctrl = {
-//            addFloatItem: addFloatItem
-//        };
-//        $scope.ctrl = ctrl;
-
-
         $scope.addFloatItem = function(){
-            console.log('addFloatItem');
+//            console.log('addFloatItem');
             var item = {
                 type: 'f',
                 left: 200/2,
@@ -35,6 +29,8 @@ function (app) {
             };
 
             ceilingModel.floatItems.push(item);
+
+            selectService.select(item);
         };
 
 //        init();

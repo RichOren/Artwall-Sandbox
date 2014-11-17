@@ -8,8 +8,8 @@ define([
     'use strict';
 
     app.directive('artFloat', [
-        'selectService',
-        function(selectService) {
+        'selectService','$rootScope',
+        function(selectService, $rootScope) {
 
             return {
                 restrict: 'E',
@@ -17,7 +17,7 @@ define([
                     plane: '=',
                     item: '='
                 },
-                templateUrl: "andrea/directive/artMedallionTemplate.html",
+                templateUrl: "andrea/directive/artFloatTemplate.html",
                 link: link
             };
 
@@ -84,6 +84,112 @@ define([
                 };
 
 
+                function logMouseEvent(event){
+                    console.log(event.type, event.clientX, event.clientY);
+                }
+
+                var threshold = 4;
+                var downX = NaN;
+                var downY = NaN;
+                var downLeft = NaN;
+                var downTop = NaN;
+                var isMoving = false;
+
+                function stopTracking() {
+                    downX = NaN;
+                    downY = NaN;
+                    isMoving = false;
+                }
+
+                $element.on('mousedown', function(event) {
+//                    logMouseEvent(event);
+                    isMoving = false;
+                    downX = event.clientX;
+                    downY = event.clientY;
+                    downLeft = $scope.item.left;
+                    downTop = $scope.item.top;
+                    //wait for threshold mouse to initiate element move
+
+                    mouseCapture();
+
+                    $scope.select();
+                    $scope.$apply();
+                    bringToFront();
+                });
+
+                function onDocMouseMove(event) {
+//                    logMouseEvent(event);
+                    if(!isMoving) {
+                        if (Math.abs(downX - event.clientX) > threshold || Math.abs(downX - event.clientX) > threshold) {
+                            isMoving = true;
+                        }
+                    }
+                    if(isMoving) {
+                        event.stopImmediatePropagation();
+                        var x = downLeft + (event.clientX - downX) / ($rootScope.scale/100);
+                        var y = downTop + (event.clientY - downY) / ($rootScope.scale/100);
+                        moveTo(x, y);
+                        $scope.$apply();
+                    }
+                }
+
+                function onDocMouseUp(event) {
+//                    logMouseEvent(event);
+                    event.stopImmediatePropagation();
+                    mouseRelease();
+                    stopTracking();
+                }
+
+
+                function mouseCapture() {
+                    document.addEventListener('mousemove', onDocMouseMove, true);
+                    document.addEventListener('mouseup', onDocMouseUp, true);
+                }
+
+                function mouseRelease() {
+                    document.removeEventListener('mousemove', onDocMouseMove, true);
+                    document.removeEventListener('mouseup', onDocMouseUp, true);
+                }
+
+                function moveTo(x, y) {
+                    var w = $scope.getWidth() ;
+                    var planeW = $scope.plane.widthPx;
+                    var h = $scope.getHeight();
+                    var planeH = $scope.plane.heightPx ;
+
+                    if((x + w) > planeW) {
+                        x = planeW - w;
+                    }
+                    if((y + h) > planeH) {
+                        y = planeH - h;
+                    }
+                    if(x < 0) x = 0;
+                    if(y < 0) y = 0;
+
+                    $scope.item.left = x;
+                    $scope.item.top = y;
+                }
+
+                function bringToFront() {
+                    var obj = $element[0];
+                    var siblings = $element[0].parentElement.childNodes;
+                    var max_index = 0;
+                    var cur_index;
+
+                    // Compute the maximal z-index of all siblings
+                    for (var i=0; i < siblings.length; i++) {
+                        var item = siblings[i];
+                        if (item == obj || !item.style || item.style.zIndex == '')
+                            continue;
+
+                        cur_index = parseInt(item.style.zIndex);
+                        if (max_index < cur_index) {
+                            max_index = cur_index;
+                        }
+                    }
+
+                    obj.style.zIndex = max_index + 1;
+                }
 
                 $scope.select = function () {
                     return selectService.select($scope.item);

@@ -5,6 +5,7 @@
      ./service/ceilingModel
      ./service/selectService
      ../core/modal/modalDirective
+     ../core/input/typeIntDirective
      ./andreaMainController"
      ng-controller="andreaMainController as mainCtrl"
      class="container selection-none"
@@ -36,7 +37,7 @@
         <div ng-show="selectedItem">
             <input
                 type="range"
-                ng-model="selectedItem.height"
+                ng-model="selectedItem.height" type-int
                 min="100" max="{{selectedPlane.heightPx*2/3}}"/>
         </div>
     </div>
