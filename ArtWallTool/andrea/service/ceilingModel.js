@@ -41,10 +41,10 @@ function (app) {
                 type: 'bg',
                 color: '#aa0044',
                 art: {
-//                    repeat: true,
-//                    url: './images/wood.jpg'
-                    stretch: true,
-                    url: './images/C1/C/C2-C1-C.jpg'
+                    repeat: true,
+                    url: './images/ceiling/moroccan-tile-pattern_001.png'
+//                    stretch: true,
+ //                   url: './images/ceiling/moroccan-tile-pattern_001.png'
                 }
             };
 
@@ -85,7 +85,7 @@ function (app) {
                 type: 'm',
                 height: 500/2,
                 art: {
-                    url: './images/ceiling/6_inch_middle_green.png'
+                    url: './images/ceiling/moroccan-madallion_001.png'
                 }
             };
 
