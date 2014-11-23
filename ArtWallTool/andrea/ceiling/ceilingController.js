@@ -24,7 +24,7 @@ function (app) {
                 top: 200/2,
                 height: 500/2,
                 art: {
-                    url: './images/ceiling/6_inch_middle_green.png'
+                    url: './images/ceiling/moroccan-floating-art.png'
                 }
             };
 
