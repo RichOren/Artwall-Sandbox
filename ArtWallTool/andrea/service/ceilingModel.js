@@ -96,7 +96,7 @@ function (app) {
                     top: 250/2,
                     height: 500/2,
                     art: {
-                        url: './images/ceiling/6_inch_middle_green.png'
+                        url: './images/ceiling/moroccan-floating-art.png'
                     }
                 },
                 {
@@ -105,7 +105,7 @@ function (app) {
                     top: 250/2,
                     height: 500/2,
                     art: {
-                        url: './images/ceiling/6_inch_middle_green.png'
+                        url: './images/ceiling/moroccan-floating-art.png'
                     }
                 }
             ];
