@@ -15,6 +15,7 @@ define([
                 open: open
             };
 
+            var doc = $document[0].documentElement;
             var menuElement;
             var menuRect = {
                 left:0,
@@ -22,27 +23,26 @@ define([
                 width:0,
                 height:0
             };
-            var cancelUp;
-            var cancelClick;
 
-            init();
             return svc;
 
-            function init(){
-                var doc = $document[0].documentElement;
-                doc.addEventListener('keydown', onBeforeKeyDown, true);
-                doc.addEventListener('mousedown', onBeforeMouseDown, true);
-                doc.addEventListener('mouseup', onBeforeMouseUp, true);
-                doc.addEventListener('click', onBeforeClick, true);
-                doc.addEventListener('click', onClick);
+            function close(doApply) {
+                if(menuElement) {
+                    menuElement.removeClass('open');
+                    menuElement = null;
+                    capture(false);
+                }
+                if(doApply){
+                    $rootScope.$apply();
+                }
             }
 
             function open(event, menuElementParam) {
-                close();
+                close(false);
                 menuElement = menuElementParam;
                 menuElement.addClass('open');
 
-                var doc = $document[0].documentElement;
+                //var doc = $document[0].documentElement;
                 var docLeft = (window.pageXOffset || doc.scrollLeft) - (doc.clientLeft || 0),
                     docTop = (window.pageYOffset || doc.scrollTop) - (doc.clientTop || 0),
                     elementWidth = menuElement[0].scrollWidth,
@@ -71,12 +71,19 @@ define([
                 menuRect.height = elementHeight;
 
                 $rootScope.$apply();
+
+                capture(true);
+                cancelNextDocClick();
             }
 
-            function close() {
-                if(menuElement) {
-                    menuElement.removeClass('open');
-                    menuElement = null;
+            function capture(isCapture){
+                if( isCapture) {
+                    doc.addEventListener('keydown', onDocBeforeKeyDown, true);
+                    doc.addEventListener('mousedown', onDocBeforeMouseDown, true);
+                }
+                else {
+                    doc.removeEventListener('keydown', onDocBeforeKeyDown, true);
+                    doc.removeEventListener('mousedown', onDocBeforeMouseDown, true);
                 }
             }
 
@@ -87,60 +94,65 @@ define([
                     event.pageY > menuRect.top &&
                     event.pageY <= (menuRect.top + menuRect.height)
                 );
-                console.log('isPointerOnMenu', hit, menuRect, event.pageX, event.pageY);
+//                console.log('isPointerOnMenu', hit, menuRect, event.pageX, event.pageY);
                 return hit;
             }
 
-            function onBeforeKeyDown(event) {
-                if (menuElement && event.keyCode === 27) {
+            function onDocBeforeKeyDown(event) {
+                if (!menuElement) return;
+                if (event.keyCode === 27) {
                     event.preventDefault();
                     event.stopPropagation();
-                    close();
-                    $rootScope.$apply();
+                    close(true);
                 }
             }
-            function onBeforeMouseDown(event) {
-                if (menuElement && !isPointerOnMenu(event)) {
-                    console.log('onBeforeMouseDown');
+            function onDocBeforeMouseDown(event) {
+                if (!menuElement) return;
+                console.log('onDocBeforeMouseDown');
+                if (isPointerOnMenu(event)) {
+                    //close menu after item is clicked
+                    doc.addEventListener('click', onDocClick);
+                }
+                else{
+                    //down outside menu
                     event.preventDefault();
                     event.stopPropagation();
-                    cancelUp = true;
-                    cancelClick = true;
-                    close();
-                    $rootScope.$apply();
+                    doc.addEventListener('mouseup', onDocBeforeMouseUp, true);
+                    cancelNextDocClick();
+                    close(true);
                 }
             }
-            function onBeforeMouseUp(event) {
-                if (cancelUp) {
-                    console.log('onBeforeMouseUp');
-                    cancelUp = false;
-                    event.preventDefault();
-                    event.stopPropagation();
-                }
 
-            }
-            function onBeforeClick(event) {
-                if (cancelClick) {
-                    cancelClick = false;
-                    event.preventDefault();
-                    event.stopPropagation();
+            function onDocClick(event) {
+                doc.removeEventListener('click', onDocClick);
+                if (isPointerOnMenu(event)) {
+                    close(true);
                 }
             }
-            function onClick(event) {
-                if (menuElement && isPointerOnMenu(event)) {
-                    event.preventDefault();
-                    event.stopPropagation();
-                    close();
-                    $rootScope.$apply();
-                }
+
+            function onDocBeforeMouseUp(event) {
+                doc.removeEventListener('mouseup', onDocBeforeMouseUp, true);
+                event.preventDefault();
+                event.stopPropagation();
+            }
+
+
+            function cancelNextDocClick(){
+                doc.addEventListener('click', onDocBeforeClick, true);
+            }
+            function onDocBeforeClick(event) {
+                doc.removeEventListener('click', onDocBeforeClick, true);
+                console.log('cancellingDocClick');
+                event.preventDefault();
+                event.stopPropagation();
             }
 
         }
     ]);
 
     app.directive('popupMenu', [
-        '$document', 'popupMenuService',
-        function($document, popupMenuService) {
+        'popupMenuService', 'mouseService',
+        function(popupMenuService, mouseService) {
 
             return {
                 restrict: 'A',
@@ -149,64 +161,19 @@ define([
 
             function link($scope, $element, $attrs, ctrl, transcludeFn) {
 
-                var downId = 0;
                 var downEvent = null;
 
-                function openMenu(event) {
-                    var menuElement = angular.element(document.getElementById($attrs.popupMenu));
-                    //var element = event.target;
-                    popupMenuService.open(event, menuElement);
-                }
-
-                function clearDownId() {
-                    if(downId) {
-                        window.clearTimeout(downId);
-                        downId = 0;
-                    }
-                }
-
-//                $element.on('contextmenu', function(event) {
-//                    event.preventDefault();
-//                    event.stopPropagation();
-//                    clearDownId();
-//                    openMenu(event);
-//                });
-                $element.on('contextmenu', function(event) {
-                    clearDownId();
-                });
-
                 $element.on('mousedown', function(event) {
-                    console.log('mousedown');
-                    clearDownId();
-                    downId = window.setTimeout(onHoldDown, 500);
-                    downEvent = event;
+                    if( event.button == 0 ) {
+                        downEvent = event;
+                        mouseService.trackLongPress($element, event, onLongPressCallback);
+                    }
                 });
 
-                function onHoldDown(event) {
-                    if(downId) {
-                        downId = 0;
-                        openMenu(downEvent);
-                    }
-                    downEvent = null;
+                function onLongPressCallback() {
+                    var menuElement = angular.element(document.getElementById($attrs.popupMenu));
+                    popupMenuService.open(downEvent, menuElement);
                 }
-
-                $element.on('mouseleave', function(event) {
-                    clearDownId();
-                });
-
-                $element.on('mouseup', function(event) {
-                    clearDownId();
-                });
-
-                $element.on('mousemove', function(event) {
-                    if(downId) {
-                        var offset = 10;
-                        if( Math.abs(downEvent.pageX - event.pageX) > offset ||
-                            Math.abs(downEvent.pageY - event.pageY) > offset ) {
-                            clearDownId();
-                        }
-                    }
-                });
 
             }
 

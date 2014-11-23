@@ -8,8 +8,8 @@ define([
     'use strict';
 
     app.directive('artFloat', [
-        'selectService','$rootScope',
-        function(selectService, $rootScope) {
+        '$rootScope', 'selectService', 'mouseService',
+        function($rootScope, selectService, mouseService) {
 
             return {
                 restrict: 'E',
@@ -84,71 +84,28 @@ define([
                 };
 
 
-                function logMouseEvent(event){
-                    console.log(event.type, event.clientX, event.clientY);
-                }
-
-                var threshold = 4;
-                var downX = NaN;
-                var downY = NaN;
                 var downLeft = NaN;
                 var downTop = NaN;
-                var isMoving = false;
-
-                function stopTracking() {
-                    downX = NaN;
-                    downY = NaN;
-                    isMoving = false;
-                }
 
                 $element.on('mousedown', function(event) {
-//                    logMouseEvent(event);
-                    isMoving = false;
-                    downX = event.clientX;
-                    downY = event.clientY;
-                    downLeft = $scope.item.left;
-                    downTop = $scope.item.top;
-                    //wait for threshold mouse to initiate element move
+                    if( event.button == 0 ) {
+                        downLeft = $scope.item.left;
+                        downTop = $scope.item.top;
+                        mouseService.trackMove($element, event, onMoveCallBack);
 
-                    mouseCapture();
-
-                    $scope.select();
-                    $scope.$apply();
-                    bringToFront();
+                        $scope.select();
+                        $scope.$apply();
+                        bringToFront();
+                    }
                 });
 
-                function onDocMouseMove(event) {
-//                    logMouseEvent(event);
-                    if(!isMoving) {
-                        if (Math.abs(downX - event.clientX) > threshold || Math.abs(downX - event.clientX) > threshold) {
-                            isMoving = true;
-                        }
-                    }
-                    if(isMoving) {
-                        event.stopImmediatePropagation();
-                        var x = downLeft + (event.clientX - downX) / ($rootScope.scale/100);
-                        var y = downTop + (event.clientY - downY) / ($rootScope.scale/100);
+                function onMoveCallBack(distance) {
+                    if( distance ) {
+                        var x = downLeft + distance.x / ($rootScope.scale/100);
+                        var y = downTop + distance.y / ($rootScope.scale/100);
                         moveTo(x, y);
                         $scope.$apply();
                     }
-                }
-
-                function onDocMouseUp(event) {
-//                    logMouseEvent(event);
-                    event.stopImmediatePropagation();
-                    mouseRelease();
-                    stopTracking();
-                }
-
-
-                function mouseCapture() {
-                    document.addEventListener('mousemove', onDocMouseMove, true);
-                    document.addEventListener('mouseup', onDocMouseUp, true);
-                }
-
-                function mouseRelease() {
-                    document.removeEventListener('mousemove', onDocMouseMove, true);
-                    document.removeEventListener('mouseup', onDocMouseUp, true);
                 }
 
                 function moveTo(x, y) {
