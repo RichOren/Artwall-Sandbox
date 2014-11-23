@@ -34,7 +34,11 @@ function (app) {
             console.log('init ceilingModel');
 //            ceiling.widthPx = 5000/2;
 //            ceiling.heightPx = 3500/2;
-            ceiling.widthPx = 5000 /2;
+
+            ceiling.widthPx = 3800/2;
+            ceiling.heightPx = 1760/2;
+
+            ceiling.widthPx = 5000/2;
             ceiling.heightPx = 5000/2;
 
             ceiling.background = {
@@ -44,7 +48,7 @@ function (app) {
                     repeat: true,
                     url: './images/ceiling/moroccan-tile-pattern_001.png'
 //                    stretch: true,
- //                   url: './images/ceiling/moroccan-tile-pattern_001.png'
+//                    url: './images/C1/C/C2-C1-C.jpg'
                 }
             };
 

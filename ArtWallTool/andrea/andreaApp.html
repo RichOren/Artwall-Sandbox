@@ -31,6 +31,7 @@
     >
         <div style="text-align: center">
             {{mainCtrl.formatType()}} Size: {{format.size(mm(selectedItem.width))}} x {{format.size(mm(selectedItem.height))}}
+            (max: {{format.size(mm(mainCtrl.getSelectedItemMaxHeightPx()))}})
             <span class="pull-right">
                 <button>X</button>
             </span>
@@ -39,7 +40,7 @@
             <input
                 type="range"
                 ng-model="selectedItem.height" type-int
-                min="100" max="{{selectedPlane.heightPx*2/3}}"/>
+                min="100" max="{{mainCtrl.getSelectedItemMaxHeightPx()}}"/>
         </div>
     </div>
 
@@ -51,10 +52,16 @@
                     Specifications
                 </a>
             </li>
-            <li>
+            <li ng-show="selectedItem.type=='a'">
                 <a class="pointer" role="menuitem" tabindex="1"
                    ng-click="mainCtrl.edit()">
                     Edit
+                </a>
+            </li>
+            <li ng-show="selectedItem.type=='f'">
+                <a class="pointer" role="menuitem" tabindex="1"
+                   ng-click="mainCtrl.duplicate()">
+                    Duplicate
                 </a>
             </li>
             <li>

@@ -67,6 +67,7 @@ function (app) {
             };
 
             wall.mainItem = {
+                type: 'a',
                 fill:false,
                 center: true,
                 left: 500,

@@ -8,15 +8,15 @@ function (app) {
     'use strict';
 
     app.controller('andreaMainController', [
-    '$rootScope', '$scope', '$location', 'selectService',
-    function($rootScope, $scope, $location, selectService) {
+    '$rootScope', '$scope', '$location', 'selectService', 'ceilingModel',
+    function($rootScope, $scope, $location, selectService, ceilingModel) {
+
+        var lowResReductionRate = 40;
+        $rootScope.minPrintDPI = 72;
+        $rootScope.scale = 24;
 
         $rootScope.format = createFormat();
 
-//        $rootScope.scale = 50;
-        $rootScope.scale = 24;
-
-        $rootScope.minPrintDPI = 72;
 
         $rootScope.px = function(mm) {
             return mm / 2;
@@ -27,7 +27,7 @@ function (app) {
         };
 
         $rootScope.maxLenghtMM = function(lowResArtNaturalLength){
-            return lowResArtNaturalLength * 10 / $rootScope.minPrintDPI * 25.4;
+            return lowResArtNaturalLength * lowResReductionRate / $rootScope.minPrintDPI * 25.4;
         };
 
         $rootScope.maxArtSizePx = function(art){
@@ -43,16 +43,16 @@ function (app) {
             return result;
         };
 
-
-
         var mainCtrl = {
             showSpec: showSpec,
             edit: edit,
+            duplicate: duplicate,
             remove: remove,
 
             item: null, //for spec dialog
             formatType: formatType,
-            isItemResizable: isItemResizable
+            isItemResizable: isItemResizable,
+            getSelectedItemMaxHeightPx: getSelectedItemMaxHeightPx
         };
         return mainCtrl;
 
@@ -70,6 +70,15 @@ function (app) {
                 $location.url("/editor");
             }
         }
+        function duplicate() {
+            var item = selectService.getSelectedItem();
+            if( item && item.art && item.type == 'f' ) {
+                var clone = angular.copy(item);
+                clone.top += clone.height;
+                ceilingModel.floatItems.push(clone);
+                selectService.select(clone);
+            }
+        }
 
         function remove() {
             var item = selectService.getSelectedItem();
@@ -78,6 +87,7 @@ function (app) {
                     var floatItems = $rootScope.selectedPlane.floatItems;
                     var index = floatItems.indexOf(item);
                     floatItems.splice(index, 1);
+                    selectService.select(null);
                 }
                 else if( item.art ) {
                     item.art.url = '';
@@ -101,7 +111,8 @@ function (app) {
 
                     case 'tt': return 'Top Trim';
                     case 'tc': return 'Corner Trim';
-                    case 'tb': return 'Botom Trim';
+                    case 'tb': return 'Bottom Trim';
+                    case 'a': return 'Main Art';
                 }
             }
             return 'Unknown';
@@ -117,6 +128,21 @@ function (app) {
                 }
             }
             return false;
+        }
+
+        function getSelectedItemMaxHeightPx() {
+            var result = 100;
+            var item = selectService.getSelectedItem();
+            if( item ) {
+                var maxArtSizePx = $rootScope.maxArtSizePx(item.art);
+                if(maxArtSizePx) {
+                    result = maxArtSizePx.height;
+                }
+            }
+            if( $rootScope.selectedPlane) {
+                result = Math.min(result, $rootScope.selectedPlane.heightPx);
+            }
+            return result;
         }
 
     }]);
