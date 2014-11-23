@@ -108,7 +108,7 @@ define([
             }
             function onDocBeforeMouseDown(event) {
                 if (!menuElement) return;
-                console.log('onDocBeforeMouseDown');
+//                console.log('onDocBeforeMouseDown');
                 if (isPointerOnMenu(event)) {
                     //close menu after item is clicked
                     doc.addEventListener('click', onDocClick);
@@ -142,7 +142,7 @@ define([
             }
             function onDocBeforeClick(event) {
                 doc.removeEventListener('click', onDocBeforeClick, true);
-                console.log('cancellingDocClick');
+//                console.log('cancellingDocClick');
                 event.preventDefault();
                 event.stopPropagation();
             }

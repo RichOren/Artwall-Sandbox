@@ -89,25 +89,27 @@ function (app) {
                 }
             };
 
+            ceiling.floatItems = [
+                {
+                    type: 'f',
+                    left: 250/2,
+                    top: 250/2,
+                    height: 500/2,
+                    art: {
+                        url: './images/ceiling/6_inch_middle_green.png'
+                    }
+                },
+                {
+                    type: 'f',
+                    left: (ceiling.widthPx - 1000/2),
+                    top: 250/2,
+                    height: 500/2,
+                    art: {
+                        url: './images/ceiling/6_inch_middle_green.png'
+                    }
+                }
+            ];
 
-
-
-//
-//            ceiling.mainItem = {
-//                fill:false,
-//                center: true,
-//                left: 500,
-//                top: 250,
-//                width: 1200,
-//                height: 700,
-//                art: {
-//                    url: './images/A023-copy.jpg',
-//                    zoom: undefined,
-//                    clipX1: 7,
-//                    clipY1: 7,
-//                    clipX2: 93
-//                }
-//            };
 
         }
 

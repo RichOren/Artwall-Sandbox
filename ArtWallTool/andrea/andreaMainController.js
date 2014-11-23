@@ -38,7 +38,8 @@ function (app) {
                     height: $rootScope.px($rootScope.maxLenghtMM(art.naturalHeight))
                 }
             }
-            console.log('maxArtSizePx', result);
+            //todo: gets called a lot
+            //console.log('maxArtSizePx', result);
             return result;
         };
 
