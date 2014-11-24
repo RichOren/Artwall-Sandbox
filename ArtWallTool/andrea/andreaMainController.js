@@ -11,7 +11,8 @@ function (app) {
     '$rootScope', '$scope', '$location', 'selectService', 'ceilingModel',
     function($rootScope, $scope, $location, selectService, ceilingModel) {
 
-        var lowResReductionFactor = 12;
+        //var lowResReductionFactor = 12;
+        var lowResReductionPercent = 8.3333333;
         $rootScope.minPrintDPI = 72;
         $rootScope.scale = 24;
 
@@ -27,7 +28,8 @@ function (app) {
         };
 
         $rootScope.maxLenghtMM = function(lowResArtNaturalLength){
-            return lowResArtNaturalLength * lowResReductionFactor / $rootScope.minPrintDPI * 25.4;
+            //return lowResArtNaturalLength * lowResReductionFactor / $rootScope.minPrintDPI * 25.4;
+            return lowResArtNaturalLength / lowResReductionPercent * 100 / $rootScope.minPrintDPI * 25.4;
         };
 
         $rootScope.maxArtSizePx = function(art){
