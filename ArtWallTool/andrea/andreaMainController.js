@@ -11,7 +11,7 @@ function (app) {
     '$rootScope', '$scope', '$location', 'selectService', 'ceilingModel',
     function($rootScope, $scope, $location, selectService, ceilingModel) {
 
-        var lowResReductionRate = 40;
+        var lowResReductionRate = 20;
         $rootScope.minPrintDPI = 72;
         $rootScope.scale = 24;
 
