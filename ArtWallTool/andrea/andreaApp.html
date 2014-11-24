@@ -33,7 +33,8 @@
             {{mainCtrl.formatType()}} Size: {{format.size(mm(selectedItem.width))}} x {{format.size(mm(selectedItem.height))}}
             (max: {{format.size(mm(mainCtrl.getSelectedItemMaxHeightPx()))}})
             <span class="pull-right">
-                <button>X</button>
+                <button ng-click="mainCtrl.closeSizePanel()"
+                        >X</button>
             </span>
         </div>
         <div ng-show="selectedItem">
@@ -54,8 +55,14 @@
             </li>
             <li ng-show="selectedItem.type=='a'">
                 <a class="pointer" role="menuitem" tabindex="1"
-                   ng-click="mainCtrl.edit()">
-                    Edit
+                   ng-click="mainCtrl.resizeArt()">
+                    Resize
+                </a>
+            </li>
+            <li ng-show="selectedItem.type=='a'">
+                <a class="pointer" role="menuitem" tabindex="1"
+                   ng-click="mainCtrl.cropAndZoom()">
+                    Crop &amp; Zoom
                 </a>
             </li>
             <li ng-show="selectedItem.type=='f'">

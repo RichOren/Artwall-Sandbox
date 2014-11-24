@@ -11,7 +11,7 @@ function (app) {
     '$rootScope', '$scope', '$location', 'selectService', 'ceilingModel',
     function($rootScope, $scope, $location, selectService, ceilingModel) {
 
-        var lowResReductionRate = 20;
+        var lowResReductionFactor = 12;
         $rootScope.minPrintDPI = 72;
         $rootScope.scale = 24;
 
@@ -27,7 +27,7 @@ function (app) {
         };
 
         $rootScope.maxLenghtMM = function(lowResArtNaturalLength){
-            return lowResArtNaturalLength * lowResReductionRate / $rootScope.minPrintDPI * 25.4;
+            return lowResArtNaturalLength * lowResReductionFactor / $rootScope.minPrintDPI * 25.4;
         };
 
         $rootScope.maxArtSizePx = function(art){
@@ -45,14 +45,16 @@ function (app) {
 
         var mainCtrl = {
             showSpec: showSpec,
-            edit: edit,
+            resizeArt: resizeArt,
+            cropAndZoom: cropAndZoom,
             duplicate: duplicate,
             remove: remove,
 
             item: null, //for spec dialog
             formatType: formatType,
             isItemResizable: isItemResizable,
-            getSelectedItemMaxHeightPx: getSelectedItemMaxHeightPx
+            getSelectedItemMaxHeightPx: getSelectedItemMaxHeightPx,
+            closeSizePanel: closeSizePanel
         };
         return mainCtrl;
 
@@ -64,12 +66,20 @@ function (app) {
             }
         }
 
-        function edit() {
+        function resizeArt() {
+            var item = selectService.getSelectedItem();
+            if( item && item.art ) {
+                //$location.url("/editor");
+            }
+        }
+
+        function cropAndZoom() {
             var item = selectService.getSelectedItem();
             if( item && item.art ) {
                 $location.url("/editor");
             }
         }
+
         function duplicate() {
             var item = selectService.getSelectedItem();
             if( item && item.art && item.type == 'f' ) {
@@ -124,7 +134,7 @@ function (app) {
                 switch (item.type) {
                     case 'm':
                     case 'f':
-                        return 'Medallion';
+                        return true;
                 }
             }
             return false;
@@ -143,6 +153,10 @@ function (app) {
                 result = Math.min(result, $rootScope.selectedPlane.heightPx);
             }
             return result;
+        }
+
+        function closeSizePanel(){
+            selectService.select(null);
         }
 
     }]);

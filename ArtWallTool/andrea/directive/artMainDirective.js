@@ -7,7 +7,7 @@ define([
 ], function (app) {
     'use strict';
 
-    app.directive('art2', [
+    app.directive('artMain', [
         'selectService',
         function(selectService) {
 
@@ -17,7 +17,7 @@ define([
                 plane: '=',
                 item: '='
             },
-            templateUrl: "andrea/directive/art2Template.html",
+            templateUrl: "andrea/directive/artMainTemplate.html",
             link: link
         };
 
@@ -30,7 +30,7 @@ define([
                 if (url){
                     var img = new Image();
                     img.onload = function(){
-                        console.log('item size:', img.width + 'x' + img.height, img.naturalWidth + 'x' + img.naturalHeight);
+                        console.log('artMain size:', img.width + 'x' + img.height, img.naturalWidth + 'x' + img.naturalHeight);
                         $scope.item.art.naturalWidth = img.width;
                         $scope.item.art.naturalHeight = img.height;
                         $scope.item.art.formFactor = $scope.item.art.naturalWidth / $scope.item.art.naturalHeight;

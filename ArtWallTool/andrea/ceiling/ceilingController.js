@@ -27,38 +27,10 @@ function (app) {
                     url: './images/ceiling/moroccan-floating-art.png'
                 }
             };
-
             ceilingModel.floatItems.push(item);
 
             selectService.select(item);
         };
-
-//        init();
-
-        //return ctrl;
-
-//        function init() {
-//
-//
-//            ctrl.floatingArts = [
-//                {
-//                    width: 20,
-//                    height: 50,
-//                    url: '',
-//                    left: 70,
-//                    top: 50
-//                },
-//                {
-//                    width: 20,
-//                    height: 50,
-//                    url: '',
-//                    left: 230,
-//                    top: 90
-//                }
-//            ];
-//
-//        }
-
 
     }]);
 

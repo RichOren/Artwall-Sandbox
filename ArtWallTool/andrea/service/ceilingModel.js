@@ -32,14 +32,14 @@ function (app) {
 
         function init() {
             console.log('init ceilingModel');
-//            ceiling.widthPx = 5000/2;
-//            ceiling.heightPx = 3500/2;
-
-            ceiling.widthPx = 3800/2;
-            ceiling.heightPx = 1760/2;
-
             ceiling.widthPx = 5000/2;
-            ceiling.heightPx = 5000/2;
+            ceiling.heightPx = 3500/2;
+
+//            ceiling.widthPx = 3800/2;
+//            ceiling.heightPx = 1760/2;
+
+//            ceiling.widthPx = 5000/2;
+//            ceiling.heightPx = 5000/2;
 
             ceiling.background = {
                 type: 'bg',

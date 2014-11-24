@@ -30,7 +30,7 @@ define([
                     if (url){
                         var img = new Image();
                         img.onload = function(){
-                            console.log('artMedallion size:', img.width + 'x' + img.height, img.naturalWidth + 'x' + img.naturalHeight);
+                            console.log('artFloat size:', img.width + 'x' + img.height, img.naturalWidth + 'x' + img.naturalHeight);
                             $scope.item.art.naturalWidth = img.width;
                             $scope.item.art.naturalHeight = img.height;
 //                        $scope.item.width = img.width;
