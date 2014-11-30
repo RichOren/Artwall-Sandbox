@@ -11,8 +11,7 @@ function (app) {
     '$rootScope', '$scope', '$location', 'selectService', 'ceilingModel',
     function($rootScope, $scope, $location, selectService, ceilingModel) {
 
-        //var lowResReductionFactor = 12;
-        var lowResReductionPercent = 8.3333333;
+        $rootScope.lowResReductionPercent = 8.3333333;
         $rootScope.minPrintDPI = 72;
         $rootScope.scale = 24;
 
@@ -28,8 +27,7 @@ function (app) {
         };
 
         $rootScope.maxLenghtMM = function(lowResArtNaturalLength){
-            //return lowResArtNaturalLength * lowResReductionFactor / $rootScope.minPrintDPI * 25.4;
-            return lowResArtNaturalLength / lowResReductionPercent * 100 / $rootScope.minPrintDPI * 25.4;
+            return lowResArtNaturalLength / $rootScope.lowResReductionPercent * 100 / $rootScope.minPrintDPI * 25.4;
         };
 
         $rootScope.maxArtSizePx = function(art){
@@ -46,6 +44,9 @@ function (app) {
         };
 
         var mainCtrl = {
+            cropItem: null, //for crop panel
+            closeCropPanel: closeCropPanel,
+
             showSpec: showSpec,
             resizeArt: resizeArt,
             cropAndZoom: cropAndZoom,
@@ -62,9 +63,9 @@ function (app) {
         };
         return mainCtrl;
 
+
         function showSpec() {
             mainCtrl.item = selectService.getSelectedItem();
-            console.log('showSpec', mainCtrl.item);
             if( mainCtrl.item) {
                 $scope.specModal.open();
             }
@@ -73,15 +74,22 @@ function (app) {
         function resizeArt() {
             var item = selectService.getSelectedItem();
             if( item && item.art ) {
-                //$location.url("/editor");
             }
         }
 
         function cropAndZoom() {
             var item = selectService.getSelectedItem();
             if( item && item.art ) {
-                $location.url("/editor");
+                var art = item.art;
+                if( art.clipX1 === undefined) art.clipX1 = 0;
+                if( art.clipY1 === undefined) art.clipY1 = 0;
+                if( art.clipX2 === undefined) art.clipX2 = 100;
+                mainCtrl.cropItem = item;
             }
+        }
+
+        function closeCropPanel() {
+            mainCtrl.cropItem = null;
         }
 
         function duplicate() {

@@ -34,7 +34,7 @@ define([
                         console.log('artBackground size:', img.width + 'x' + img.height, img.naturalWidth + 'x' + img.naturalHeight);
                         $scope.item.art.naturalWidth = img.width;
                         $scope.item.art.naturalHeight = img.height;
-                        $scope.item.art.formFactor = $scope.item.art.naturalWidth / $scope.item.art.naturalHeight;
+                        $scope.item.art.formFactor = img.width / img.height;
                         $scope.$apply();
                     };
                     img.src = url;

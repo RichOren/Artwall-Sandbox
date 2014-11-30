@@ -96,7 +96,7 @@ define([
             function getArtFormFactor() {
                 var formFactor = $scope.item.art ? $scope.item.art.formFactor : 0;
                 if( !formFactor ) {
-                    console.log('!!! using default form factor');
+                    //console.log('!!! using default form factor');
                     formFactor = 4/3;
                 }
                 return formFactor;

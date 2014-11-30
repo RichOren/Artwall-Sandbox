@@ -2,21 +2,22 @@
  * Created by awyss on 7/23/14.
  */
 define([
-    'app'
+    'app',
+    '../../core/service/debounceService'
 
 ], function (app) {
     'use strict';
 
     app.directive('cropper', [
-    '$window', 'debounce',
-    function($window, debounce) {
+    '$rootScope', '$window', 'debounce',
+    function($rootScope, $window, debounce) {
 
         return {
             restrict: 'E',
             scope: {
                 item: '='
             },
-            templateUrl: "andrea/editor/cropperTemplate.html",
+            templateUrl: "andrea/directive/cropperTemplate.html",
             link: link
         };
 
@@ -25,12 +26,17 @@ define([
         }
 
         function createController($scope, $element) {
+            //$element.addClass('absolute');
 
             var ctrl = {
                 margin: 40,
+                top: 0,
+                left: 0,
+                bottom: 0,
                 width: 0,
                 height: 0,
                 dottedWidth: 100,
+                dottedHeight: 100,
                 naturalWidth: 400,
                 naturalHeight: 250,
                 getImagePosition: getImagePosition,
@@ -63,10 +69,25 @@ define([
                 }
                 function afterResize() {
                     if(trackElementSize) {
-                        ctrl.width = $element.width();
-                        ctrl.dottedWidth = ctrl.width - 2*ctrl.margin;
-                        ctrl.dottedHeight = ctrl.dottedWidth / getFrameAspectRatio();
-                        ctrl.height = ctrl.dottedHeight + 2*ctrl.margin;
+                        var frameAscpectRatio = getFrameAspectRatio();
+                        var elementAspectRation = getElementAspectRation();
+
+                        if( frameAscpectRatio > 1) {
+                            ctrl.width = $element.width();
+                            ctrl.dottedWidth = ctrl.width - 2*ctrl.margin;
+                            ctrl.dottedHeight = ctrl.dottedWidth / frameAscpectRatio;
+                            ctrl.height = ctrl.dottedHeight + 2*ctrl.margin;
+                            ctrl.left = 0;
+                            ctrl.top = 0.5*($element.height() - ctrl.height);
+                        }
+                        else {
+                            ctrl.height = $element.height();
+                            ctrl.dottedHeight = ctrl.height - 2*ctrl.margin;
+                            ctrl.dottedWidth = ctrl.dottedHeight * frameAscpectRatio;
+                            ctrl.width = ctrl.dottedWidth + 2*ctrl.margin;
+                            ctrl.left = 0.5*($element.width() - ctrl.width);
+                            ctrl.top = 0;
+                        }
                         $scope.$apply();
                     }
                 }
@@ -77,16 +98,17 @@ define([
                     if(url){
                         var img = new Image();
                         img.onload = function(){
-                            console.log('img.naturalSize:', img.width + 'x' + img.height, img.naturalWidth + 'x' + img.naturalHeight);
+                            console.log('crop naturalSize:', img.width + 'x' + img.height, img.naturalWidth + 'x' + img.naturalHeight);
                             var art = $scope.item.art;
-                            art.naturalWidth = img.width ? img.width : 400;
-                            art.naturalHeight = img.height ? img.height : 300;
-                            art.formFactor = art.naturalWidth / art.naturalHeight;
+                            art.naturalWidth = img.width;
+                            art.naturalHeight = img.height;
+                            art.formFactor = img.width / img.height;
                             calcMaxZoomFactor();
                             calcAndUpdateZoom();
                             $scope.$apply();
                         };
                         img.src = url;
+                        onResize();
                     }
                 });
 
@@ -104,7 +126,7 @@ define([
                     formFactor = $scope.item.art.formFactor;
                 }
                 if( !formFactor ) {
-                    console.log('!!! using default form factor');
+                    //console.log('!!! using default form factor');
                     formFactor = 4/3;
                 }
                 return formFactor;
@@ -121,26 +143,24 @@ define([
                     }
                     return 100 / diff;
                 }
-                return 100;
+                return 1;
             }
 
             function calcMaxZoomFactor() {
-                var minPrintDPI = 100; //min print DPI needed
-                var sampleToHighRes = 50; //linear factor from working samples to high res images
-                var highResArtWidth = $scope.item.art.naturalWidth * sampleToHighRes;
-                var highResArtHeight = $scope.item.art.naturalHeight * sampleToHighRes;
+                var highResArtWidth = $scope.item.art.naturalWidth / $rootScope.lowResReductionPercent * 100;
+                var highResArtHeight = $scope.item.art.naturalHeight / $rootScope.lowResReductionPercent * 100;
 
-                var frameWidthMM = $scope.item.width;
-                var frameHeightMM = $scope.item.height;
+                var frameWidthMM = $rootScope.mm($scope.item.width);
+                var frameHeightMM = $rootScope.mm($scope.item.height);
 
-                var minPrintPixelsWidth = frameWidthMM / 25.4 * minPrintDPI;
-                var minPrintPixelsHeight = frameHeightMM / 25.4 * minPrintDPI;
+                var minPrintPixelsWidth = frameWidthMM / 25.4 * $rootScope.minPrintDPI;
+                var minPrintPixelsHeight = frameHeightMM / 25.4 * $rootScope.minPrintDPI;
 
                 var maxFactorWidth = highResArtWidth / minPrintPixelsWidth;
                 var maxFactorHeight = highResArtHeight / minPrintPixelsHeight;
 
                 var maxFactor = Math.min(maxFactorWidth, maxFactorHeight);
-                console.log('MaxZoomFactor', maxFactor);
+                console.log('cropper MaxZoomFactor', maxFactor);
                 if( maxFactor < 1) {
                     console.log('Surface is too large');
                 }
@@ -160,6 +180,14 @@ define([
             function getFrameAspectRatio() {
                 var w = $scope.item ? $scope.item.width : 0;
                 var h = $scope.item ? $scope.item.height : 0;
+                if( !w ) w = 100;
+                if( !h ) h = 100;
+                return w/h;
+            }
+
+            function getElementAspectRation() {
+                var w = $element.width();
+                var h = $element.height();
                 if( !w ) w = 100;
                 if( !h ) h = 100;
                 return w/h;
@@ -208,15 +236,15 @@ define([
 
                 w = getCurrImageWidth();
                 var h = w / getArtFormFactor();
-                var deltaP = deltaY * 100 / h;
+                deltaP = deltaY * 100 / h;
 
                 var clipY1 = art.clipY1 - deltaP;
-                if( clipY1 < 0) {
-                    clipY1 = 0;
-                }
                 var maxClipY1 = (h - ctrl.dottedHeight) * 100 / h;
                 if( clipY1 > maxClipY1) {
                     clipY1 = maxClipY1;
+                }
+                if( clipY1 < 0) {
+                    clipY1 = 0;
                 }
                 art.clipY1 = clipY1;
             }
@@ -251,12 +279,12 @@ define([
                 var h = w / getArtFormFactor();
 
                 var clipY1 = art.clipY1 + deltaP;
-                if( clipY1 < 0) {
-                    clipY1 = 0;
-                }
                 var maxClipY1 = (h - ctrl.dottedHeight) * 100 / h;
                 if( clipY1 > maxClipY1) {
                     clipY1 = maxClipY1;
+                }
+                if( clipY1 < 0) {
+                    clipY1 = 0;
                 }
                 art.clipY1 = clipY1;
 
@@ -295,12 +323,12 @@ define([
                 var h = w / getArtFormFactor();
 
                 var clipY1 = art.clipY1 + deltaClip2;
-                if( clipY1 < 0) {
-                    clipY1 = 0;
-                }
                 var maxClipY1 = (h - ctrl.dottedHeight) * 100 / h;
                 if( clipY1 > maxClipY1) {
                     clipY1 = maxClipY1;
+                }
+                if( clipY1 < 0) {
+                    clipY1 = 0;
                 }
                 art.clipY1 = clipY1;
 

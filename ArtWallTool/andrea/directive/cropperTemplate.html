@@ -1,13 +1,16 @@
-<div style="overflow-x: hidden; overflow-y: hidden"
+<div
     ng-style="{
-    width: '100%',
+    top: ctrl.top + 'px',
+    left: ctrl.left + 'px',
+    width: ctrl.width + 'px',
     height: ctrl.height + 'px'
 }">
     <!-- Image -->
     <div ng-style="{
         position: 'absolute',
-        top: 0,
-        width: '100%',
+        top: ctrl.top + 'px',
+        left: ctrl.left + 'px',
+        width: ctrl.width + 'px',
         height: ctrl.height + 'px',
         'background-color': 'black',
         'background-image': 'url(\'' + item.art.url + '\')',
@@ -20,8 +23,9 @@
     <div ng-style="{
         position: 'absolute',
         top: 0,
-        width: '100%',
-        height: ctrl.margin + 'px',
+        left: 0,
+        right: 0,
+        height: ctrl.top + ctrl.margin + 'px',
         'background-color': 'black',
         opacity: .5
     }"></div>
@@ -29,8 +33,9 @@
     <div ng-style="{
         position: 'absolute',
         bottom: 0,
-        width: '100%',
-        height: ctrl.margin + 'px',
+        left: 0,
+        right: 0,
+        height: ctrl.top + ctrl.margin + 'px',
         'background-color': 'black',
         opacity: .5
     }"></div>
@@ -38,9 +43,9 @@
     <div ng-style="{
         position: 'absolute',
         left: 0,
-        width: ctrl.margin + 'px',
-        height: (ctrl.height - 2*ctrl.margin) + 'px',
-        top: ctrl.margin + 'px',
+        width: ctrl.left + ctrl.margin + 'px',
+        top: ctrl.top + ctrl.margin + 'px',
+        bottom: ctrl.top + ctrl.margin + 'px',
         'background-color': 'black',
         opacity: .5
     }"></div>
@@ -48,9 +53,9 @@
     <div ng-style="{
         position: 'absolute',
         right: 0,
-        width: ctrl.margin + 'px',
-        height: (ctrl.height - 2*ctrl.margin) + 'px',
-        top: ctrl.margin + 'px',
+        width: ctrl.left + ctrl.margin + 'px',
+        top: ctrl.top + ctrl.margin + 'px',
+        bottom: ctrl.top + ctrl.margin + 'px',
         'background-color': 'black',
         opacity: .5
     }"></div>
@@ -58,10 +63,10 @@
     <!-- Dotted Frame -->
     <div style="cursor: hand" ng-style="{
         position: 'absolute',
-        left: ctrl.margin-2 + 'px',
-        right: ctrl.margin-2 + 'px',
-        top: ctrl.margin-2 + 'px',
-        bottom: ctrl.margin-2 + 'px',
+        top: ctrl.top+ctrl.margin-2 + 'px',
+        left: ctrl.left+ctrl.margin-2 + 'px',
+        width: ctrl.dottedWidth+4 + 'px',
+        height: ctrl.dottedHeight+4 + 'px',
         'border': '2px dashed white'
     }"
     ></div>
@@ -69,8 +74,9 @@
     <!-- Mouse Tracking -->
     <div class="mouse-tracker" ng-style="{
         position: 'absolute',
-        top: 0,
-        width: '100%',
+        top: ctrl.top + 'px',
+        left: ctrl.left + 'px',
+        right: ctrl.left + 'px',
         height: ctrl.height + 'px'
     }"
          ng-mousedown="ctrl.onMouseDown($event)"
