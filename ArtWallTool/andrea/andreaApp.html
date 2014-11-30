@@ -23,6 +23,7 @@
     <div class="position-fixed"
             style="
             background-color: #CCCCCC;
+            opacity: .8;
             padding: 10px;
             bottom: 0px;
             left: 0px;
@@ -30,18 +31,67 @@
         ng-show="mainCtrl.isItemResizable(selectedItem)"
     >
         <div style="text-align: center">
-            {{mainCtrl.formatType()}} Size: {{format.size(mm(selectedItem.width))}} x {{format.size(mm(selectedItem.height))}}
-            (max: {{format.size(mm(mainCtrl.getSelectedItemMaxHeightPx()))}})
+            {{mainCtrl.formatType()}}: {{format.size(mm(selectedItem.width))}} x {{format.size(mm(selectedItem.height))}}
             <span class="pull-right">
                 <button ng-click="mainCtrl.closeSizePanel()"
                         >X</button>
             </span>
         </div>
-        <div ng-show="selectedItem">
+        <div>
+            <input
+                type="range"
+                ng-model="selectedItem.width" type-int
+                min="100" max="{{mainCtrl.getSelectedItemMaxWidthPx()}}"/>
+            <div>
+                Width
+                <span class="pull-right">
+                    {{format.size(mm(mainCtrl.getSelectedItemMaxWidthPx()))}}
+                </span>
+            </div>
+        </div>
+        <br/>
+        <div>
             <input
                 type="range"
                 ng-model="selectedItem.height" type-int
                 min="100" max="{{mainCtrl.getSelectedItemMaxHeightPx()}}"/>
+            <div>
+                Height
+                <span class="pull-right">
+                    {{format.size(mm(mainCtrl.getSelectedItemMaxHeightPx()))}}
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <div class="position-fixed"
+            style="
+            background-color: #CCCCCC;
+            opacity: .8;
+            padding: 10px;
+            bottom: 0px;
+            left: 0px;
+            right: 0px"
+        ng-show="mainCtrl.isHeightAdjustable(selectedItem)"
+    >
+        <div style="text-align: center">
+            {{mainCtrl.formatType()}}: {{format.size(mm(selectedItem.width))}} x {{format.size(mm(selectedItem.height))}}
+            <span class="pull-right">
+                <button ng-click="mainCtrl.closeSizePanel()"
+                        >X</button>
+            </span>
+        </div>
+        <div>
+            <input
+                    type="range"
+                    ng-model="selectedItem.height" type-int
+                    min="100" max="{{mainCtrl.getSelectedItemMaxHeightPx()}}"/>
+            <div>
+                Height
+                <span class="pull-right">
+                    {{format.size(mm(mainCtrl.getSelectedItemMaxHeightPx()))}}
+                </span>
+            </div>
         </div>
     </div>
 

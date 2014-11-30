@@ -70,8 +70,8 @@ function (app) {
                 type: 'a',
                 fill:false,
                 center: true,
-                left: 500,
-                top: 250,
+//                left: 500,
+//                top: 250,
                 width: 1200,
                 height: 700,
                 art: {

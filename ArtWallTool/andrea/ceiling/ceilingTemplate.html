@@ -19,7 +19,7 @@
     <button ng-click="addFloatItem()">Add Floating Art {{plane.floatItems.length}}</button>
 
     <div>
-        Ceiling - Width: {{format.size(mm(plane.widthPx))}} Height: {{format.size(mm(plane.heightPx))}}
+        Ceiling: {{format.size(mm(plane.widthPx))}} x {{format.size(mm(plane.heightPx))}}
         <span class="pull-right">
             <input type="checkbox" ng-model="format.useMetric"/>
         </span>

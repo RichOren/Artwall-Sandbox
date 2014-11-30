@@ -1,8 +1,8 @@
 <div class="origin0" style="background-color: gray"
      ng-style="{
+        width: getHitWidth() + 'px',
+        height: getHitHeight() + 'px',
         transform: 'translate3d(' + getLeft() + 'px, ' + getTop() + 'px, 0)',
-        width: getWidth() + 'px',
-        height: getHeight() + 'px',
         'background-image': 'url(\'' + item.art.url + '\')',
         'background-repeat': 'no-repeat',
         'background-position': getImagePosition(),

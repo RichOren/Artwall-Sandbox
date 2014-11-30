@@ -40,20 +40,39 @@ define([
                 }
             });
 
+//            $scope.getLeft = function() {
+//                return $scope.item.left;
+//            };
+//
+//            $scope.getTop = function() {
+//                return $scope.item.top;
+//            };
+
             $scope.getLeft = function() {
-                return $scope.item.left;
+                return ($scope.plane.widthPx - $scope.getHitWidth())/2;
             };
 
             $scope.getTop = function() {
-                return $scope.item.top;
+                return ($scope.plane.heightPx - $scope.getHitHeight())/2;
             };
+
+
 
             $scope.getWidth = function() {
                 return $scope.item.width;
             };
+            $scope.getHitWidth = function() {
+                var result = $scope.getWidth();
+                return (result > hitSize) ? result : hitSize;
+            };
+
 
             $scope.getHeight = function() {
                 return $scope.item.height;
+            };
+            $scope.getHitHeight = function() {
+                var result = $scope.getHeight();
+                return (result > hitSize) ? result : hitSize;
             };
 
             $scope.getImagePosition = function() {

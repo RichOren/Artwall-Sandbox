@@ -54,8 +54,10 @@ function (app) {
 
             item: null, //for spec dialog
             formatType: formatType,
+            isHeightAdjustable: isHeightAdjustable,
             isItemResizable: isItemResizable,
             getSelectedItemMaxHeightPx: getSelectedItemMaxHeightPx,
+            getSelectedItemMaxWidthPx: getSelectedItemMaxWidthPx,
             closeSizePanel: closeSizePanel
         };
         return mainCtrl;
@@ -103,6 +105,8 @@ function (app) {
                 }
                 else if( item.art ) {
                     item.art.url = '';
+                    delete item.art.naturalWidth;
+                    delete item.art.naturalHeight;
                     item.width = 0;
                     item.height = 0;
                 }
@@ -119,7 +123,7 @@ function (app) {
                     case 'br': return 'Border Center';
                     case 'bm': return 'Border Middle';
                     case 'm': return 'Medallion';
-                    case 'f': return 'Float';
+                    case 'f': return 'Float Art';
 
                     case 'tt': return 'Top Trim';
                     case 'tc': return 'Corner Trim';
@@ -130,7 +134,7 @@ function (app) {
             return 'Unknown';
         }
 
-        function isItemResizable() {
+        function isHeightAdjustable() {
             var item = selectService.getSelectedItem();
             if( item && item.type ) {
                 switch (item.type) {
@@ -142,17 +146,41 @@ function (app) {
             return false;
         }
 
+        function isItemResizable() {
+            var item = selectService.getSelectedItem();
+            if( item && item.type ) {
+                switch (item.type) {
+                    case 'a':
+                        return true;
+                }
+            }
+            return false;
+        }
+
         function getSelectedItemMaxHeightPx() {
-            var result = 100;
+            var result = $rootScope.selectedPlane
+                ? $rootScope.selectedPlane.heightPx
+                : 100;
             var item = selectService.getSelectedItem();
             if( item ) {
                 var maxArtSizePx = $rootScope.maxArtSizePx(item.art);
                 if(maxArtSizePx) {
-                    result = maxArtSizePx.height;
+                    result = Math.min(result, maxArtSizePx.height);
                 }
             }
-            if( $rootScope.selectedPlane) {
-                result = Math.min(result, $rootScope.selectedPlane.heightPx);
+            return result;
+        }
+
+        function getSelectedItemMaxWidthPx() {
+            var result = $rootScope.selectedPlane
+                ? $rootScope.selectedPlane.widthPx
+                : 100;
+            var item = selectService.getSelectedItem();
+            if( item ) {
+                var maxArtSizePx = $rootScope.maxArtSizePx(item.art);
+                if(maxArtSizePx) {
+                    result = Math.min(result, maxArtSizePx.width);
+                }
             }
             return result;
         }
