@@ -79,8 +79,8 @@ function (app) {
 
         function createCeiling() {
             var ceiling = {
-                widthPx: model.width,
-                heightPx: model.depth,
+                width: model.width,
+                height: model.depth,
 
                 background: null,
 
@@ -158,7 +158,7 @@ function (app) {
                 },
                 {
                     type: 'f',
-                    left: (ceiling.widthPx - 1000/2),
+                    left: (ceiling.width - 1000/2),
                     top: 250/2,
                     height: 500/2,
                     art: {
@@ -173,8 +173,8 @@ function (app) {
         function createWall(side) {
             var wall = {
                 name: getWallName(side),
-                widthPx: ( (side == wFront || side == wBack) ? model.width : model.depth),
-                heightPx: model.height,
+                width: ( (side == wFront || side == wBack) ? model.width : model.depth),
+                height: model.height,
 
                 background: null,
 

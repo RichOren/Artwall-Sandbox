@@ -110,9 +110,9 @@ define([
 
                 function moveTo(x, y) {
                     var w = $scope.getWidth() ;
-                    var planeW = $scope.plane.widthPx;
+                    var planeW = $scope.plane.width;
                     var h = $scope.getHeight();
-                    var planeH = $scope.plane.heightPx ;
+                    var planeH = $scope.plane.height ;
 
                     if((x + w) > planeW) {
                         x = planeW - w;

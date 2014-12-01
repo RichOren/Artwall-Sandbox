@@ -56,7 +56,7 @@ define([
             };
 
             $scope.getWidth = function() {
-                var result = $scope.plane.widthPx;
+                var result = $scope.plane.width;
                 if (!$scope.isBottom) {
                     result -= 2*$scope.plane.trimTopCorner.width;
                     if( result < 0 ) result = 0;

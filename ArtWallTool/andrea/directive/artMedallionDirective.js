@@ -71,11 +71,11 @@ define([
             };
 
             $scope.getLeft = function() {
-                return ($scope.plane.widthPx - $scope.getHitWidth())/2;
+                return ($scope.plane.width - $scope.getHitWidth())/2;
             };
 
             $scope.getTop = function() {
-                return ($scope.plane.heightPx - $scope.getHitHeight())/2;
+                return ($scope.plane.height - $scope.getHitHeight())/2;
             };
 
 

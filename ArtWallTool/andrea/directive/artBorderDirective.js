@@ -43,7 +43,7 @@ define([
             });
 
             function updateTotalWidth() {
-                var result = 2*$scope.plane.widthPx + 2*$scope.plane.heightPx;
+                var result = 2*$scope.plane.width + 2*$scope.plane.height;
                 result -= 4*$scope.plane.borderCorner.width;
                 result -= 4*$scope.plane.borderCorner.height;
                 result -= 2*$scope.plane.borderCenter.width;
@@ -58,7 +58,7 @@ define([
 
             $scope.getWidth = function() {
                 updateTotalWidth();
-                var result = $scope.plane.widthPx;
+                var result = $scope.plane.width;
                 result -= 2*$scope.plane.borderCorner.width;
                 if( result < 0 ) result = 0;
                 return result;
@@ -69,7 +69,7 @@ define([
             };
 
             $scope.getHeight = function() {
-                var result = $scope.plane.heightPx;
+                var result = $scope.plane.height;
                 result -= 2*$scope.plane.borderCorner.height;
                 if( result < 0 ) result = 0;
                 return result;

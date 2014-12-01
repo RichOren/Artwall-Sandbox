@@ -169,7 +169,7 @@ function (app) {
 
         function getSelectedItemMaxHeightPx() {
             var result = $rootScope.selectedPlane
-                ? $rootScope.selectedPlane.heightPx
+                ? $rootScope.selectedPlane.height
                 : 100;
             var item = selectService.getSelectedItem();
             if( item ) {
@@ -183,7 +183,7 @@ function (app) {
 
         function getSelectedItemMaxWidthPx() {
             var result = $rootScope.selectedPlane
-                ? $rootScope.selectedPlane.widthPx
+                ? $rootScope.selectedPlane.width
                 : 100;
             var item = selectService.getSelectedItem();
             if( item ) {
