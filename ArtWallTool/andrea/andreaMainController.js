@@ -8,8 +8,10 @@ function (app) {
     'use strict';
 
     app.controller('andreaMainController', [
-    '$rootScope', '$scope', '$location', 'selectService', 'ceilingModel',
-    function($rootScope, $scope, $location, selectService, ceilingModel) {
+    '$rootScope', '$scope', '$location', 'selectService', 'roomModel',
+    function($rootScope, $scope, $location, selectService, roomModel) {
+
+        $scope.root = $rootScope;
 
         $rootScope.lowResReductionPercent = 8.3333333;
         $rootScope.minPrintDPI = 72;
@@ -97,7 +99,7 @@ function (app) {
             if( item && item.art && item.type == 'f' ) {
                 var clone = angular.copy(item);
                 clone.top += clone.height;
-                ceilingModel.floatItems.push(clone);
+                roomModel.ceiling.floatItems.push(clone);
                 selectService.select(clone);
             }
         }

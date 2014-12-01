@@ -12,11 +12,7 @@
     ng-controller="ceilingController"
 >
 
-    {{root.scale}}
-    <br/>
-    <input type="range" ng-model="root.scale" min="15" max="100"/>
-    <br/>
-    <button ng-click="addFloatItem()">Add Floating Art {{plane.floatItems.length}}</button>
+    <!--<button ng-click="addFloatItem()">Add Floating Art {{plane.floatItems.length}}</button>-->
 
     <div>
         Ceiling: {{format.size(mm(plane.widthPx))}} x {{format.size(mm(plane.heightPx))}}

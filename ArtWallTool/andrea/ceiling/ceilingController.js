@@ -8,16 +8,15 @@ function (app) {
     'use strict';
 
     app.controller('ceilingController', [
-    '$rootScope', '$scope', '$location', 'ceilingModel', 'selectService',
-    function($rootScope, $scope, $location, ceilingModel, selectService) {
+    '$rootScope', '$scope', '$location', 'roomModel', 'selectService',
+    function($rootScope, $scope, $location, roomModel, selectService) {
 
-        $scope.root = $rootScope;
-        $scope.plane = ceilingModel;
+        $scope.plane = roomModel.ceiling;
 
         $rootScope.selectedPlane = $scope.plane;
+        selectService.select(null);
 
         $scope.addFloatItem = function(){
-//            console.log('addFloatItem');
             var item = {
                 type: 'f',
                 left: 200/2,
@@ -27,11 +26,9 @@ function (app) {
                     url: './images/ceiling/moroccan-floating-art.png'
                 }
             };
-            ceilingModel.floatItems.push(item);
-
+            roomModel.ceiling.floatItems.push(item);
             selectService.select(item);
         };
-
     }]);
 
 });

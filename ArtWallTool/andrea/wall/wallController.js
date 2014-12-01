@@ -8,23 +8,12 @@ function (app) {
     'use strict';
 
     app.controller('wallController', [
-    '$rootScope', '$scope', '$location', 'wallModel', 'selectService',
-    function($rootScope, $scope, $location, wallModel, selectService) {
-
-        $scope.root = $rootScope;
-        $scope.plane = wallModel;
+    '$rootScope', '$scope', '$location', 'roomModel', 'selectService',
+    function($rootScope, $scope, $location, roomModel, selectService) {
+        $scope.plane = roomModel.getWall($location.search().side);
 
         $rootScope.selectedPlane = $scope.plane;
-
-        var ctrl = {
-
-        };
-        $scope.ctrl = ctrl;
-
-//        return ctrl;
-
-
-
+        selectService.select(null);
     }]);
 
 });

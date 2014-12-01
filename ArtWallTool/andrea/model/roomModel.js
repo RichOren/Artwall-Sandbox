@@ -11,31 +11,76 @@ function (app) {
 
     function() {
         var model = {
+            width: 0,
+            height: 0,
+            depth: 0,
+
             ceiling: null,
 
             wallLeft: null,
             wallFront: null,
             wallRight: null,
-            wallBack: null
-        };
+            wallBack: null,
 
+            getWall: getWall
+        };
+        var wLeft = 'left';
+        var wFront = 'front';
+        var wRight = 'right';
+        var wBack = 'back';
         init();
 
         return model;
 
         function init() {
-            ceiling: createCeiling();
+            model.height = 2500/2;
+            model.width = 6000/2;
+//            model.width = 5000/2;
+//            model.width = 3800/2;
+            model.depth = 3500/2;
+//            model.depth = 5000/2;
 
-            wallLeft: createWall();
-            wallFront: createWall();
-            wallRight: createWall();
-            wallBack: createWall();
+            model.ceiling = createCeiling();
+
+            model.wallLeft = createWall(wLeft);
+            model.wallFront = createWall(wFront);
+            model.wallRight = createWall(wRight);
+            model.wallBack = createWall(wBack);
+        }
+
+        function getWall(side) {
+            switch(side){
+                case 'left': return model.wallLeft;
+                case 'front': return model.wallFront;
+                case 'right': return model.wallRight;
+                case 'back': return model.wallBack;
+            }
+            return null;
+        }
+
+        function getWallName(side) {
+            var result = 'Wall';
+            switch(side){
+                case 'left':
+                    result = 'Left ' + result;
+                    break;
+                case 'front':
+                    result = 'Front ' + result;
+                    break;
+                case 'right':
+                    result = 'Right ' + result;
+                    break;
+                case 'back':
+                    result = 'Back ' + result;
+                    break;
+            }
+            return result;
         }
 
         function createCeiling() {
             var ceiling = {
-                widthPx: 0,
-                heightPx: 0,
+                widthPx: model.width,
+                heightPx: model.depth,
 
                 background: null,
 
@@ -48,8 +93,6 @@ function (app) {
 
                 floatItems: []
             };
-            ceiling.widthPx = 5000/2;
-            ceiling.heightPx = 3500/2;
 
             ceiling.background = {
                 type: 'bg',
@@ -127,10 +170,11 @@ function (app) {
             return ceiling;
         }
 
-        function createWall() {
+        function createWall(side) {
             var wall = {
-                widthPx: 0,
-                heightPx: 0,
+                name: getWallName(side),
+                widthPx: ( (side == wFront || side == wBack) ? model.width : model.depth),
+                heightPx: model.height,
 
                 background: null,
 
@@ -141,9 +185,6 @@ function (app) {
                 mainArtFrame: null,
                 mainArt: null
             };
-
-            wall.widthPx = 6000/2; //mm
-            wall.heightPx = 2500/2; //mm
 
             wall.background = {
                 type: 'bg',
@@ -156,44 +197,61 @@ function (app) {
             wall.trimTop = {
                 type: 'tt',
                 height: 0,
-                art: {
-                    url: './images/C1/T/12_inch_trim.png'
-                }
+                art: null
             };
 
             wall.trimTopCorner = {
                 type: 'tc',
                 width: 0,
                 height: 0,
-                art: {
-                    url: './images/C1/TC/12_inch_corner_b.png'
-                }
+                art: null
             };
 
             wall.trimBottom = {
                 type: 'tb',
                 height: 0,
-                art: {
-                    url: './images/C1/B/C1-B1-B.jpg'
-                }
+                art: null
             };
+
+            if( side != wBack) {
+                wall.trimTop.art = {
+                    url: './images/C1/T/12_inch_trim.png'
+                };
+
+                wall.trimTopCorner.art = {
+                    url: './images/C1/TC/12_inch_corner_b.png'
+                };
+
+                wall.trimBottom.art = {
+                    url: './images/C1/B/C1-B1-B.jpg'
+                };
+            }
 
             wall.mainItem = {
                 type: 'a',
-                fill:false,
-                center: true,
-                left: 500,
-                top: 250,
-                width: 1200,
-                height: 700,
-                art: {
-                    url: './images/A023-copy.jpg',
-                    zoom: undefined,
-                    clipX1: 7,
-                    clipY1: 7,
-                    clipX2: 93
-                }
+                width: 0,
+                height: 0,
+                art: null
             };
+
+            if( side == wFront) {
+                wall.mainItem = {
+                    type: 'a',
+                    fill:false,
+                    center: true,
+//                left: 500,
+//                top: 250,
+                    width: 1200,
+                    height: 700,
+                    art:{
+                        url: './images/A023-copy.jpg',
+                        zoom: undefined,
+                        clipX1: 7,
+                        clipY1: 7,
+                        clipX2: 93
+                    }
+                };
+            }
 
             return wall;
         }

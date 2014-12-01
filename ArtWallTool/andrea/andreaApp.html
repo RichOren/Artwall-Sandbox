@@ -1,8 +1,7 @@
 <div ng-cloak
      ds-base-url="andrea"
      ds-require="./andreaApp
-     ./service/wallModel
-     ./service/ceilingModel
+     ./model/roomModel
      ./service/selectService
      ./service/mouseService
      ../core/modal/modalDirective
@@ -13,13 +12,21 @@
      class="container selection-none"
      >
 
-    <a ng-href="#/ceiling" class="btn btn-default">Ceiling</a>
-    <a ng-href="#/wall" class="btn btn-default">Wall</a>
-    <!--<a ng-href="#/test" class="btn btn-default">Test</a>-->
+    Scale {{root.scale}}%
+    <input type="range" ng-model="root.scale" min="15" max="100"/>
+    <br/>
 
+    <div>
+        <a ng-href="#/wall?side=left" class="btn btn-default">Left Wall</a>
+        <a ng-href="#/wall?side=front" class="btn btn-default">Front Wall</a>
+        <a ng-href="#/wall?side=right" class="btn btn-default">Right Wall</a>
+        <a ng-href="#/ceiling" class="btn btn-default">Ceiling</a>
+        <a ng-href="#/wall?side=back" class="btn btn-default">Back Wall</a>
+        <!--<a ng-href="#/test" class="btn btn-default">Test</a>-->
+    </div>
+
+    <br/>
     <ng-view ng-hide="mainCtrl.cropItem"></ng-view>
-
-
 
 
     <div class="position-fixed"

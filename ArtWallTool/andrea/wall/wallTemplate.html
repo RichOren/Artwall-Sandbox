@@ -9,13 +9,8 @@
     ../directive/artFrameDirective"
     ng-controller="wallController"
 >
-    {{root.scale}}
-    <br/>
-    <input type="range" ng-model="root.scale" min="15" max="100"/>
-    <br/>
-
     <div>
-        Wall: {{format.size(mm(plane.widthPx))}} x {{format.size(mm(plane.heightPx))}}
+        {{plane.name}}: {{format.size(mm(plane.widthPx))}} x {{format.size(mm(plane.heightPx))}}
         <span class="pull-right">
             <input type="checkbox" ng-model="format.useMetric"/>
         </span>
