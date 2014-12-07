@@ -46,6 +46,18 @@ function (app) {
         };
 
         var mainCtrl = {
+            selectedView: null,
+            onViewChange: onViewChange,
+
+            isCatalogVisible: false,
+            toggleCatalog: toggleCatalog,
+            collections: [
+                {name:'Collection A'},
+                {name:'Collection B'}
+            ],
+            selectedCollection: null,
+            onCollectionChange: onCollectionChange,
+
             cropItem: null, //for crop panel
             closeCropPanel: closeCropPanel,
 
@@ -63,8 +75,50 @@ function (app) {
             getSelectedItemMaxWidthPx: getSelectedItemMaxWidthPx,
             closeSizePanel: closeSizePanel
         };
+
+        init();
+
         return mainCtrl;
 
+
+        function init() {
+            $scope.$on("$routeChangeSuccess", function () {
+                updateViewSelected();
+            });
+            updateViewSelected();
+        }
+
+        function updateViewSelected() {
+            var path = $location.path();
+            var search = $location.search();
+            switch(path) {
+                case '/wall':
+                    mainCtrl.selectedView = search.side;
+                    break;
+                case '/ceiling':
+                    mainCtrl.selectedView = 'ceiling';
+                    break;
+            }
+            console.log('updateViewSelected', path, search);
+        }
+
+        function onViewChange() {
+            console.log('onViewChange', mainCtrl.selectedView);
+            if( mainCtrl.selectedView == 'ceiling') {
+                $location.path('/ceiling').search('side', null);
+            }
+            else {
+                $location.path('/wall').search('side', mainCtrl.selectedView);
+            }
+        }
+
+        function toggleCatalog() {
+            mainCtrl.isCatalogVisible = !mainCtrl.isCatalogVisible;
+        }
+
+        function onCollectionChange() {
+            console.log(mainCtrl.selectedCollection);
+        }
 
         function showSpec() {
             mainCtrl.item = selectService.getSelectedItem();

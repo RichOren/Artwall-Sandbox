@@ -11,32 +11,23 @@
      ng-controller="andreaMainController as mainCtrl"
      class="container selection-none"
      >
+    <div style="height: 44px"></div>
 
     Scale {{root.scale}}%
     <input type="range" ng-model="root.scale" min="15" max="100"/>
     <br/>
 
-    <div>
-        <a ng-href="#/wall?side=left" class="btn btn-default">Left Wall</a>
-        <a ng-href="#/wall?side=front" class="btn btn-default">Front Wall</a>
-        <a ng-href="#/wall?side=right" class="btn btn-default">Right Wall</a>
-        <a ng-href="#/ceiling" class="btn btn-default">Ceiling</a>
-        <a ng-href="#/wall?side=back" class="btn btn-default">Back Wall</a>
-        <!--<a ng-href="#/test" class="btn btn-default">Test</a>-->
-    </div>
-
-    <br/>
     <ng-view ng-hide="mainCtrl.cropItem"></ng-view>
 
-
+    <!-- Resize Panel -->
     <div class="position-fixed"
             style="
             background-color: #CCCCCC;
             opacity: .8;
             padding: 10px;
-            bottom: 0px;
-            left: 0px;
-            right: 0px"
+            bottom: 0;
+            left: 0;
+            right: 0"
         ng-show="mainCtrl.isItemResizable(selectedItem)"
     >
         <div style="text-align: center">
@@ -73,14 +64,15 @@
         </div>
     </div>
 
+    <!-- Height Adjust Panel -->
     <div class="position-fixed"
             style="
             background-color: #CCCCCC;
             opacity: .8;
             padding: 10px;
-            bottom: 0px;
-            left: 0px;
-            right: 0px"
+            bottom: 0;
+            left: 0;
+            right: 0"
         ng-show="mainCtrl.isHeightAdjustable(selectedItem)"
     >
         <div style="text-align: center">
@@ -104,6 +96,83 @@
         </div>
     </div>
 
+    <!-- Top MenuBar -->
+    <div class="position-fixed"
+         style="
+            background-color: #000000;
+            padding: 4px;
+            padding-left: 10px;
+            padding-right: 10px;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 44px;
+            border-bottom: 1px solid #ffffff"
+            >
+        <div>
+
+            <select style="margin-top: 6px"
+                    ng-model="mainCtrl.selectedView"
+                    ng-change="mainCtrl.onViewChange()"
+                    >
+                <option value="left">Left Wall</option>
+                <option value="front">Front Wall</option>
+                <option value="right">Right Wall</option>
+                <option value="ceiling">Ceiling</option>
+                <option value="back">Back Wall</option>
+            </select>
+
+            <button class="pull-right"
+                    style="height: 36px"
+                    ng-click="mainCtrl.toggleCatalog()"
+            >Catalog</button>
+        </div>
+    </div>
+
+    <!-- Right Catalog Panel -->
+    <div class="position-fixed"
+         style="
+            background-color: #ffffff;
+            padding: 4px;
+            padding-left: 10px;
+            padding-right: 10px;
+            bottom: 0;
+            top: 0;
+            right: 0;
+            border-left: 1px solid #000000"
+         ng-show="mainCtrl.isCatalogVisible"
+            >
+
+        <div>
+            <span class="pull-right">
+                <button ng-click="mainCtrl.toggleCatalog()"
+                        style="width: 44px; height: 36px"
+                        >X</button>
+            </span>
+        </div>
+
+        <div style="padding-top: 44px">
+            Category
+        </div>
+        <select>
+            <option value="">select a Category</option>
+        </select>
+
+        <div style="padding-top: 10px">
+            Collection
+        </div>
+
+        <select ng-model="mainCtrl.selectedCollection"
+                ng-options="coll.name for coll in mainCtrl.collections"
+                ng-change="mainCtrl.onCollectionChange()"
+                >
+            <option value="">select a Collection</option>
+        </select>
+
+    </div>
+
+
+    <!-- Crop and Zoom Panel -->
     <div class="position-fixed"
          ng-show="mainCtrl.cropItem"
          style="
@@ -150,7 +219,7 @@
 
     </div>
 
-
+    <!-- Menu Popup -->
     <div id="artMenu" class="dropdown position-fixed" >
         <ul class="dropdown-menu" role="menu">
             <li>
@@ -186,7 +255,7 @@
         </ul>
     </div>
 
-
+    <!-- Specification Modal -->
     <ds:modal name="specModal" escape size="md"
               title="Specifications"
             >

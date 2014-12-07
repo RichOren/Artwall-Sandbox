@@ -10,11 +10,11 @@
     <link rel="stylesheet" href="css/jquery.freetrans.css" />
     <link rel="stylesheet" href="css/angular-stepper.css" />
     <link rel="stylesheet" href="css/artwall-tool.css" />
+    <!-- load require.js in the head to avoid loading it twice! -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/require.js/2.1.14/require.js"
+            data-main="main.js"></script>
 </head>
 <body>
     <ng-include src="'andrea/andreaApp.html'" />
 </body>
-
-<script src="//cdnjs.cloudflare.com/ajax/libs/require.js/2.1.14/require.js"
-        data-main="main.js"></script>
-</html> 
+</html>
