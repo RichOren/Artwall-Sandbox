@@ -2,11 +2,13 @@
      ds-base-url="andrea"
      ds-require="./andreaApp
      ./model/roomModel
+     ./model/catalogModel
      ./service/selectService
      ./service/mouseService
      ../core/modal/modalDirective
      ./directive/cropperDirective
      ../core/input/typeIntDirective
+     ./catalog/catalogController
      ./andreaMainController"
      ng-controller="andreaMainController as mainCtrl"
      class="container selection-none"
@@ -131,6 +133,7 @@
 
     <!-- Right Catalog Panel -->
     <div class="position-fixed"
+         ng-controller="catalogController as catalogCtrl"
          style="
             background-color: #ffffff;
             padding: 4px;
@@ -151,23 +154,208 @@
             </span>
         </div>
 
-        <div style="padding-top: 44px">
-            Category
-        </div>
+        <div style="height: 44px"></div>
         <select>
             <option value="">select a Category</option>
         </select>
-
-        <div style="padding-top: 10px">
-            Collection
-        </div>
-
-        <select ng-model="mainCtrl.selectedCollection"
-                ng-options="coll.name for coll in mainCtrl.collections"
-                ng-change="mainCtrl.onCollectionChange()"
+        <br/>
+        <br/>
+        <select ng-model="catalogCtrl.selectedCollection"
+                ng-options="coll.name for coll in catalogCtrl.catalog.collections"
+                ng-change="catalogCtrl.onCollectionChange()"
                 >
             <option value="">select a Collection</option>
         </select>
+        <br/>
+        <br/>
+
+        <div class="panel-group" id="accordion">
+
+            <div class="panel panel-default"
+                ng-show="catalogCtrl.selectedCollection.backgrounds.length"
+            >
+                <a class="accordion-toggle"
+                   ng-click="ctrl.selectType('B')"
+                   data-toggle="collapse"
+                   data-parent="#accordion"
+                   href="#collapseBackgrounds">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <span>
+                                Backgrounds ({{catalogCtrl.selectedCollection.backgrounds.length}})
+                            </span><i class="indicator glyphicon glyphicon-chevron-down pull-right"></i>
+                        </h4>
+                    </div>
+                </a>
+                <div id="collapseBackgrounds" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <span ng-repeat="product in catalogCtrl.selectedCollection.backgrounds">
+                            <img class="prod" dnd-source="product"
+                                 ng-src="{{product.url}}">
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default"
+                ng-show="catalogCtrl.selectedCollection.trimSets.length"
+            >
+                <a class="accordion-toggle"
+                   ng-click="ctrl.selectType('B')"
+                   data-toggle="collapse"
+                   data-parent="#accordion"
+                   href="#collapseTrimSets">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <span>
+                                Trim Sets ({{catalogCtrl.selectedCollection.trimSets.length}})
+                            </span><i class="indicator glyphicon glyphicon-chevron-down pull-right"></i>
+                        </h4>
+                    </div>
+                </a>
+                <div id="collapseTrimSets" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <span ng-repeat="product in catalogCtrl.selectedCollection.trimSets">
+                            <img class="prod" dnd-source="product"
+                                 ng-src="{{product.border.url}}">
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default"
+                 ng-show="catalogCtrl.selectedCollection.topTrims.length"
+                    >
+                <a class="accordion-toggle"
+                   ng-click="ctrl.selectType('B')"
+                   data-toggle="collapse"
+                   data-parent="#accordion"
+                   href="#collapseTopTrims">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <span>
+                                Top Trims ({{catalogCtrl.selectedCollection.topTrims.length}})
+                            </span><i class="indicator glyphicon glyphicon-chevron-down pull-right"></i>
+                        </h4>
+                    </div>
+                </a>
+                <div id="collapseTopTrims" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <span ng-repeat="product in catalogCtrl.selectedCollection.topTrims">
+                            <img class="prod" dnd-source="product"
+                                 ng-src="{{product.url}}">
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default"
+                 ng-show="catalogCtrl.selectedCollection.bottomTrims.length"
+                    >
+                <a class="accordion-toggle"
+                   ng-click="ctrl.selectType('B')"
+                   data-toggle="collapse"
+                   data-parent="#accordion"
+                   href="#collapseBottomTrims">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <span>
+                                Bottom Trims ({{catalogCtrl.selectedCollection.bottomTrims.length}})
+                            </span><i class="indicator glyphicon glyphicon-chevron-down pull-right"></i>
+                        </h4>
+                    </div>
+                </a>
+                <div id="collapseBottomTrims" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <span ng-repeat="product in catalogCtrl.selectedCollection.bottomTrims">
+                            <img class="prod" dnd-source="product"
+                                 ng-src="{{product.url}}">
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default"
+                 ng-show="catalogCtrl.selectedCollection.medallions.length"
+                    >
+                <a class="accordion-toggle"
+                   ng-click="ctrl.selectType('B')"
+                   data-toggle="collapse"
+                   data-parent="#accordion"
+                   href="#collapseMedallions">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <span>
+                                Medallions ({{catalogCtrl.selectedCollection.medallions.length}})
+                            </span><i class="indicator glyphicon glyphicon-chevron-down pull-right"></i>
+                        </h4>
+                    </div>
+                </a>
+                <div id="collapseMedallions" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <span ng-repeat="product in catalogCtrl.selectedCollection.medallions">
+                            <img class="prod" dnd-source="product"
+                                 ng-src="{{product.url}}">
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default"
+                 ng-show="catalogCtrl.selectedCollection.floats.length"
+                    >
+                <a class="accordion-toggle"
+                   ng-click="ctrl.selectType('B')"
+                   data-toggle="collapse"
+                   data-parent="#accordion"
+                   href="#collapseFloats">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <span>
+                                Floats ({{catalogCtrl.selectedCollection.floats.length}})
+                            </span><i class="indicator glyphicon glyphicon-chevron-down pull-right"></i>
+                        </h4>
+                    </div>
+                </a>
+                <div id="collapseFloats" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <span ng-repeat="product in catalogCtrl.selectedCollection.floats">
+                            <img class="prod" dnd-source="product"
+                                 ng-src="{{product.url}}">
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default"
+                 ng-show="catalogCtrl.selectedCollection.arts.length"
+                    >
+                <a class="accordion-toggle"
+                   ng-click="ctrl.selectType('B')"
+                   data-toggle="collapse"
+                   data-parent="#accordion"
+                   href="#collapseArts">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <span>
+                                Arts ({{catalogCtrl.selectedCollection.arts.length}})
+                            </span><i class="indicator glyphicon glyphicon-chevron-down pull-right"></i>
+                        </h4>
+                    </div>
+                </a>
+                <div id="collapseArts" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <span ng-repeat="product in catalogCtrl.selectedCollection.arts">
+                            <img class="prod" dnd-source="product"
+                                 ng-src="{{product.url}}">
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
 
     </div>
 

@@ -51,12 +51,6 @@ function (app) {
 
             isCatalogVisible: false,
             toggleCatalog: toggleCatalog,
-            collections: [
-                {name:'Collection A'},
-                {name:'Collection B'}
-            ],
-            selectedCollection: null,
-            onCollectionChange: onCollectionChange,
 
             cropItem: null, //for crop panel
             closeCropPanel: closeCropPanel,
@@ -114,10 +108,6 @@ function (app) {
 
         function toggleCatalog() {
             mainCtrl.isCatalogVisible = !mainCtrl.isCatalogVisible;
-        }
-
-        function onCollectionChange() {
-            console.log(mainCtrl.selectedCollection);
         }
 
         function showSpec() {

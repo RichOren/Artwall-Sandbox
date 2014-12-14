@@ -117,9 +117,9 @@ function (app) {
                 type: 'bc',
                 width: 0,
                 height: 0,
-//                art: {
-//                    url: './images/ceiling/6_inch_corner_green.png'
-//                }
+                art: {
+                    url: './images/ceiling/6_inch_corner_green.png'
+                }
             };
 
             ceiling.borderCenter = {
