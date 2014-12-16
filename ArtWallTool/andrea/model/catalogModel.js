@@ -65,43 +65,43 @@ function (app) {
                             url: './images/C1/TC/6_inch_corner_a.png'
                         },
                         bottomTrim: {
-                            url: './images/C1/B/C1-B1-B.jpg'
+                            url: './images/C1/T/6_inch_bottom_trim.png'
                         }
                     },
                     {
                         border: {
-                            url: './images/ceiling/12_inch_trim_green.jpg'
+                            url: './images/ceiling/6_inch_trim_green.jpg'
                         },
                         corner: {
-                            url: './images/ceiling/12_inch_corner_green.jpg'
+                            url: './images/ceiling/6_inch_corner_green.jpg'
                         },
                         center: {
-                            url: './images/ceiling/12_inch_middle_green.jpg'
+                            url: './images/ceiling/6_inch_middle_green.jpg'
                         },
                         middle: {
-                            url: './images/ceiling/12_inch_middle_green.jpg'
+                            url: './images/ceiling/6_inch_middle_green.jpg'
                         },
                         topTrim: {
-                            url: './images/C1/T/12_inch_trim.png'
+                            url: './images/C1/T/6_inch_trim.png'
                         },
                         wallCorner: {
-                            url: './images/C1/TC/12_inch_corner_b.png'
+                            url: './images/C1/TC/6_inch_corner_b.png'
                         },
                         wallCornerShort: {
-                            url: './images/C1/TC/12_inch_corner_a.png'
+                            url: './images/C1/TC/6_inch_corner_a.png'
                         }
                     }
                 ],
 
                 topTrims: [
                     {
-                        url: './images/C1/T/12_inch_trim.png'
+                        url: './images/C1/T/6_inch_trim.png'
                     }
                 ],
 
                 bottomTrims: [
                     {
-                        url: './images/C1/B/C1-B1-B.jpg'
+                        url: './images/C1/T/6_inch_bottom_trim.png'
                     }
                 ],
 
