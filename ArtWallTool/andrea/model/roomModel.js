@@ -215,15 +215,15 @@ function (app) {
 
             if( side != wBack) {
                 wall.trimTop.art = {
-                    url: './images/C1/T/6_inch_trim.png'
+                    url: './images/C1/T/6_inch_trim_green.png'
                 };
 
                 wall.trimTopCorner.art = {
-                    url: './images/C1/TC/6_inch_corner_b.png'
+                    url: './images/C1/TC/6_inch_corner_green_b.png'
                 };
 
                 wall.trimBottom.art = {
-                    url: './images/C1/T/6_inch_bottom_trim.png'
+                    url: './images/C1/T/6_inch_bottom_trim_green.png'
                 };
             }
 

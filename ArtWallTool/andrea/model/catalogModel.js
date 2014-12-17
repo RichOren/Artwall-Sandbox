@@ -19,9 +19,8 @@ function (app) {
 
         function init() {
             model.collections = [
-                createCollection('A'),
-                createCollection('B'),
-                createCollection('C')
+                createCollection('green'),
+                createCollection('red')
             ];
         }
 
@@ -37,71 +36,71 @@ function (app) {
                     },
                     {
                         url: './images/wood.jpg',
-                        repeat: true,
+                        repeat: true
                     }
                 ],
 
                 trimSets: [
                     {
                         border: {
-                            url: './images/ceiling/6_inch_trim_green.jpg'
+                            url: './images/ceiling/6_inch_trim_' + collId + '.jpg'
                         },
                         corner: {
-                            url: './images/ceiling/6_inch_corner_green.jpg'
+                            url: './images/ceiling/6_inch_corner_' + collId + '.jpg'
                         },
                         center: {
-                            url: './images/ceiling/6_inch_middle_green.jpg'
+                            url: './images/ceiling/6_inch_middle_' + collId + '.jpg'
                         },
                         middle: {
-                            url: './images/ceiling/6_inch_middle_green.jpg'
+                            url: './images/ceiling/6_inch_middle_' + collId + '.jpg'
                         },
                         topTrim: {
-                            url: './images/C1/T/6_inch_trim.png'
+                            url: './images/C1/T/6_inch_trim_' + collId + '.png'
                         },
                         wallCorner: {
-                            url: './images/C1/TC/6_inch_corner_b.png'
+                            url: './images/C1/TC/6_inch_corner_' + collId + '_b.png'
                         },
                         wallCornerShort: {
-                            url: './images/C1/TC/6_inch_corner_a.png'
+                            url: './images/C1/TC/6_inch_corner_' + collId + '_a.png'
                         },
                         bottomTrim: {
-                            url: './images/C1/T/6_inch_bottom_trim.png'
+                            url: './images/C1/T/6_inch_bottom_trim_' + collId + '.png'
                         }
                     },
                     {
                         border: {
-                            url: './images/ceiling/6_inch_trim_green.jpg'
+                            url: './images/ceiling/12_inch_trim_' + collId + '.jpg'
                         },
                         corner: {
-                            url: './images/ceiling/6_inch_corner_green.jpg'
+                            url: './images/ceiling/12_inch_corner_' + collId + '.jpg'
                         },
                         center: {
-                            url: './images/ceiling/6_inch_middle_green.jpg'
+                            url: './images/ceiling/12_inch_middle_' + collId + '.jpg'
                         },
                         middle: {
-                            url: './images/ceiling/6_inch_middle_green.jpg'
+                            url: './images/ceiling/12_inch_middle_' + collId + '.jpg'
                         },
                         topTrim: {
-                            url: './images/C1/T/6_inch_trim.png'
+                            url: './images/C1/T/12_inch_trim_' + collId + '.png'
                         },
                         wallCorner: {
-                            url: './images/C1/TC/6_inch_corner_b.png'
+                            url: './images/C1/TC/12_inch_corner_' + collId + '_b.png'
                         },
                         wallCornerShort: {
-                            url: './images/C1/TC/6_inch_corner_a.png'
+                            url: './images/C1/TC/12_inch_corner_' + collId + '_a.png'
                         }
                     }
                 ],
 
                 topTrims: [
                     {
-                        url: './images/C1/T/6_inch_trim.png'
+                        url: './images/C1/T/6_inch_trim_' + collId + '.png'
                     }
                 ],
 
                 bottomTrims: [
                     {
-                        url: './images/C1/T/6_inch_bottom_trim.png'
+                        url: './images/C1/T/6_inch_bottom_trim_' + collId + '.png'
                     }
                 ],
 
