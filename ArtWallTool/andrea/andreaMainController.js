@@ -8,8 +8,8 @@ function (app) {
     'use strict';
 
     app.controller('andreaMainController', [
-    '$rootScope', '$scope', '$location', 'selectService', 'roomModel',
-    function($rootScope, $scope, $location, selectService, roomModel) {
+    '$rootScope', '$scope', '$location', 'selectService', 'roomModel', 'catalogVM',
+    function($rootScope, $scope, $location, selectService, roomModel, catalogVM) {
 
         $scope.root = $rootScope;
 
@@ -49,7 +49,6 @@ function (app) {
             selectedView: null,
             onViewChange: onViewChange,
 
-            isCatalogVisible: false,
             toggleCatalog: toggleCatalog,
 
             cropItem: null, //for crop panel
@@ -67,7 +66,9 @@ function (app) {
             isItemResizable: isItemResizable,
             getSelectedItemMaxHeightPx: getSelectedItemMaxHeightPx,
             getSelectedItemMaxWidthPx: getSelectedItemMaxWidthPx,
-            closeSizePanel: closeSizePanel
+            closeSizePanel: closeSizePanel,
+
+            applyProduct: applyProduct
         };
 
         init();
@@ -107,8 +108,9 @@ function (app) {
         }
 
         function toggleCatalog() {
-            mainCtrl.isCatalogVisible = !mainCtrl.isCatalogVisible;
+            catalogVM.toggleCatalog();
         }
+
 
         function showSpec() {
             mainCtrl.item = selectService.getSelectedItem();
@@ -150,6 +152,10 @@ function (app) {
 
         function remove() {
             var item = selectService.getSelectedItem();
+            removeItem(item);
+        }
+
+        function removeItem(item) {
             if( item ){
                 if( item.type == 'f') {
                     var floatItems = $rootScope.selectedPlane.floatItems;
@@ -165,6 +171,68 @@ function (app) {
                     item.height = 0;
                 }
             }
+        }
+
+        function applyProduct(product) {
+            var plane = roomModel.getWall(mainCtrl.selectedView);
+            if (plane) {
+                switch (catalogVM.selectedProductType) {
+                    case 'bg':
+                        delete plane.background.art.naturalWidth;
+                        delete plane.background.art.naturalHeight;
+                        plane.background.art.url = product.url;
+                        break;
+                    case 'tt':
+                        delete plane.trimTop.art.naturalWidth;
+                        delete plane.trimTop.art.naturalHeight;
+                        plane.trimTop.art.url = product.url;
+                        break;
+                    case 'tb':
+                        delete plane.trimBottom.art.naturalWidth;
+                        delete plane.trimBottom.art.naturalHeight;
+                        plane.trimBottom.art.url = product.url;
+                        break;
+                    case 'a':
+                        delete plane.mainItem.art.naturalWidth;
+                        delete plane.mainItem.art.naturalHeight;
+                        plane.mainItem.art = {
+                            url: product.url,
+                            zoom: undefined,
+                            clipX1: 0,
+                            clipY1: 0,
+                            clipX2: 100
+                        };
+                        break;
+                }
+            }
+            else if(mainCtrl.selectedView === 'ceiling') {
+                plane = roomModel.ceiling;
+                switch (catalogVM.selectedProductType) {
+                    case 'bg':
+                        removeItem(plane.background);
+                        plane.background.art.url = product.url;
+                        break;
+
+                    case 'm':
+                        delete plane.medallion.art.naturalWidth;
+                        delete plane.medallion.art.naturalHeight;
+                        plane.medallion.art.url = product.url;
+                        break;
+
+                    case 'f':
+                        plane.floatItems.push({
+                            type: 'f',
+                            left: 250/2,
+                            top: 250/2,
+                            height: 500/2,
+                            art: {
+                                url: product.url
+                            }
+                        });
+                        break;
+                }
+            }
+            catalogVM.selectProduct(null);
         }
 
         function formatType() {

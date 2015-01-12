@@ -1,0 +1,61 @@
+<div class="position-fixed"
+    style="background-color: #000000;
+        bottom: 0;
+        top: 0;
+        left: 0;
+        right: 290px"
+    ng-show="catalogVM.isCatalogVisible && catalogVM.selectedProduct"
+>
+    <div class="origin0"
+         ng-style="{
+                left: '10px',
+                right: '10px',
+                top: '10px',
+                bottom: '54px',
+                'background-image': 'url(\'' + catalogVM.selectedProduct.url + '\')',
+                'background-position': 'center center',
+                'background-repeat': 'no-repeat',
+                'background-size': '90%'
+            }"
+         ng-show="catalogVM.selectedProduct.url"
+            ></div>
+
+
+    <art-border
+         ng-hide="catalogVM.selectedProduct.url"
+         plane="catalogVM.plane" item="catalogVM.selectedProduct.border"
+    ></art-border>
+
+    <button
+         ng-hide="catalogVM.selectedProduct.url"
+    >trim set</button>
+
+
+    <div class="origin0"
+         ng-style="{
+                left: '10px',
+                right: '10px',
+                bottom: '10px'
+            }"
+            >
+        <button
+                style="height: 36px"
+                >
+            Prev
+        </button>
+        <button
+                style="height: 36px"
+                >
+            Next
+        </button>
+
+        <button
+                class="pull-right"
+                style="height: 36px"
+                ng-click="mainCtrl.applyProduct(catalogVM.selectedProduct)"
+                >
+            Use
+        </button>
+    </div>
+
+</div>

@@ -182,8 +182,7 @@ function (app) {
                 trimTopCorner: null,
                 trimBottom: null,
 
-                mainArtFrame: null,
-                mainArt: null
+                mainItem: null
             };
 
             wall.background = {

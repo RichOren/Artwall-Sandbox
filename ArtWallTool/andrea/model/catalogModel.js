@@ -11,6 +11,7 @@ function (app) {
 
     function() {
         var model = {
+            categories: [],
             collections: []
         };
         init();
@@ -18,12 +19,24 @@ function (app) {
         return model;
 
         function init() {
+            model.categories = [
+                createCategory('cat-g', 'Generic'),
+                createCategory('cat-1', 'Category 1'),
+                createCategory('cat-2', 'Category 2')
+            ];
             model.collections = [
                 createCollection('green'),
                 createCollection('red')
             ];
         }
 
+        function createCategory(catId, name) {
+            var category = {
+                catId: catId,
+                name: name
+            };
+            return category;
+        }
 
         function createCollection(collId) {
             var collection = {
@@ -36,6 +49,10 @@ function (app) {
                     },
                     {
                         url: './images/wood.jpg',
+                        repeat: true
+                    },
+                    {
+                        url: './images/ceiling/moroccan-tile-pattern_001.png',
                         repeat: true
                     }
                 ],

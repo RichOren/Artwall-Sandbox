@@ -8,7 +8,9 @@
      ../core/modal/modalDirective
      ./directive/cropperDirective
      ../core/input/typeIntDirective
-     ./catalog/catalogController
+     ./catalog/catalogVM
+     ./catalog/catalogBrowserDirective
+     ./catalog/productPreviewDirective
      ./andreaMainController"
      ng-controller="andreaMainController as mainCtrl"
      class="container selection-none"
@@ -131,154 +133,9 @@
         </div>
     </div>
 
-    <!-- Right Catalog Panel -->
-    <div class="position-fixed"
-         ng-controller="catalogController as catalogCtrl"
-         style="
-            background-color: #ffffff;
-            padding: 4px;
-            padding-left: 10px;
-            padding-right: 10px;
-            bottom: 0;
-            top: 0;
-            right: 0;
-            border-left: 1px solid #000000"
-         ng-show="mainCtrl.isCatalogVisible"
-            >
+    <catalog-browser></catalog-browser>
 
-        <div>
-            <span class="pull-right">
-                <button ng-click="mainCtrl.toggleCatalog()"
-                        style="width: 44px; height: 36px"
-                        >X</button>
-            </span>
-        </div>
-
-        <div style="height: 44px"></div>
-        <select>
-            <option value="">select a Category</option>
-        </select>
-        <br/>
-        <br/>
-        <select ng-model="catalogCtrl.selectedCollection"
-                ng-options="coll.name for coll in catalogCtrl.catalog.collections"
-                ng-change="catalogCtrl.onCollectionChange()"
-                >
-            <option value="">select a Collection</option>
-        </select>
-        <br/>
-        <br/>
-        <accordion close-others="true">
-
-            <accordion-group
-                ng-show="catalogCtrl.selectedCollection.backgrounds.length"
-            >
-                <accordion-heading>
-                    <h4>
-                        Backgrounds ({{catalogCtrl.selectedCollection.backgrounds.length}})
-                        </span><i class="indicator glyphicon glyphicon-chevron-down pull-right"></i>
-                    </h4>
-                </accordion-heading>
-                <span ng-repeat="product in catalogCtrl.selectedCollection.backgrounds">
-                    <img class="prod" dnd-source="product"
-                         ng-src="{{product.url}}">
-                </span>
-            </accordion-group>
-
-            <accordion-group
-                ng-show="catalogCtrl.selectedCollection.trimSets.length"
-            >
-                <accordion-heading>
-                    <h4>
-                        Trim Sets ({{catalogCtrl.selectedCollection.trimSets.length}})
-                        </span><i class="indicator glyphicon glyphicon-chevron-down pull-right"></i>
-                    </h4>
-                </accordion-heading>
-                <span ng-repeat="product in catalogCtrl.selectedCollection.trimSets">
-                    <img class="prod" dnd-source="product"
-                         ng-src="{{product.border.url}}">
-                </span>
-            </accordion-group>
-
-            <accordion-group
-                    ng-show="catalogCtrl.selectedCollection.topTrims.length"
-                    >
-                <accordion-heading>
-                    <h4>
-                        Top Trims ({{catalogCtrl.selectedCollection.topTrims.length}})
-                        </span><i class="indicator glyphicon glyphicon-chevron-down pull-right"></i>
-                    </h4>
-                </accordion-heading>
-                <span ng-repeat="product in catalogCtrl.selectedCollection.topTrims">
-                    <img class="prod" dnd-source="product"
-                         ng-src="{{product.url}}">
-                </span>
-            </accordion-group>
-
-            <accordion-group
-                    ng-show="catalogCtrl.selectedCollection.bottomTrims.length"
-                    >
-                <accordion-heading>
-                    <h4>
-                        Bottom Trims ({{catalogCtrl.selectedCollection.bottomTrims.length}})
-                        </span><i class="indicator glyphicon glyphicon-chevron-down pull-right"></i>
-                    </h4>
-                </accordion-heading>
-                <span ng-repeat="product in catalogCtrl.selectedCollection.bottomTrims">
-                    <img class="prod" dnd-source="product"
-                         ng-src="{{product.url}}">
-                </span>
-            </accordion-group>
-
-            <accordion-group
-                    ng-show="catalogCtrl.selectedCollection.medallions.length"
-                    >
-                <accordion-heading>
-                    <h4>
-                        Medallions ({{catalogCtrl.selectedCollection.medallions.length}})
-                        </span><i class="indicator glyphicon glyphicon-chevron-down pull-right"></i>
-                    </h4>
-                </accordion-heading>
-                <span ng-repeat="product in catalogCtrl.selectedCollection.medallions">
-                    <img class="prod" dnd-source="product"
-                         ng-src="{{product.url}}">
-                </span>
-            </accordion-group>
-
-            <accordion-group
-                    ng-show="catalogCtrl.selectedCollection.floats.length"
-                    >
-                <accordion-heading>
-                    <h4>
-                        Floats ({{catalogCtrl.selectedCollection.floats.length}})
-                        </span><i class="indicator glyphicon glyphicon-chevron-down pull-right"></i>
-                    </h4>
-                </accordion-heading>
-                <span ng-repeat="product in catalogCtrl.selectedCollection.floats">
-                    <img class="prod" dnd-source="product"
-                         ng-src="{{product.url}}">
-                </span>
-            </accordion-group>
-
-            <accordion-group
-                    ng-show="catalogCtrl.selectedCollection.arts.length"
-                    >
-                <accordion-heading>
-                    <h4>
-                        Arts ({{catalogCtrl.selectedCollection.arts.length}})
-                        </span><i class="indicator glyphicon glyphicon-chevron-down pull-right"></i>
-                    </h4>
-                </accordion-heading>
-                <span ng-repeat="product in catalogCtrl.selectedCollection.arts">
-                    <img class="prod" dnd-source="product"
-                         ng-src="{{product.url}}">
-                </span>
-            </accordion-group>
-
-        </accordion>
-
-
-    </div>
+    <product-preview></product-preview>
 
 
     <!-- Crop and Zoom Panel -->

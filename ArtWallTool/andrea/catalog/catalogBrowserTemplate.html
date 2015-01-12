@@ -1,0 +1,171 @@
+<div class="position-fixed"
+     style="
+        background-color: #ffffff;
+        padding: 4px;
+        padding-left: 10px;
+        padding-right: 10px;
+        bottom: 0;
+        top: 0;
+        right: 0;
+        width: 290px;
+        border-left: 1px solid #000000;
+        overflow-y: auto"
+     ng-show="catalogVM.isCatalogVisible"
+        >
+
+    <div>
+        <span class="pull-right">
+            <button ng-click="catalogVM.toggleCatalog()"
+                    style="width: 44px; height: 36px"
+                    >X</button>
+        </span>
+    </div>
+
+    <div style="height: 44px"></div>
+    <select ng-model="catalogVM.selectedCategory"
+            ng-options="cat.name for cat in catalogVM.catalog.categories"
+            ng-change="catalogVM.onCategoryChange()"
+            >
+        <option value="">select a Category</option>
+    </select>
+    <br/>
+    <br/>
+    <select ng-model="catalogVM.selectedCollection"
+            ng-options="coll.name for coll in catalogVM.catalog.collections"
+            ng-change="catalogVM.onCollectionChange()"
+            >
+        <option value="">select a Collection</option>
+    </select>
+    <br/>
+    <br/>
+    <accordion close-others="true">
+
+        <accordion-group
+            ng-show="catalogVM.selectedCollection.backgrounds.length"
+        >
+            <accordion-heading>
+                <h4 ng-click="catalogVM.selectType('bg')">
+                    Backgrounds ({{catalogVM.selectedCollection.backgrounds.length}})
+                    <i class="indicator glyphicon glyphicon-chevron-down pull-right"></i>
+                </h4>
+            </accordion-heading>
+            <span ng-repeat="product in catalogVM.selectedCollection.backgrounds">
+                <img class="prod" dnd-source="product"
+                     ng-class="{'prod-selected': catalogVM.isProductSelected(product)}"
+                     ng-src="{{product.url}}"
+                     ng-click="catalogVM.selectProduct(product)"
+                >
+            </span>
+        </accordion-group>
+
+        <accordion-group
+            ng-show="catalogVM.selectedCollection.trimSets.length"
+        >
+            <accordion-heading>
+                <h4 ng-click="catalogVM.selectType('ts')">
+                    Trim Sets ({{catalogVM.selectedCollection.trimSets.length}})
+                    <i class="indicator glyphicon glyphicon-chevron-down pull-right"></i>
+                </h4>
+            </accordion-heading>
+            <span ng-repeat="product in catalogVM.selectedCollection.trimSets">
+                <img class="prod" dnd-source="product"
+                     ng-class="{'prod-selected': catalogVM.isProductSelected(product)}"
+                     ng-src="{{product.border.url}}"
+                     ng-click="catalogVM.selectProduct(product)"
+                >
+            </span>
+        </accordion-group>
+
+        <accordion-group
+                ng-show="catalogVM.selectedCollection.topTrims.length"
+                >
+            <accordion-heading>
+                <h4 ng-click="catalogVM.selectType('tt')">
+                    Top Trims ({{catalogVM.selectedCollection.topTrims.length}})
+                    <i class="indicator glyphicon glyphicon-chevron-down pull-right"></i>
+                </h4>
+            </accordion-heading>
+            <span ng-repeat="product in catalogVM.selectedCollection.topTrims">
+                <img class="prod" dnd-source="product"
+                     ng-class="{'prod-selected': catalogVM.isProductSelected(product)}"
+                     ng-src="{{product.url}}"
+                     ng-click="catalogVM.selectProduct(product)"
+                >
+            </span>
+        </accordion-group>
+
+        <accordion-group
+                ng-show="catalogVM.selectedCollection.bottomTrims.length"
+                >
+            <accordion-heading>
+                <h4 ng-click="catalogVM.selectType('tb')">
+                    Bottom Trims ({{catalogVM.selectedCollection.bottomTrims.length}})
+                    <i class="indicator glyphicon glyphicon-chevron-down pull-right"></i>
+                </h4>
+            </accordion-heading>
+            <span ng-repeat="product in catalogVM.selectedCollection.bottomTrims">
+                <img class="prod" dnd-source="product"
+                     ng-class="{'prod-selected': catalogVM.isProductSelected(product)}"
+                     ng-src="{{product.url}}"
+                     ng-click="catalogVM.selectProduct(product)"
+                >
+            </span>
+        </accordion-group>
+
+        <accordion-group
+                ng-show="catalogVM.selectedCollection.medallions.length"
+                >
+            <accordion-heading>
+                <h4 ng-click="catalogVM.selectType('m')">
+                    Medallions ({{catalogVM.selectedCollection.medallions.length}})
+                    <i class="indicator glyphicon glyphicon-chevron-down pull-right"></i>
+                </h4>
+            </accordion-heading>
+            <span ng-repeat="product in catalogVM.selectedCollection.medallions">
+                <img class="prod" dnd-source="product"
+                     ng-class="{'prod-selected': catalogVM.isProductSelected(product)}"
+                     ng-src="{{product.url}}"
+                     ng-click="catalogVM.selectProduct(product)"
+                >
+            </span>
+        </accordion-group>
+
+        <accordion-group
+                ng-show="catalogVM.selectedCollection.floats.length"
+                >
+            <accordion-heading>
+                <h4 ng-click="catalogVM.selectType('f')">
+                    Floats ({{catalogVM.selectedCollection.floats.length}})
+                    <i class="indicator glyphicon glyphicon-chevron-down pull-right"></i>
+                </h4>
+            </accordion-heading>
+            <span ng-repeat="product in catalogVM.selectedCollection.floats">
+                <img class="prod" dnd-source="product"
+                     ng-class="{'prod-selected': catalogVM.isProductSelected(product)}"
+                     ng-src="{{product.url}}"
+                     ng-click="catalogVM.selectProduct(product)"
+                >
+            </span>
+        </accordion-group>
+
+        <accordion-group
+                ng-show="catalogVM.selectedCollection.arts.length"
+                >
+            <accordion-heading>
+                <h4 ng-click="catalogVM.selectType('a')">
+                    Arts ({{catalogVM.selectedCollection.arts.length}})
+                    <i class="indicator glyphicon glyphicon-chevron-down pull-right"></i>
+                </h4>
+            </accordion-heading>
+            <span ng-repeat="product in catalogVM.selectedCollection.arts">
+                <img class="prod" dnd-source="product"
+                     ng-class="{'prod-selected': catalogVM.isProductSelected(product)}"
+                     ng-src="{{product.url}}"
+                     ng-click="catalogVM.selectProduct(product)"
+                >
+            </span>
+        </accordion-group>
+
+    </accordion>
+
+</div>

@@ -96,6 +96,10 @@ div[numeric-stepper].ng-invalid-out-of-bounds input.form-control
     margin-top: 5px;
     margin-left: 5px;
 }
+.prod-selected
+{
+    border: 2px solid red;
+}
 .viewport
 {
     position: absolute;
