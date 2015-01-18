@@ -77,7 +77,7 @@
         </accordion-group>
 
         <accordion-group
-                ng-show="catalogVM.selectedCollection.topTrims.length"
+                ng-show="catalogVM.selectedCollection.topTrims.length && mainCtrl.isWallView"
                 >
             <accordion-heading>
                 <h4 ng-click="catalogVM.selectType('tt')">
@@ -95,7 +95,7 @@
         </accordion-group>
 
         <accordion-group
-                ng-show="catalogVM.selectedCollection.bottomTrims.length"
+                ng-show="catalogVM.selectedCollection.bottomTrims.length && mainCtrl.isWallView"
                 >
             <accordion-heading>
                 <h4 ng-click="catalogVM.selectType('tb')">
@@ -113,7 +113,7 @@
         </accordion-group>
 
         <accordion-group
-                ng-show="catalogVM.selectedCollection.medallions.length"
+                ng-show="catalogVM.selectedCollection.medallions.length && mainCtrl.isCeilingView"
                 >
             <accordion-heading>
                 <h4 ng-click="catalogVM.selectType('m')">
@@ -131,7 +131,7 @@
         </accordion-group>
 
         <accordion-group
-                ng-show="catalogVM.selectedCollection.floats.length"
+                ng-show="catalogVM.selectedCollection.floats.length && mainCtrl.isCeilingView"
                 >
             <accordion-heading>
                 <h4 ng-click="catalogVM.selectType('f')">
@@ -149,7 +149,7 @@
         </accordion-group>
 
         <accordion-group
-                ng-show="catalogVM.selectedCollection.arts.length"
+                ng-show="catalogVM.selectedCollection.arts.length && mainCtrl.isWallView"
                 >
             <accordion-heading>
                 <h4 ng-click="catalogVM.selectType('a')">

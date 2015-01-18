@@ -228,6 +228,8 @@ function (app) {
 
             wall.mainItem = {
                 type: 'a',
+                fill:false,
+                center: true,
                 width: 0,
                 height: 0,
                 art: null

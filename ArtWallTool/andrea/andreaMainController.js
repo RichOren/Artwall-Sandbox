@@ -48,6 +48,8 @@ function (app) {
         var mainCtrl = {
             selectedView: null,
             onViewChange: onViewChange,
+            isWallView: false,
+            isCeilingView: false,
 
             toggleCatalog: toggleCatalog,
 
@@ -70,6 +72,9 @@ function (app) {
 
             applyProduct: applyProduct
         };
+        var VIEW_3D = '3d';
+        var VIEW_CEILING = 'ceiling';
+        var VIEW_WALL = 'wall';
 
         init();
 
@@ -86,12 +91,19 @@ function (app) {
         function updateViewSelected() {
             var path = $location.path();
             var search = $location.search();
+            mainCtrl.isCeilingView = false;
+            mainCtrl.isWallView = false;
             switch(path) {
-                case '/wall':
-                    mainCtrl.selectedView = search.side;
+                case '/3d':
+                    mainCtrl.selectedView = '3d';
                     break;
                 case '/ceiling':
+                    mainCtrl.isCeilingView = true;
                     mainCtrl.selectedView = 'ceiling';
+                    break;
+                case '/wall':
+                    mainCtrl.isWallView = true;
+                    mainCtrl.selectedView = search.side;
                     break;
             }
             console.log('updateViewSelected', path, search);
@@ -99,7 +111,10 @@ function (app) {
 
         function onViewChange() {
             console.log('onViewChange', mainCtrl.selectedView);
-            if( mainCtrl.selectedView == 'ceiling') {
+            if( mainCtrl.selectedView == VIEW_3D) {
+                $location.path('/3d').search('side', null);
+            }
+            else if( mainCtrl.selectedView == VIEW_CEILING) {
                 $location.path('/ceiling').search('side', null);
             }
             else {
@@ -174,38 +189,27 @@ function (app) {
         }
 
         function applyProduct(product) {
+            var art = angular.copy(product);
             var plane = roomModel.getWall(mainCtrl.selectedView);
             if (plane) {
                 switch (catalogVM.selectedProductType) {
                     case 'bg':
-                        delete plane.background.art.naturalWidth;
-                        delete plane.background.art.naturalHeight;
-                        plane.background.art.url = product.url;
+                        plane.background.art = art;
                         break;
                     case 'tt':
-                        delete plane.trimTop.art.naturalWidth;
-                        delete plane.trimTop.art.naturalHeight;
-                        plane.trimTop.art.url = product.url;
+                        plane.trimTop.art = art;
                         break;
                     case 'tb':
-                        delete plane.trimBottom.art.naturalWidth;
-                        delete plane.trimBottom.art.naturalHeight;
-                        plane.trimBottom.art.url = product.url;
+                        plane.trimBottom.art = art;
                         break;
                     case 'a':
-                        delete plane.mainItem.art.naturalWidth;
-                        delete plane.mainItem.art.naturalHeight;
-                        plane.mainItem.art = {
-                            url: product.url,
-                            zoom: undefined,
-                            clipX1: 0,
-                            clipY1: 0,
-                            clipX2: 100
-                        };
+                        plane.mainItem.width = plane.width;
+                        plane.mainItem.height = plane.height;
+                        plane.mainItem.art = art;
                         break;
                 }
             }
-            else if(mainCtrl.selectedView === 'ceiling') {
+            else if(mainCtrl.selectedView === VIEW_CEILING) {
                 plane = roomModel.ceiling;
                 switch (catalogVM.selectedProductType) {
                     case 'bg':
