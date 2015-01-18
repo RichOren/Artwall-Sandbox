@@ -16,12 +16,7 @@ function (app) {
             depth: 0,
 
             ceiling: null,
-
-            wallLeft: null,
-            wallFront: null,
-            wallRight: null,
-            wallBack: null,
-
+            walls: [], //left, front, right, back
             getWall: getWall
         };
         var wLeft = 'left';
@@ -41,19 +36,20 @@ function (app) {
 //            model.depth = 5000/2;
 
             model.ceiling = createCeiling();
-
-            model.wallLeft = createWall(wLeft);
-            model.wallFront = createWall(wFront);
-            model.wallRight = createWall(wRight);
-            model.wallBack = createWall(wBack);
+            model.walls = [
+                createWall(wLeft),
+                createWall(wFront),
+                createWall(wRight),
+                createWall(wBack)
+            ];
         }
 
         function getWall(side) {
             switch(side){
-                case 'left': return model.wallLeft;
-                case 'front': return model.wallFront;
-                case 'right': return model.wallRight;
-                case 'back': return model.wallBack;
+                case 'left': return model.walls[0];
+                case 'front': return model.walls[1];
+                case 'right': return model.walls[2];
+                case 'back': return model.walls[3];
             }
             return null;
         }

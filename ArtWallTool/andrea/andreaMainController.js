@@ -189,54 +189,109 @@ function (app) {
         }
 
         function applyProduct(product) {
-            var art = angular.copy(product);
-            var plane = roomModel.getWall(mainCtrl.selectedView);
-            if (plane) {
-                switch (catalogVM.selectedProductType) {
-                    case 'bg':
-                        plane.background.art = art;
-                        break;
-                    case 'tt':
-                        plane.trimTop.art = art;
-                        break;
-                    case 'tb':
-                        plane.trimBottom.art = art;
-                        break;
-                    case 'a':
-                        plane.mainItem.width = plane.width;
-                        plane.mainItem.height = plane.height;
-                        plane.mainItem.art = art;
-                        break;
+            var isSingle = !!(product.url);
+            if (isSingle) {
+                if (mainCtrl.isWallView) {
+                    applyProductToSelectedWall(product);
+                }
+                if (mainCtrl.isCeilingView) {
+                    applyProductToCeiling(product);
                 }
             }
-            else if(mainCtrl.selectedView === VIEW_CEILING) {
-                plane = roomModel.ceiling;
-                switch (catalogVM.selectedProductType) {
-                    case 'bg':
-                        removeItem(plane.background);
-                        plane.background.art.url = product.url;
-                        break;
-
-                    case 'm':
-                        delete plane.medallion.art.naturalWidth;
-                        delete plane.medallion.art.naturalHeight;
-                        plane.medallion.art.url = product.url;
-                        break;
-
-                    case 'f':
-                        plane.floatItems.push({
-                            type: 'f',
-                            left: 250/2,
-                            top: 250/2,
-                            height: 500/2,
-                            art: {
-                                url: product.url
-                            }
-                        });
-                        break;
-                }
+            else {
+                //Trim Set
+                applyTrimSetToCeiling(product);
+                applyTrimSetToWalls(product);
             }
             catalogVM.selectProduct(null);
+        }
+
+        function applyProductToSelectedWall(product) {
+            if( mainCtrl.isWallView) {
+                var plane = roomModel.getWall(mainCtrl.selectedView);
+                applyProductToWall(product, plane);
+            }
+        }
+
+        function applyProductToWall(product, plane) {
+            var art = angular.copy(product);
+            switch (catalogVM.selectedProductType) {
+                case 'bg':
+                    plane.background.art = art;
+                    break;
+                case 'tt':
+                    plane.trimTop.art = art;
+                    break;
+                case 'tb':
+                    plane.trimBottom.art = art;
+                    break;
+                case 'a':
+                    plane.mainItem.width = plane.width;
+                    plane.mainItem.height = plane.height;
+                    plane.mainItem.art = art;
+                    break;
+            }
+        }
+
+        function applyProductToCeiling(product) {
+            var plane = roomModel.ceiling;
+            var art = angular.copy(product);
+
+            switch (catalogVM.selectedProductType) {
+                case 'bg':
+                    removeItem(plane.background);
+                    plane.background.art = art;
+                    break;
+
+                case 'm':
+                    plane.medallion.art = art;
+                    break;
+
+                case 'f':
+                    plane.floatItems.push({
+                        type: 'f',
+                        left: 250/2,
+                        top: 250/2,
+                        height: 500/2,
+                        art: art
+                    });
+                    break;
+            }
+        }
+
+        function applyTrimSetToCeiling(trimSet){
+            var ceiling = roomModel.ceiling;
+            for ( var productType in trimSet) {
+                if (trimSet.hasOwnProperty(productType)) {
+                    if( productType[0] != '$' && ceiling.hasOwnProperty(productType) ) {
+                        ceiling[productType].art = angular.copy(trimSet[productType]);
+                    }
+                }
+            }
+        }
+
+        function applyTrimSetToWalls(trimSet){
+            if (trimSet.trimTop) {
+                angular.forEach(roomModel.walls, function(wall) {
+                    wall.trimTop.art = angular.copy(trimSet.trimTop);
+                });
+            }
+            if (trimSet.trimTopCornerShort && trimSet.trimTopCorner) {
+                roomModel.walls[0].trimTopCorner.art = angular.copy(trimSet.trimTopCornerShort);
+                roomModel.walls[2].trimTopCorner.art = angular.copy(trimSet.trimTopCornerShort);
+                roomModel.walls[1].trimTopCorner.art = angular.copy(trimSet.trimTopCorner);
+                roomModel.walls[3].trimTopCorner.art = angular.copy(trimSet.trimTopCorner);
+            }
+            else if (trimSet.trimTopCorner) {
+                angular.forEach(roomModel.walls, function(wall) {
+                    wall.trimTopCorner.art = angular.copy(trimSet.trimTopCorner);
+                });
+            }
+            if (trimSet.trimBottom) {
+                angular.forEach(roomModel.walls, function(wall) {
+                    wall.trimBottom.art = angular.copy(trimSet.trimBottom);
+                });
+            }
         }
 
         function formatType() {
