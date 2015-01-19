@@ -8,6 +8,7 @@
      ../core/modal/modalDirective
      ./directive/cropperDirective
      ../core/input/typeIntDirective
+     ../core/input/inputSizeDirective
      ./catalog/catalogVM
      ./catalog/catalogBrowserDirective
      ./catalog/productPreviewDirective
@@ -115,7 +116,7 @@
             >
         <div>
 
-            <select style="margin-top: 6px"
+            <select style="height: 36px"
                     ng-model="mainCtrl.selectedView"
                     ng-change="mainCtrl.onViewChange()"
                     >
@@ -126,6 +127,11 @@
                 <option value="right">Right Wall</option>
                 <option value="back">Back Wall</option>
             </select>
+
+            <button
+                    style="height: 36px"
+                    ng-click="mainCtrl.openRoomSizeModal()"
+            >Room Size</button>
 
             <button class="pull-right"
                     style="height: 36px"
@@ -238,6 +244,5 @@
             <span>{{format.size(mm(mainCtrl.item.height))}}</span>
         </div>
     </ds:modal>
-
 
 </div>

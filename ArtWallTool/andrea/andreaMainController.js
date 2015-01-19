@@ -8,8 +8,8 @@ function (app) {
     'use strict';
 
     app.controller('andreaMainController', [
-    '$rootScope', '$scope', '$location', 'selectService', 'roomModel', 'catalogVM',
-    function($rootScope, $scope, $location, selectService, roomModel, catalogVM) {
+    '$rootScope', '$scope', '$location', '$modal', 'selectService', 'roomModel', 'catalogVM',
+    function($rootScope, $scope, $location, $modal, selectService, roomModel, catalogVM) {
 
         $scope.root = $rootScope;
 
@@ -50,6 +50,8 @@ function (app) {
             onViewChange: onViewChange,
             isWallView: false,
             isCeilingView: false,
+
+            openRoomSizeModal: openRoomSizeModal,
 
             toggleCatalog: toggleCatalog,
 
@@ -121,6 +123,25 @@ function (app) {
                 $location.path('/wall').search('side', mainCtrl.selectedView);
             }
         }
+
+        function openRoomSizeModal() {
+            var dialogScope = $rootScope.$new();
+            dialogScope.roomSize = {
+                width: roomModel.width,
+                height: roomModel.height,
+                depth: roomModel.depth
+            };
+            $modal.open({
+                templateUrl: './andrea/room/roomSizeModalTemplate.html',
+                scope: dialogScope
+            })
+            .result
+                .then(function(roomSize){
+//                    console.log('Modal dismissed with: ', result);
+                    roomModel.updateSize(roomSize);
+                });
+        }
+
 
         function toggleCatalog() {
             catalogVM.toggleCatalog();
@@ -413,7 +434,6 @@ function (app) {
             if( quarters == 2 ) return "1/2";
             return (quarters ? (quarters + '/4') : '');
         }
-
 
     }
 

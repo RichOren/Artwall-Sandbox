@@ -1,6 +1,3 @@
-/**
- * Created by awyss on 11/23/14.
- */
 define([
     'app'
 ],
@@ -8,23 +5,26 @@ function (app) {
     'use strict';
 
     app.service('roomModel', [
-
     function() {
+
         var model = {
             width: 0,
             height: 0,
             depth: 0,
 
             ceiling: null,
-            walls: [], //left, front, right, back
-            getWall: getWall
-        };
-        var wLeft = 'left';
-        var wFront = 'front';
-        var wRight = 'right';
-        var wBack = 'back';
-        init();
+            walls: [],
+            getWall: getWall,
 
+            updateSize: updateSize
+        };
+
+        var iLeft = 0;
+        var iFront = 1;
+        var iRight = 2;
+        var iBack = 3;
+
+        init();
         return model;
 
         function init() {
@@ -37,15 +37,30 @@ function (app) {
 
             model.ceiling = createCeiling();
             model.walls = [
-                createWall(wLeft),
-                createWall(wFront),
-                createWall(wRight),
-                createWall(wBack)
+                createWall(iLeft),
+                createWall(iFront),
+                createWall(iRight),
+                createWall(iBack)
             ];
         }
 
-        function getWall(side) {
-            switch(side){
+        function updateSize(size) {
+            model.width = size.width;
+            model.height = size.height;
+            model.depth = size.depth;
+
+            model.ceiling.width = model.width;
+            model.ceiling.height = model.depth;
+
+            for (var iSide=0; iSide<4; iSide++) {
+                var wall = model.walls[iSide];
+                wall.width = (iSide == iFront || iSide == iBack) ? model.width : model.depth;
+                wall.height = model.height;
+            }
+        }
+
+        function getWall(sideName) {
+            switch(sideName){
                 case 'left': return model.walls[0];
                 case 'front': return model.walls[1];
                 case 'right': return model.walls[2];
@@ -54,19 +69,19 @@ function (app) {
             return null;
         }
 
-        function getWallName(side) {
+        function getWallName(iSide) {
             var result = 'Wall';
-            switch(side){
-                case 'left':
+            switch(iSide){
+                case 0:
                     result = 'Left ' + result;
                     break;
-                case 'front':
+                case 1:
                     result = 'Front ' + result;
                     break;
-                case 'right':
+                case 2:
                     result = 'Right ' + result;
                     break;
-                case 'back':
+                case 3:
                     result = 'Back ' + result;
                     break;
             }
@@ -166,10 +181,10 @@ function (app) {
             return ceiling;
         }
 
-        function createWall(side) {
+        function createWall(iSide) {
             var wall = {
-                name: getWallName(side),
-                width: ( (side == wFront || side == wBack) ? model.width : model.depth),
+                name: getWallName(iSide),
+                width: ( (iSide == iFront || iSide == iBack) ? model.width : model.depth),
                 height: model.height,
 
                 background: null,
@@ -208,7 +223,7 @@ function (app) {
                 art: null
             };
 
-            if( side != wBack) {
+            if( iSide != iBack) {
                 wall.trimTop.art = {
                     url: './images/C1/T/6_inch_trim_green.png'
                 };
@@ -231,7 +246,7 @@ function (app) {
                 art: null
             };
 
-            if( side == wFront) {
+            if( iSide == iFront) {
                 wall.mainItem = {
                     type: 'a',
                     fill:false,

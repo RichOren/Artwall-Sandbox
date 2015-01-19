@@ -27,13 +27,9 @@ define([
                 '<input type="number" class="input-in" style="width:35px; text-align: right" ng-blur="onInchBlur()" min="-1" max="12"/>' +
                 '<select>' +
                 '<option value="0"></option>' +
-                '<option value="1">1&#47;8</option>' +
-                '<option value="2">1&#47;4</option>' +
-                '<option value="3">3&#47;8</option>' +
-                '<option value="4">1&#47;2</option>' +
-                '<option value="5">5&#47;8</option>' +
-                '<option value="6">3&#47;4</option>' +
-                '<option value="7">7&#47;8</option>' +
+                '<option value="1">1&#47;4</option>' +
+                '<option value="2">1&#47;2</option>' +
+                '<option value="3">3&#47;4</option>' +
                 '</select>' +
                 'in' +
                 '</span>' +
@@ -51,9 +47,10 @@ define([
 
             ngModelController.$render = function() {
                 console.log('ngModelController.$render');
-                var val = ngModelController.$modelValue;
-                var eights = val % 8;
-                val = Math.floor(val / 8);
+                var valMM = ngModelController.$modelValue * 2; //px * 2 = mm
+                var val = Math.round(valMM / 25.4 * 4);
+                var eights = val % 4;
+                val = Math.floor(val / 4);
                 var inch = val % 12;
                 var feet = Math.floor(val / 12);
                 getFeetInput().val(feet);
@@ -136,7 +133,9 @@ define([
                 if( isNaN(newEights) ) {
                     newEights = 0;
                 }
-                var newVal = (newFeet * 12 + newInch) * 8 + newEights;
+                var newVal = (newFeet * 12 + newInch) * 4 + newEights;
+                newVal = Math.round(newVal / 8 * 25.4);
+
                 // update the model, call $parsers pipeline...
                 ngModelController.$setViewValue(newVal);
                 // update the local view
